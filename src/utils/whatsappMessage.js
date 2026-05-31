@@ -1,4 +1,14 @@
-const WHATSAPP_NUMBER = '919328798087'; // +91 India
+// Phone number is loaded from the .env file (VITE_WHATSAPP_NUMBER).
+// .env is gitignored — it never gets committed to GitHub.
+// Vite exposes VITE_* variables to the frontend bundle at build time.
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+
+if (!WHATSAPP_NUMBER) {
+  console.warn(
+    '[STAR] VITE_WHATSAPP_NUMBER is not set. ' +
+    'Copy .env.example to .env and fill in your WhatsApp number.'
+  );
+}
 
 /**
  * Generates a formatted WhatsApp message from cart items
