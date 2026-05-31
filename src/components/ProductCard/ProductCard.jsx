@@ -7,9 +7,25 @@ export default function ProductCard({ product }) {
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
   const [added, setAdded] = useState(false);
 
+  // Resolve which image to show:
+  // 1. Selected variant's own image (if it has one)
+  // 2. Product-level image (fallback)
+  // 3. null → show placeholder
+  const activeImage =
+    (selectedVariant?.image ?? null) !== null
+      ? selectedVariant.image
+      : product.image ?? null;
+
+  // 'cover' for flat products (soaps), 'contain' for bottles (oil, shampoo, gel)
+  const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
+
   const displayPrice = product.hasVariants
     ? selectedVariant ? `₹${selectedVariant.price}` : getDisplayPrice(product)
     : `₹${product.price}`;
+
+  function handleVariantSelect(variant) {
+    setSelectedVariant(variant);
+  }
 
   function handleAddToCart() {
     addItem(product, selectedVariant);
@@ -19,19 +35,26 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="flex flex-col bg-white group border border-transparent hover:border-[#E4E4DC] transition-colors duration-300">
+
       {/* Image Container */}
       <div className="relative w-full aspect-square bg-[#F5F5F0] overflow-hidden">
-        {product.image ? (
+        {activeImage ? (
           <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.04]"
+            src={activeImage}
+            alt={
+              selectedVariant
+                ? `${product.name} — ${selectedVariant.label}`
+                : product.name
+            }
+            className={`w-full h-full ${imgFit} transition-all duration-[400ms] ease-out group-hover:scale-[1.04]`}
             loading="lazy"
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
             <PlaceholderIcon />
-            <span className="text-[10px] tracking-[0.1em] uppercase text-[#AEAEA6]">Image Soon</span>
+            <span className="text-[10px] tracking-[0.1em] uppercase text-[#AEAEA6]">
+              Image Soon
+            </span>
           </div>
         )}
       </div>
@@ -52,7 +75,7 @@ export default function ProductCard({ product }) {
             {product.variants.map((variant) => (
               <button
                 key={variant.id}
-                onClick={() => setSelectedVariant(variant)}
+                onClick={() => handleVariantSelect(variant)}
                 className={`text-[10px] sm:text-xs px-2.5 py-1 border tracking-[0.05em] transition-all duration-200 cursor-pointer ${
                   selectedVariant?.id === variant.id
                     ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'

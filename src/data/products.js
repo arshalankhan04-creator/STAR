@@ -6,18 +6,46 @@
  * - variants array supports any combination of size/weight/price
  * - featured flag controls home page display
  * - category slug matches URL query param values
+ *
+ * Image paths use Vite's asset import convention.
+ * For variant-specific images, each variant carries its own `image` field.
+ * The ProductCard reads variant.image (if present) and falls back to product.image.
  */
 
+// ─── Asset imports ────────────────────────────────────────────────────────────
+
+import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg';
+import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
+import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
+import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
+import imgSoapBesan           from '../assets/images/products/soap-besan-pithi.jpg';
+import imgSoapNim             from '../assets/images/products/soap-nim-aloevera.jpg';
+import imgSoapMilky           from '../assets/images/products/soap-milky.jpg';
+import imgStarFacial8g        from '../assets/images/products/soap-star-facial-8g.jpg';
+import imgStarFacial22g       from '../assets/images/products/soap-star-facial-22g.jpg';
+import imgStarFacial50g       from '../assets/images/products/soap-star-facial-50g.jpg';
+import imgHerbalFaceGel       from '../assets/images/products/herbal-face-gel.jpg';
+import imgHerbalOil           from '../assets/images/products/herbal-oil.jpg';
+import imgHerbalShampoo       from '../assets/images/products/herbal-shampoo.jpg';
+import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
+
+// All product images are now available.
+
+// ─── Categories ───────────────────────────────────────────────────────────────
+
 export const CATEGORIES = [
-  { id: 'all', label: 'All' },
-  { id: 'soap', label: 'Soap' },
+  { id: 'all',      label: 'All' },
+  { id: 'soap',     label: 'Soap' },
   { id: 'hair-oil', label: 'Hair Oil' },
-  { id: 'shampoo', label: 'Shampoo' },
+  { id: 'shampoo',  label: 'Shampoo' },
   { id: 'face-gel', label: 'Face Gel' },
 ];
 
+// ─── Products ─────────────────────────────────────────────────────────────────
+
 export const products = [
-  // ─── SOAPS ───────────────────────────────────────────────────────────────
+
+  // ── SOAPS ──────────────────────────────────────────────────────────────────
   {
     id: 'soap-skin-care',
     name: 'Skin Care Soap',
@@ -27,7 +55,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&q=80',
+    image: imgSoapSkinCare,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -41,7 +70,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+    image: imgSoapAlovera,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -55,7 +85,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',
+    image: imgSoapCharcoal,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -69,7 +100,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80',
+    image: imgSoapBaby,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -83,7 +115,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=600&q=80',
+    image: imgSoapBesan,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -97,7 +130,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',
+    image: imgSoapHoney,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -111,7 +145,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=600&q=80',
+    image: imgSoapNim,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -125,7 +160,8 @@ export const products = [
     unit: '50g',
     hasVariants: false,
     featured: true,
-    image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&q=80',
+    image: imgSoapMilky,
+    imageStyle: 'cover',
     description: '',
     ingredients: '',
     usage: '',
@@ -138,19 +174,20 @@ export const products = [
     price: null,
     unit: null,
     hasVariants: true,
+    imageStyle: 'cover',
     variants: [
-      { id: 'star-facial-8g', label: '8g', price: 10 },
-      { id: 'star-facial-22g', label: '22g', price: 20 },
-      { id: 'star-facial-50g', label: '50g', price: 60 },
+      { id: 'star-facial-8g',  label: '8g',  price: 10,  image: imgStarFacial8g  },
+      { id: 'star-facial-22g', label: '22g', price: 25,  image: imgStarFacial22g },
+      { id: 'star-facial-50g', label: '50g', price: 60,  image: imgStarFacial50g },
     ],
+    image: imgStarFacial50g,
     featured: true,
-    image: 'https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=600&q=80',
     description: '',
     ingredients: '',
     usage: '',
   },
 
-  // ─── HAIR OIL ─────────────────────────────────────────────────────────────
+  // ── HAIR OIL ───────────────────────────────────────────────────────────────
   {
     id: 'herbal-oil',
     name: 'Herbal Oil',
@@ -160,18 +197,19 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-oil-100ml', label: '100ml', price: 140 },
-      { id: 'herbal-oil-200ml', label: '200ml', price: 280 },
-      { id: 'herbal-oil-500ml', label: '500ml', price: 700 },
+      { id: 'herbal-oil-100ml', label: '100ml', price: 140, image: imgHerbalOil },
+      { id: 'herbal-oil-200ml', label: '200ml', price: 280, image: imgHerbalOil },
+      { id: 'herbal-oil-500ml', label: '500ml', price: 700, image: imgHerbalOil },
     ],
+    image: imgHerbalOil,
     featured: true,
-    image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80',
+    imageStyle: 'contain',
     description: '',
     ingredients: '',
     usage: '',
   },
 
-  // ─── SHAMPOO ──────────────────────────────────────────────────────────────
+  // ── SHAMPOO ────────────────────────────────────────────────────────────────
   {
     id: 'herbal-shampoo',
     name: 'Herbal Shampoo',
@@ -181,18 +219,19 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-shampoo-100ml', label: '100ml', price: 70 },
-      { id: 'herbal-shampoo-200ml', label: '200ml', price: 140 },
-      { id: 'herbal-shampoo-500ml', label: '500ml', price: 350 },
+      { id: 'herbal-shampoo-100ml', label: '100ml', price: 70,  image: imgHerbalShampoo },
+      { id: 'herbal-shampoo-200ml', label: '200ml', price: 140, image: imgHerbalShampoo },
+      { id: 'herbal-shampoo-500ml', label: '500ml', price: 350, image: imgHerbalShampoo },
     ],
+    image: imgHerbalShampoo,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&q=80',
+    imageStyle: 'contain',
     description: '',
     ingredients: '',
     usage: '',
   },
 
-  // ─── FACE GEL ─────────────────────────────────────────────────────────────
+  // ── FACE GEL ───────────────────────────────────────────────────────────────
   {
     id: 'herbal-face-gel',
     name: 'Herbal Face Gel',
@@ -202,12 +241,13 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-face-gel-100ml', label: '100ml', price: 50 },
-      { id: 'herbal-face-gel-200ml', label: '200ml', price: 100 },
-      { id: 'herbal-face-gel-500ml', label: '500ml', price: 250 },
+      { id: 'herbal-face-gel-100ml', label: '100ml', price: 50,  image: imgHerbalFaceGel },
+      { id: 'herbal-face-gel-200ml', label: '200ml', price: 100, image: imgHerbalFaceGel },
+      { id: 'herbal-face-gel-500ml', label: '500ml', price: 250, image: imgHerbalFaceGel },
     ],
+    image: imgHerbalFaceGel,
     featured: true,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80',
+    imageStyle: 'contain',
     description: '',
     ingredients: '',
     usage: '',

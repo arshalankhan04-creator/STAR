@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '919081294043'; // +91 India
+const WHATSAPP_NUMBER = '919328798087'; // +91 India
 
 /**
  * Generates a formatted WhatsApp message from cart items
