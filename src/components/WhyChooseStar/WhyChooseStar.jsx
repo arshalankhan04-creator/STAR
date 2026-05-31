@@ -27,32 +27,32 @@ const reasons = [
 
 export default function WhyChooseStar() {
   return (
-    <section className="w-full bg-[#F4F6F3] py-16 md:py-24">
+    <section className="w-full bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-[#8FA882] mb-3 font-['Montserrat']">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[#6B8F5E] mb-3 font-['Montserrat'] font-normal">
             Our Promise
           </p>
-          <h2 className="font-['Montserrat'] text-lg sm:text-xl md:text-2xl tracking-[0.15em] uppercase text-[#555555] font-normal">
+          <h2 className="font-['Montserrat'] text-lg sm:text-xl md:text-2xl tracking-[0.15em] uppercase text-[#2C2C2C] font-normal">
             Why Choose STAR
           </h2>
-          <div className="w-8 h-px bg-[#8FA882] mx-auto mt-4" />
+          <div className="w-8 h-px bg-[#6B8F5E] mx-auto mt-4" />
         </div>
 
         {/* Reasons Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {reasons.map((item) => (
             <div key={item.number} className="flex flex-col gap-3">
-              <span className="font-['Montserrat'] text-3xl font-light text-[#8FA882]/40 tracking-[0.05em]">
+              <span className="font-['Montserrat'] text-4xl font-light text-[#6B8F5E]/25 tracking-tight">
                 {item.number}
               </span>
-              <div className="w-6 h-px bg-[#8FA882]" />
-              <h3 className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#555555] font-normal">
+              <div className="w-6 h-px bg-[#6B8F5E]" />
+              <h3 className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#2C2C2C] font-medium">
                 {item.title}
               </h3>
-              <p className="text-xs text-[#888888] font-light leading-relaxed">
+              <p className="text-xs text-[#7A7A72] font-light leading-relaxed">
                 {item.description}
               </p>
             </div>

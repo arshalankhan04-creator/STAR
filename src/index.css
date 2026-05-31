@@ -3,14 +3,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #8FA882;
-  --color-brand-light: #F4F6F3;
-  --color-text-primary: #555555;
-  --color-text-muted: #888888;
-  --color-border: #222222;
-  --color-hover-bg: #FBFBFB;
+  /* ── Brand ── */
+  --color-brand:        #6B8F5E;   /* deep forest green — primary accent */
+  --color-brand-dark:   #4A7A3D;   /* deeper green — value ribbon, strong CTAs */
+  --color-brand-hover:  #5a7d4f;   /* hover state for brand-colored elements */
+  --color-brand-light:  #F0F4EE;   /* warm green-tinted off-white */
+
+  /* ── Backgrounds ── */
+  --color-bg-white:     #FFFFFF;
+  --color-bg-cream:     #FAFAF8;   /* warm cream — alternating sections */
+  --color-bg-card:      #F5F5F0;   /* product card image backgrounds */
+
+  /* ── Text ── */
+  --color-text-primary: #2C2C2C;   /* near-black — headings, strong copy */
+  --color-text-body:    #4A4A44;   /* warm dark grey — body text */
+  --color-text-muted:   #7A7A72;   /* warm muted grey — secondary info */
+  --color-text-faint:   #AEAEA6;   /* very muted — placeholders, hints */
+
+  /* ── Borders & Dividers ── */
+  --color-border-strong: #1A1A1A;  /* CTA button borders, active states */
+  --color-border-mid:    #C8C8C0;  /* variant pills, inactive borders */
+  --color-border-light:  #E4E4DC;  /* section dividers, card edges */
+
+  /* ── Fonts ── */
   --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
+  --font-body:    'Open Sans', sans-serif;
 }
 
 * {
@@ -19,13 +36,15 @@
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-primary);
+  color: var(--color-text-body);
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  color: var(--color-text-primary);
 }
 
 /* ─── Custom Animations ─────────────────────────────────────────────────── */
@@ -41,17 +60,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes bounceSlow {
-  0%, 100% { transform: translateY(0) translateX(-50%); }
-  50% { transform: translateY(6px) translateX(-50%); }
-}
-
 .animate-fade-in-up {
   animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
-}
-
-.animate-bounce-slow {
-  animation: bounceSlow 2s ease-in-out infinite;
 }
 
 /* ─── Hide scrollbar for category filter ────────────────────────────────── */

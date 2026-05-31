@@ -8,14 +8,12 @@ export default function Navbar({ onCartOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Add subtle border on scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on route change / outside click
   useEffect(() => {
     if (!menuOpen) return;
     const close = () => setMenuOpen(false);
@@ -25,13 +23,13 @@ export default function Navbar({ onCartOpen }) {
 
   const navLinkClass = ({ isActive }) =>
     `text-xs tracking-[0.12em] uppercase transition-colors duration-300 ${
-      isActive ? 'text-[#222222]' : 'text-[#555555] hover:text-[#222222]'
+      isActive ? 'text-[#1A1A1A]' : 'text-[#4A4A44] hover:text-[#1A1A1A]'
     }`;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${
-        scrolled ? 'border-b border-[#e8e8e8]' : ''
+        scrolled ? 'border-b border-[#E4E4DC] shadow-[0_1px_8px_rgba(0,0,0,0.04)]' : ''
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,51 +38,45 @@ export default function Navbar({ onCartOpen }) {
           {/* Logo */}
           <Link
             to="/"
-            className="font-['Montserrat'] text-xl font-light tracking-[0.2em] uppercase text-[#555555] hover:text-[#222222] transition-colors duration-300"
+            className="font-['Montserrat'] text-xl font-light tracking-[0.25em] uppercase text-[#2C2C2C] hover:text-[#6B8F5E] transition-colors duration-300"
           >
             STAR
           </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-10">
-            <NavLink to="/" end className={navLinkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/products" className={navLinkClass}>
-              Products
-            </NavLink>
+            <NavLink to="/" end className={navLinkClass}>Home</NavLink>
+            <NavLink to="/products" className={navLinkClass}>Products</NavLink>
             <a
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs tracking-[0.12em] uppercase text-[#555555] hover:text-[#222222] transition-colors duration-300"
+              className="text-xs tracking-[0.12em] uppercase text-[#4A4A44] hover:text-[#1A1A1A] transition-colors duration-300"
             >
               WhatsApp Order
             </a>
           </nav>
 
           {/* Right: Cart + Hamburger */}
-          <div className="flex items-center gap-4">
-            {/* Cart Button */}
+          <div className="flex items-center gap-3">
             <button
               onClick={onCartOpen}
               aria-label={`Open cart, ${totalItems} items`}
-              className="relative p-2 text-[#555555] hover:text-[#222222] transition-colors duration-300"
+              className="relative p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
             >
               <CartIcon />
               {totalItems > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#8FA882] text-white text-[9px] font-medium rounded-full flex items-center justify-center leading-none">
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#6B8F5E] text-white text-[9px] font-medium rounded-full flex items-center justify-center leading-none">
                   {totalItems > 9 ? '9+' : totalItems}
                 </span>
               )}
             </button>
 
-            {/* Hamburger — mobile only */}
             <button
               onClick={(e) => { e.stopPropagation(); setMenuOpen((v) => !v); }}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
-              className="md:hidden p-2 text-[#555555] hover:text-[#222222] transition-colors duration-300"
+              className="md:hidden p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
             >
               {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
             </button>
@@ -95,31 +87,18 @@ export default function Navbar({ onCartOpen }) {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-          menuOpen ? 'max-h-64 border-t border-[#e8e8e8]' : 'max-h-0'
+          menuOpen ? 'max-h-64 border-t border-[#E4E4DC]' : 'max-h-0'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <nav className="flex flex-col bg-white px-6 py-4 gap-5">
-          <NavLink
-            to="/"
-            end
-            className={navLinkClass}
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/products"
-            className={navLinkClass}
-            onClick={() => setMenuOpen(false)}
-          >
-            Products
-          </NavLink>
+        <nav className="flex flex-col bg-white px-6 py-5 gap-5">
+          <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/products" className={navLinkClass} onClick={() => setMenuOpen(false)}>Products</NavLink>
           <a
             href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs tracking-[0.12em] uppercase text-[#555555] hover:text-[#222222] transition-colors duration-300"
+            className="text-xs tracking-[0.12em] uppercase text-[#4A4A44] hover:text-[#1A1A1A] transition-colors duration-300"
             onClick={() => setMenuOpen(false)}
           >
             WhatsApp Order

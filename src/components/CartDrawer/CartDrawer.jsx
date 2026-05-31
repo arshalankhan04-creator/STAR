@@ -48,13 +48,13 @@ export default function CartDrawer({ isOpen, onClose }) {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#e8e8e8]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#E4E4DC]">
           <div>
-            <h2 className="font-['Montserrat'] text-xs tracking-[0.15em] uppercase text-[#555555]">
+            <h2 className="font-['Montserrat'] text-xs tracking-[0.15em] uppercase text-[#2C2C2C]">
               Your Cart
             </h2>
             {totalItems > 0 && (
-              <p className="text-[11px] text-[#888888] mt-0.5">
+              <p className="text-[11px] text-[#7A7A72] mt-0.5">
                 {totalItems} {totalItems === 1 ? 'item' : 'items'}
               </p>
             )}
@@ -62,7 +62,7 @@ export default function CartDrawer({ isOpen, onClose }) {
           <button
             onClick={onClose}
             aria-label="Close cart"
-            className="p-2 text-[#888888] hover:text-[#222222] transition-colors duration-200 cursor-pointer"
+            className="p-2 text-[#7A7A72] hover:text-[#2C2C2C] transition-colors duration-200 cursor-pointer"
           >
             <CloseIcon />
           </button>
@@ -88,13 +88,13 @@ export default function CartDrawer({ isOpen, onClose }) {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-[#e8e8e8] px-6 py-5 flex flex-col gap-4">
+          <div className="border-t border-[#E4E4DC] px-6 py-5 flex flex-col gap-4">
             {/* Total */}
             <div className="flex items-center justify-between">
-              <span className="text-xs tracking-[0.1em] uppercase text-[#888888] font-['Montserrat']">
+              <span className="text-xs tracking-[0.1em] uppercase text-[#7A7A72] font-['Montserrat']">
                 Total
               </span>
-              <span className="font-['Montserrat'] text-base font-light text-[#555555]">
+              <span className="font-['Montserrat'] text-base font-normal text-[#2C2C2C]">
                 ₹{totalPrice}
               </span>
             </div>
@@ -102,14 +102,14 @@ export default function CartDrawer({ isOpen, onClose }) {
             {/* WhatsApp Order Button */}
             <button
               onClick={handleOrder}
-              className="w-full flex items-center justify-center gap-2 bg-[#8FA882] text-white text-xs tracking-[0.15em] uppercase py-4 transition-all duration-[400ms] hover:bg-[#7a9470] cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 bg-[#6B8F5E] text-white text-xs tracking-[0.15em] uppercase py-4 transition-all duration-[400ms] hover:bg-[#5a7d4f] cursor-pointer font-['Montserrat']"
               aria-label="Place order on WhatsApp"
             >
               <WhatsAppIcon />
               Order on WhatsApp
             </button>
 
-            <p className="text-[10px] text-[#888888] text-center leading-relaxed">
+            <p className="text-[10px] text-[#7A7A72] text-center leading-relaxed">
               You will be redirected to WhatsApp with your order details pre-filled.
             </p>
           </div>
@@ -125,7 +125,7 @@ function CartItem({ item, onRemove, onQuantityChange }) {
   return (
     <li className="flex gap-3">
       {/* Thumbnail */}
-      <div className="w-16 h-16 flex-shrink-0 bg-[#F4F6F3] flex items-center justify-center">
+      <div className="w-16 h-16 flex-shrink-0 bg-[#F5F5F0] flex items-center justify-center">
         {item.image ? (
           <img
             src={item.image}
@@ -141,11 +141,11 @@ function CartItem({ item, onRemove, onQuantityChange }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-xs font-['Montserrat'] tracking-[0.08em] uppercase text-[#555555] truncate">
+            <p className="text-xs font-['Montserrat'] tracking-[0.08em] uppercase text-[#2C2C2C] truncate">
               {item.name}
             </p>
             {item.selectedVariant && (
-              <p className="text-[11px] text-[#888888] mt-0.5">
+              <p className="text-[11px] text-[#7A7A72] mt-0.5">
                 {item.selectedVariant.label}
               </p>
             )}
@@ -153,7 +153,7 @@ function CartItem({ item, onRemove, onQuantityChange }) {
           <button
             onClick={onRemove}
             aria-label={`Remove ${item.name} from cart`}
-            className="flex-shrink-0 text-[#cccccc] hover:text-[#888888] transition-colors duration-200 cursor-pointer mt-0.5"
+            className="flex-shrink-0 text-[#C8C8C0] hover:text-[#7A7A72] transition-colors duration-200 cursor-pointer mt-0.5"
           >
             <RemoveIcon />
           </button>
@@ -166,7 +166,7 @@ function CartItem({ item, onRemove, onQuantityChange }) {
             onDecrease={() => onQuantityChange(item.quantity - 1)}
             onIncrease={() => onQuantityChange(item.quantity + 1)}
           />
-          <span className="text-xs font-['Montserrat'] text-[#555555]">
+          <span className="text-xs font-['Montserrat'] text-[#2C2C2C]">
             ₹{item.price * item.quantity}
           </span>
         </div>
@@ -179,21 +179,21 @@ function CartItem({ item, onRemove, onQuantityChange }) {
 
 function QuantityControl({ quantity, onDecrease, onIncrease }) {
   return (
-    <div className="flex items-center border border-[#e8e8e8]">
+    <div className="flex items-center border border-[#E4E4DC]">
       <button
         onClick={onDecrease}
         aria-label="Decrease quantity"
-        className="w-7 h-7 flex items-center justify-center text-[#888888] hover:text-[#222222] hover:bg-[#FBFBFB] transition-colors duration-200 cursor-pointer text-sm"
+        className="w-7 h-7 flex items-center justify-center text-[#7A7A72] hover:text-[#2C2C2C] hover:bg-[#F5F5F0] transition-colors duration-200 cursor-pointer text-sm"
       >
         −
       </button>
-      <span className="w-7 h-7 flex items-center justify-center text-xs text-[#555555] font-['Montserrat'] border-x border-[#e8e8e8]">
+      <span className="w-7 h-7 flex items-center justify-center text-xs text-[#2C2C2C] font-['Montserrat'] border-x border-[#E4E4DC]">
         {quantity}
       </span>
       <button
         onClick={onIncrease}
         aria-label="Increase quantity"
-        className="w-7 h-7 flex items-center justify-center text-[#888888] hover:text-[#222222] hover:bg-[#FBFBFB] transition-colors duration-200 cursor-pointer text-sm"
+        className="w-7 h-7 flex items-center justify-center text-[#7A7A72] hover:text-[#2C2C2C] hover:bg-[#F5F5F0] transition-colors duration-200 cursor-pointer text-sm"
       >
         +
       </button>
@@ -206,13 +206,13 @@ function QuantityControl({ quantity, onDecrease, onIncrease }) {
 function EmptyCart() {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 py-16 text-center">
-      <div className="w-16 h-16 rounded-full border border-[#e8e8e8] flex items-center justify-center">
+      <div className="w-16 h-16 rounded-full border border-[#E4E4DC] flex items-center justify-center">
         <CartEmptyIcon />
       </div>
-      <p className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#888888]">
+      <p className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#7A7A72]">
         Your cart is empty
       </p>
-      <p className="text-xs text-[#888888] font-light max-w-[180px] leading-relaxed">
+      <p className="text-xs text-[#7A7A72] font-light max-w-[180px] leading-relaxed">
         Browse our products and add something you love.
       </p>
     </div>

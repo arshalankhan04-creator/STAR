@@ -6,7 +6,6 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'all';
-
   const filtered = filterByCategory(products, activeCategory);
 
   function handleCategoryChange(categoryId) {
@@ -15,7 +14,6 @@ export default function Products() {
     } else {
       setSearchParams({ category: categoryId });
     }
-    // Scroll to top of product grid on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -23,15 +21,15 @@ export default function Products() {
     <main className="min-h-screen bg-white pt-16 md:pt-20">
 
       {/* Page Header */}
-      <div className="bg-[#F4F6F3] py-10 md:py-14">
+      <div className="bg-[#F0F4EE] py-10 md:py-14">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-[#8FA882] mb-3 font-['Montserrat']">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[#6B8F5E] mb-3 font-['Montserrat'] font-normal">
             STAR Collection
           </p>
-          <h1 className="font-['Montserrat'] text-xl sm:text-2xl md:text-3xl tracking-[0.15em] uppercase text-[#555555] font-light">
+          <h1 className="font-['Montserrat'] text-xl sm:text-2xl md:text-3xl tracking-[0.15em] uppercase text-[#2C2C2C] font-light">
             Our Products
           </h1>
-          <div className="w-8 h-px bg-[#8FA882] mx-auto mt-4" />
+          <div className="w-8 h-px bg-[#6B8F5E] mx-auto mt-4" />
         </div>
       </div>
 
@@ -43,10 +41,10 @@ export default function Products() {
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
-              className={`flex-shrink-0 text-[10px] sm:text-xs tracking-[0.12em] uppercase px-4 sm:px-5 py-2.5 border transition-all duration-300 cursor-pointer ${
+              className={`flex-shrink-0 text-[10px] sm:text-xs tracking-[0.12em] uppercase px-4 sm:px-5 py-2.5 border transition-all duration-300 cursor-pointer font-['Montserrat'] ${
                 activeCategory === cat.id
-                  ? 'border-[#222222] bg-[#222222] text-white'
-                  : 'border-[#cccccc] text-[#888888] hover:border-[#555555] hover:text-[#555555] bg-transparent'
+                  ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
+                  : 'border-[#C8C8C0] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] bg-transparent'
               }`}
               aria-pressed={activeCategory === cat.id}
             >
@@ -56,7 +54,7 @@ export default function Products() {
         </div>
 
         {/* Results count */}
-        <p className="text-xs text-[#888888] mb-6 tracking-[0.05em]">
+        <p className="text-xs text-[#7A7A72] mb-6 tracking-[0.05em]">
           {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
         </p>
 
@@ -69,7 +67,7 @@ export default function Products() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#888888]">
+            <p className="font-['Montserrat'] text-xs tracking-[0.12em] uppercase text-[#7A7A72]">
               No products found
             </p>
           </div>

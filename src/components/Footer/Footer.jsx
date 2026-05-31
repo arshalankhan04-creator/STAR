@@ -3,56 +3,37 @@ import { getWhatsAppLink } from '../../utils/whatsappMessage';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#F4F6F3] border-t border-[#e8e8e8]">
+    <footer className="w-full bg-[#2C2C2C] border-t border-[#3a3a3a]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-8">
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <span className="font-['Montserrat'] text-xl font-light tracking-[0.2em] uppercase text-[#555555]">
+            <span className="font-['Montserrat'] text-xl font-light tracking-[0.25em] uppercase text-white">
               STAR
             </span>
-            <p className="text-xs text-[#888888] font-light leading-relaxed max-w-[200px]">
+            <p className="text-xs text-white/50 font-light leading-relaxed max-w-[200px]">
               Handmade skincare crafted with natural ingredients. Pure, honest, and made with love.
             </p>
+            <div className="w-6 h-px bg-[#6B8F5E] mt-1" />
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-col gap-4">
-            <h3 className="font-['Montserrat'] text-[10px] tracking-[0.2em] uppercase text-[#555555]">
+            <h3 className="font-['Montserrat'] text-[10px] tracking-[0.2em] uppercase text-white/60 font-normal">
               Quick Links
             </h3>
             <nav className="flex flex-col gap-3">
-              <Link
-                to="/"
-                className="text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200 tracking-[0.05em]"
-              >
-                Home
-              </Link>
-              <Link
-                to="/products"
-                className="text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200 tracking-[0.05em]"
-              >
-                Products
-              </Link>
-              <Link
-                to="/products?category=soap"
-                className="text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200 tracking-[0.05em]"
-              >
-                Soaps
-              </Link>
-              <Link
-                to="/products?category=hair-oil"
-                className="text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200 tracking-[0.05em]"
-              >
-                Hair Oil
-              </Link>
+              <Link to="/" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">Home</Link>
+              <Link to="/products" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">Products</Link>
+              <Link to="/products?category=soap" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">Soaps</Link>
+              <Link to="/products?category=hair-oil" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">Hair Oil</Link>
             </nav>
           </div>
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <h3 className="font-['Montserrat'] text-[10px] tracking-[0.2em] uppercase text-[#555555]">
+            <h3 className="font-['Montserrat'] text-[10px] tracking-[0.2em] uppercase text-white/60 font-normal">
               Contact
             </h3>
             <div className="flex flex-col gap-3">
@@ -60,15 +41,12 @@ export default function Footer() {
                 href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200"
+                className="flex items-center gap-2 text-xs text-white/50 hover:text-white transition-colors duration-200"
               >
                 <WhatsAppIcon />
                 WhatsApp Order
               </a>
-              <a
-                href="tel:+919081294043"
-                className="text-xs text-[#888888] hover:text-[#555555] transition-colors duration-200 tracking-[0.05em]"
-              >
+              <a href="tel:+919081294043" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">
                 +91 90812 94043
               </a>
             </div>
@@ -76,11 +54,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-10 pt-6 border-t border-[#e8e8e8] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-[#888888] tracking-[0.05em]">
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] text-white/30 tracking-[0.05em]">
             © {new Date().getFullYear()} STAR. All rights reserved.
           </p>
-          <p className="text-[11px] text-[#888888] tracking-[0.05em]">
+          <p className="text-[11px] text-white/30 tracking-[0.05em]">
             Handmade with ♥
           </p>
         </div>
