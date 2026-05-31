@@ -38,7 +38,7 @@ export default function WhatsAppCTA() {
           </a>
 
           <p className="text-[11px] text-[#7A7A72] mt-5 tracking-[0.05em]">
-            {import.meta.env.VITE_WHATSAPP_DISPLAY}
+            +91 93287 98087
           </p>
         </div>
       </div>

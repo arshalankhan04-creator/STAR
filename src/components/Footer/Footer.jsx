@@ -46,8 +46,8 @@ export default function Footer() {
                 <WhatsAppIcon />
                 WhatsApp Order
               </a>
-              <a href={`tel:+${import.meta.env.VITE_WHATSAPP_NUMBER}`} className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">
-                {import.meta.env.VITE_WHATSAPP_DISPLAY}
+              <a href="tel:+919328798087" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">
+                +91 93287 98087
               </a>
             </div>
           </div>
