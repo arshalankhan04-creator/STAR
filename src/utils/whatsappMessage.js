@@ -32,7 +32,16 @@ export function openWhatsAppOrder(cartItems) {
 
   const encodedMessage = encodeURIComponent(message);
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+
+  // Use a temporary anchor click instead of window.open()
+  // — more reliable across browsers and not blocked by popup blockers
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 /**
