@@ -18,16 +18,16 @@ export function openWhatsAppOrder(cartItems) {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const message = [
-    'Hello STAR Herbal,',
+    '🌿 *STAR Herbal — નવો ઓર્ડર*',
     '',
-    'I would like to place an order.',
+    'નમસ્તે Samim bhai,',
+    'મારે નીચેના products મંગાવવા છે:',
     '',
-    'Products:',
     ...lines,
     '',
-    `Total Amount: ₹${total}`,
+    `💰 *કુલ રકમ: ₹${total}*`,
     '',
-    'Please contact me regarding this order.',
+    'કૃપા કરી મારો સંપર્ક કરો. આભાર 🙏',
   ].join('\n');
 
   const encodedMessage = encodeURIComponent(message);

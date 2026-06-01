@@ -1,9 +1,17 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { featuredProducts } from '../../data/products';
 import ProductCard from '../ProductCard/ProductCard';
+import ProductCardSkeleton from '../ProductCardSkeleton/ProductCardSkeleton';
 
 export default function FeaturedProducts() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <section className="w-full bg-[#FAFAF8] py-16 md:py-24">
@@ -22,9 +30,18 @@ export default function FeaturedProducts() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => <ProductCardSkeleton key={i} />)
+            : featuredProducts.map((product) => (
+                <div
+                  key={product.id}
+                  onClick={() => navigate(`/products/${product.id}`)}
+                  className="cursor-pointer"
+                >
+                  <ProductCard product={product} />
+                </div>
+              ))
+          }
         </div>
 
         {/* Explore All CTA */}

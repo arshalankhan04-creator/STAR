@@ -1,12 +1,30 @@
-import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { products, CATEGORIES } from '../../data/products';
 import { filterByCategory } from '../../utils/productHelpers';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import ProductCardSkeleton from '../../components/ProductCardSkeleton/ProductCardSkeleton';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const activeCategory = searchParams.get('category') || 'all';
   const filtered = filterByCategory(products, activeCategory);
+
+  const [loading, setLoading] = useState(true);
+
+  // Simulate a brief load so skeletons are visible on first render
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 600);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Reset skeleton when category changes
+  useEffect(() => {
+    setLoading(true);
+    const t = setTimeout(() => setLoading(false), 400);
+    return () => clearTimeout(t);
+  }, [activeCategory]);
 
   function handleCategoryChange(categoryId) {
     if (categoryId === 'all') {
@@ -54,15 +72,29 @@ export default function Products() {
         </div>
 
         {/* Results count */}
-        <p className="text-xs text-[#7A7A72] mb-6 tracking-[0.05em]">
-          {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
-        </p>
+        {!loading && (
+          <p className="text-xs text-[#7A7A72] mb-6 tracking-[0.05em]">
+            {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
+          </p>
+        )}
 
         {/* Product Grid */}
-        {filtered.length > 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : filtered.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <div
+                key={product.id}
+                onClick={() => navigate(`/products/${product.id}`)}
+                className="cursor-pointer"
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         ) : (
