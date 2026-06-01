@@ -24,7 +24,7 @@ export default function Products() {
       <div className="bg-[#F0F4EE] py-10 md:py-14">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-[10px] tracking-[0.3em] uppercase text-[#6B8F5E] mb-3 font-['Montserrat'] font-normal">
-            STAR Collection
+            STAR Herbal Collection
           </p>
           <h1 className="font-['Montserrat'] text-xl sm:text-2xl md:text-3xl tracking-[0.15em] uppercase text-[#2C2C2C] font-light">
             Our Products

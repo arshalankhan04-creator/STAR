@@ -40,7 +40,7 @@ export default function Navbar({ onCartOpen }) {
             to="/"
             className="font-['Montserrat'] text-xl font-light tracking-[0.25em] uppercase text-[#2C2C2C] hover:text-[#6B8F5E] transition-colors duration-300"
           >
-            STAR
+            STAR Herbal
           </Link>
 
           {/* Desktop Nav Links */}

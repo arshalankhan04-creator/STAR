@@ -37,9 +37,14 @@ export default function WhatsAppCTA() {
             Chat With Us
           </a>
 
-          <p className="text-[11px] text-[#7A7A72] mt-5 tracking-[0.05em]">
-            +91 93287 98087
-          </p>
+          <div className="mt-5 flex flex-col items-center gap-1">
+            <p className="text-[12px] text-[#2C2C2C] tracking-[0.08em] font-['Montserrat'] font-normal">
+              Samim I Patel
+            </p>
+            <p className="text-[11px] text-[#7A7A72] tracking-[0.05em]">
+              +91 93287 98087
+            </p>
+          </div>
         </div>
       </div>
     </section>

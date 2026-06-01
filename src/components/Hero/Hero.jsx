@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import heroImage from '../../assets/images/brand/hero.png';
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -9,10 +10,10 @@ export default function Hero() {
       {/* Hero background image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1600&q=80"
+          src={heroImage}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-top"
         />
         {/* Warm cream overlay — lighter at center for text legibility */}
         <div className="absolute inset-0 bg-white/72" />

@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <span className="font-['Montserrat'] text-xl font-light tracking-[0.25em] uppercase text-white">
-              STAR
+              STAR Herbal
             </span>
             <p className="text-xs text-white/50 font-light leading-relaxed max-w-[200px]">
               Handmade skincare crafted with natural ingredients. Pure, honest, and made with love.
@@ -49,6 +49,9 @@ export default function Footer() {
               <a href="tel:+919328798087" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">
                 +91 93287 98087
               </a>
+              <p className="text-xs text-white/50 tracking-[0.05em]">
+                Samim I Patel
+              </p>
             </div>
           </div>
         </div>
@@ -56,7 +59,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-white/30 tracking-[0.05em]">
-            © {new Date().getFullYear()} STAR. All rights reserved.
+            © {new Date().getFullYear()} STAR Herbal. All rights reserved.
           </p>
           <p className="text-[11px] text-white/30 tracking-[0.05em]">
             Handmade with ♥

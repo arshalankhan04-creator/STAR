@@ -18,7 +18,7 @@ export function openWhatsAppOrder(cartItems) {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const message = [
-    'Hello STAR,',
+    'Hello STAR Herbal,',
     '',
     'I would like to place an order.',
     '',

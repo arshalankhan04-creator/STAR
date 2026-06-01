@@ -1,5 +1,5 @@
 /**
- * STAR Product Catalog
+ * STAR Herbal Product Catalog
  *
  * Data structure is intentionally designed to support future additions:
  * - description, ingredients, usage, benefits fields are included but optional
@@ -26,7 +26,11 @@ import imgStarFacial22g       from '../assets/images/products/soap-star-facial-2
 import imgStarFacial50g       from '../assets/images/products/soap-star-facial-50g.jpg';
 import imgHerbalFaceGel       from '../assets/images/products/herbal-face-gel.jpg';
 import imgHerbalOil           from '../assets/images/products/herbal-oil.jpg';
+import imgHerbalOil200ml      from '../assets/images/products/200mloil.jpeg';
+import imgHerbalOil500ml      from '../assets/images/products/500mloil.jpeg';
 import imgHerbalShampoo       from '../assets/images/products/herbal-shampoo.jpg';
+import imgHerbalShampoo200ml  from '../assets/images/products/200mlshampoo.jpeg';
+import imgHerbalShampoo500ml  from '../assets/images/products/500mlshampoo.jpeg';
 import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
 
 // All product images are now available.
@@ -198,8 +202,8 @@ export const products = [
     hasVariants: true,
     variants: [
       { id: 'herbal-oil-100ml', label: '100ml', price: 140, image: imgHerbalOil },
-      { id: 'herbal-oil-200ml', label: '200ml', price: 280, image: imgHerbalOil },
-      { id: 'herbal-oil-500ml', label: '500ml', price: 700, image: imgHerbalOil },
+      { id: 'herbal-oil-200ml', label: '200ml', price: 280, image: imgHerbalOil200ml },
+      { id: 'herbal-oil-500ml', label: '500ml', price: 700, image: imgHerbalOil500ml },
     ],
     image: imgHerbalOil,
     featured: true,
@@ -220,8 +224,8 @@ export const products = [
     hasVariants: true,
     variants: [
       { id: 'herbal-shampoo-100ml', label: '100ml', price: 70,  image: imgHerbalShampoo },
-      { id: 'herbal-shampoo-200ml', label: '200ml', price: 140, image: imgHerbalShampoo },
-      { id: 'herbal-shampoo-500ml', label: '500ml', price: 350, image: imgHerbalShampoo },
+      { id: 'herbal-shampoo-200ml', label: '200ml', price: 140, image: imgHerbalShampoo200ml },
+      { id: 'herbal-shampoo-500ml', label: '500ml', price: 350, image: imgHerbalShampoo500ml },
     ],
     image: imgHerbalShampoo,
     featured: false,
