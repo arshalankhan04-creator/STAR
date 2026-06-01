@@ -61,9 +61,8 @@ export const products = [
     featured: false,
     image: imgSoapSkinCare,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ચહેરા ઉપર ના કાળા કુંડળ આને ફોડલી આને ગરદન કોહની ની કાળાશ મિટાવી whitening glow કરે',
+    ingredients: 'Coffee Powder, Chavala Powder, Potato Powder, Mulethi Powder — તેના ઉપરાંત 14 વસ્તુઓ થી બનેલો Skin Care',
   },
   {
     id: 'soap-aloevera-cool',
@@ -76,9 +75,8 @@ export const products = [
     featured: false,
     image: imgSoapAlovera,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'માથા આને શરીર ની આળ આને ગરમી આને મીઠી ખંજવાળ થી મુક્ત કરી ઠંડક આપે',
+    ingredients: 'Aloevera, Coconut Oil, Glisarin — તેના ઉપરાંત 6 વસ્તુઓ થી બનેલો Aloevera Cool',
   },
   {
     id: 'soap-charcoal-multani',
@@ -91,9 +89,8 @@ export const products = [
     featured: false,
     image: imgSoapCharcoal,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ચહેરા ને oily ત્વચા થી મુક્ત કરી દાઘ ફોડલી ખીલ & વારંવાર આવતા પરસેવા ના ટીપા મુક્ત કરે',
+    ingredients: 'Charcoal, Multani Mitti, Glishrin, Gulab Jal — ઉપરાંત 5 વસ્તુ થી બનેલો Charcoal Multani Mitti',
   },
   {
     id: 'soap-baby',
@@ -106,9 +103,8 @@ export const products = [
     featured: false,
     image: imgSoapBaby,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: '0 થી કોઈ પણ age ના baby ની skin ને massage ingredients થી બનેલા baby soap થી skin moisture કરી પોષણ આપે',
+    ingredients: 'Honey, Besan, Pithi, Goat Milk, Massage Ingredients',
   },
   {
     id: 'soap-besan-pithi',
@@ -121,9 +117,8 @@ export const products = [
     featured: false,
     image: imgSoapBesan,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ત્વચા ને મુલાયમ & moisture આને કોમળ બનાવે',
+    ingredients: 'Besan, Pithi, Coconut Oil, Gulab Jal — તેના ઉપરાંત 4 વસ્તુ થી બનેલો',
   },
   {
     id: 'soap-honey',
@@ -136,9 +131,8 @@ export const products = [
     featured: false,
     image: imgSoapHoney,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ત્વચા ને પોષણ આપી ચમકદાર બનાવે',
+    ingredients: 'Honey, Coconut Oil, Vitamin E Capsule, Gulab Jal — તેના ઉપરાંત 5 વસ્તુ થી બનેલો Honey',
   },
   {
     id: 'soap-nim-aloevera',
@@ -151,9 +145,8 @@ export const products = [
     featured: false,
     image: imgSoapNim,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ત્વચા ની અશુદ્ધિઓ દૂર કરી ખીલ, ફોડલી અને ચામડી ના ચેપ સામે રક્ષણ આપે',
+    ingredients: 'Neem, Aloevera, Coconut Oil, Gulab Jal — કુદરતી વસ્તુઓ થી બનેલો',
   },
   {
     id: 'soap-milky',
@@ -166,9 +159,8 @@ export const products = [
     featured: true,
     image: imgSoapMilky,
     imageStyle: 'cover',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: '0 થી કોઈ પણ age ના વ્યક્તિ ની કરચલી વાળી & સૂકી skin ને પોષણ આપી મુલાયમ કરે — ઉપરાંત પાતળી વાળી skin ને પણ મુલાયમ moisture બનાવે',
+    ingredients: 'Sheep Ghee, Goat Milk, Malai, Glisarin, Gulab Jal — તેના ઉપરાંત 7 વસ્તુ થી બનેલો Milky',
   },
   {
     id: 'soap-star-facial',
@@ -186,9 +178,8 @@ export const products = [
     ],
     image: imgStarFacial50g,
     featured: true,
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ચહેરા ને moisture & કોરેના glow કરે',
+    ingredients: 'Facial Whiting Capsule, Mulethi Powder, Goat Milk, Rice Powder, Malai — તેના ઉપરાંત 7 વસ્તુ',
   },
 
   // ── HAIR OIL ───────────────────────────────────────────────────────────────
@@ -208,9 +199,8 @@ export const products = [
     image: imgHerbalOil,
     featured: true,
     imageStyle: 'contain',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'Hair ને કાળા ઘેરા silky shiny સીધા & લાંબા કરી માથા ના દુખાવા માં રાહત આપી hair fall બંધ કરે — તેના ઉપરાંત dandruff થી છુટકારો આપે',
+    ingredients: 'Onion, Aamla, Sikakhai, Bhugraj, Limdo, Aloevera, Methi, Hibiscus, Heena — કુલ 25 વસ્તુ થી બનેલી Shampoo Oil',
   },
 
   // ── SHAMPOO ────────────────────────────────────────────────────────────────
@@ -230,9 +220,8 @@ export const products = [
     image: imgHerbalShampoo,
     featured: false,
     imageStyle: 'contain',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'Hair ને કાળા ઘેરા silky shiny સીધા & લાંબા કરી માથા ના દુખાવા માં રાહત આપી hair fall બંધ કરે — તેના ઉપરાંત dandruff થી છુટકારો આપે',
+    ingredients: 'Onion, Aamla, Sikakhai, Bhugraj, Limdo, Aloevera, Methi, Hibiscus, Heena — કુલ 25 વસ્તુ થી બનેલી Shampoo Oil',
   },
 
   // ── FACE GEL ───────────────────────────────────────────────────────────────
@@ -252,9 +241,8 @@ export const products = [
     image: imgHerbalFaceGel,
     featured: true,
     imageStyle: 'contain',
-    description: '',
-    ingredients: '',
-    usage: '',
+    benefits: 'ચહેરા & body ને moisture કરી દાઘ ફોડલી થી મુક્ત કરી આને છિદ્રો ને ભરી skin glow આપે',
+    ingredients: 'Flax Seeds Gel, Pithi, Glisarin, Gulab Jal — ઉપરાંત 5 થી વધુ વસ્તુ થી બનેલું Gel',
   },
 ];
 

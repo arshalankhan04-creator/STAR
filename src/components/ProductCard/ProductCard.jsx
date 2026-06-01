@@ -6,22 +6,20 @@ export default function ProductCard({ product }) {
   const { addItem } = useCart();
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
   const [added, setAdded] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
-  // Resolve which image to show:
-  // 1. Selected variant's own image (if it has one)
-  // 2. Product-level image (fallback)
-  // 3. null → show placeholder
   const activeImage =
     (selectedVariant?.image ?? null) !== null
       ? selectedVariant.image
       : product.image ?? null;
 
-  // 'cover' for flat products (soaps), 'contain' for bottles (oil, shampoo, gel)
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
   const displayPrice = product.hasVariants
     ? selectedVariant ? `₹${selectedVariant.price}` : getDisplayPrice(product)
     : `₹${product.price}`;
+
+  const hasDetails = product.benefits || product.ingredients;
 
   function handleVariantSelect(variant) {
     setSelectedVariant(variant);
@@ -96,6 +94,60 @@ export default function ProductCard({ product }) {
         </p>
       </div>
 
+      {/* Details Toggle */}
+      {hasDetails && (
+        <div className="px-3 pb-1">
+          <button
+            onClick={() => setDetailsOpen((v) => !v)}
+            aria-expanded={detailsOpen}
+            className="w-full flex items-center justify-between text-[10px] tracking-[0.1em] uppercase text-[#7A7A72] hover:text-[#6B8F5E] transition-colors duration-200 cursor-pointer py-2 border-t border-[#F0F0EA]"
+          >
+            <span>Details</span>
+            <ChevronIcon open={detailsOpen} />
+          </button>
+
+          {/* Expandable Panel */}
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-out ${
+              detailsOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <div className="pb-3 flex flex-col gap-3 text-left">
+
+              {/* Benefits */}
+              {product.benefits && (
+                <div>
+                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">
+                    ફાયદા
+                  </p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">
+                    {product.benefits}
+                  </p>
+                </div>
+              )}
+
+              {/* Divider between sections */}
+              {product.benefits && product.ingredients && (
+                <div className="w-full h-px bg-[#F0F0EA]" />
+              )}
+
+              {/* Ingredients */}
+              {product.ingredients && (
+                <div>
+                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">
+                    સામગ્રી
+                  </p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">
+                    {product.ingredients}
+                  </p>
+                </div>
+              )}
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Add to Cart Button */}
       <div className="px-3 pb-4 mt-auto">
         <button
@@ -112,6 +164,26 @@ export default function ProductCard({ product }) {
         </button>
       </div>
     </article>
+  );
+}
+
+// ─── Icons ────────────────────────────────────────────────────────────────────
+
+function ChevronIcon({ open }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
   );
 }
 
