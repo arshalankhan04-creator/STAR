@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../../data/products';
 import { useCart } from '../../context/CartContext';
+import { useLang } from '../../context/LanguageContext';
 import { getDefaultVariant } from '../../utils/productHelpers';
 
 export default function ProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { t } = useLang();
 
   const product = products.find((p) => p.id === productId);
 
@@ -17,7 +19,6 @@ export default function ProductDetail() {
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState('benefits');
 
-  // Product not found → 404
   if (!product) {
     navigate('/404', { replace: true });
     return null;
@@ -48,23 +49,18 @@ export default function ProductDetail() {
       {/* Breadcrumb */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <nav className="flex items-center gap-2 text-[11px] text-[#7A7A72] tracking-[0.05em]">
-          <button onClick={() => navigate('/')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">
-            Home
-          </button>
+          <button onClick={() => navigate('/')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">{t.detailHome}</button>
           <span>/</span>
-          <button onClick={() => navigate('/products')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">
-            Products
-          </button>
+          <button onClick={() => navigate('/products')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">{t.detailProducts}</button>
           <span>/</span>
           <span className="text-[#2C2C2C]">{product.name}</span>
         </nav>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20">
 
-          {/* ── Image Panel ── */}
+          {/* Image Panel */}
           <div className="w-full">
             <div className="aspect-square bg-[#F5F5F0] overflow-hidden">
               {activeImage ? (
@@ -75,12 +71,12 @@ export default function ProductDetail() {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-[11px] tracking-[0.1em] uppercase text-[#AEAEA6]">Image Soon</span>
+                  <span className="text-[11px] tracking-[0.1em] uppercase text-[#AEAEA6]">{t.detailImageSoon}</span>
                 </div>
               )}
             </div>
 
-            {/* Variant image thumbnails */}
+            {/* Variant thumbnails */}
             {product.hasVariants && product.variants && (
               <div className="flex gap-2 mt-3">
                 {product.variants.map((variant) => (
@@ -88,22 +84,14 @@ export default function ProductDetail() {
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}
                     className={`w-16 h-16 border-2 overflow-hidden bg-[#F5F5F0] transition-all duration-200 cursor-pointer ${
-                      selectedVariant?.id === variant.id
-                        ? 'border-[#6B8F5E]'
-                        : 'border-transparent hover:border-[#C8C8C0]'
+                      selectedVariant?.id === variant.id ? 'border-[#6B8F5E]' : 'border-transparent hover:border-[#C8C8C0]'
                     }`}
                     aria-label={`View ${variant.label}`}
                   >
                     {variant.image ? (
-                      <img
-                        src={variant.image}
-                        alt={variant.label}
-                        className={`w-full h-full ${imgFit}`}
-                      />
+                      <img src={variant.image} alt={variant.label} className={`w-full h-full ${imgFit}`} />
                     ) : (
-                      <span className="text-[9px] text-[#AEAEA6] flex items-center justify-center h-full">
-                        {variant.label}
-                      </span>
+                      <span className="text-[9px] text-[#AEAEA6] flex items-center justify-center h-full">{variant.label}</span>
                     )}
                   </button>
                 ))}
@@ -111,22 +99,19 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* ── Info Panel ── */}
+          {/* Info Panel */}
           <div className="flex flex-col gap-5">
 
-            {/* Category label */}
             <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B8F5E] font-['Montserrat']">
               {product.categoryLabel}
             </p>
 
-            {/* Name */}
             <h1 className="font-['Montserrat'] text-2xl sm:text-3xl tracking-[0.08em] uppercase text-[#2C2C2C] font-light leading-snug">
               {product.name}
             </h1>
 
             <div className="w-8 h-px bg-[#6B8F5E]" />
 
-            {/* Price */}
             <p className="font-['Montserrat'] text-2xl text-[#2C2C2C] font-normal">
               {displayPrice}
               {!product.hasVariants && product.unit && (
@@ -137,9 +122,7 @@ export default function ProductDetail() {
             {/* Variant Pills */}
             {product.hasVariants && product.variants && (
               <div>
-                <p className="text-[10px] tracking-[0.15em] uppercase text-[#7A7A72] font-['Montserrat'] mb-2">
-                  Size
-                </p>
+                <p className="text-[10px] tracking-[0.15em] uppercase text-[#7A7A72] font-['Montserrat'] mb-2">{t.detailSize}</p>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((variant) => (
                     <button
@@ -159,7 +142,6 @@ export default function ProductDetail() {
               </div>
             )}
 
-            {/* Add to Cart */}
             <button
               onClick={handleAddToCart}
               disabled={product.hasVariants && !selectedVariant}
@@ -168,50 +150,41 @@ export default function ProductDetail() {
                   ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
                   : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
               }`}
-              aria-label={`Add ${product.name} to cart`}
+              aria-label={`${t.detailAddToCart} ${product.name}`}
             >
-              {added ? 'Added to Cart ✓' : 'Add to Cart'}
+              {added ? t.detailAdded : t.detailAddToCart}
             </button>
 
             {/* Details Tabs */}
             {hasDetails && (
               <div className="border-t border-[#E4E4DC] pt-5 mt-2">
-
-                {/* Tab buttons */}
                 <div className="flex gap-6 mb-4 border-b border-[#E4E4DC]">
                   {product.benefits && (
                     <button
                       onClick={() => setActiveTab('benefits')}
                       className={`text-[10px] tracking-[0.15em] uppercase pb-3 transition-colors duration-200 cursor-pointer font-['Montserrat'] border-b-2 -mb-px ${
-                        activeTab === 'benefits'
-                          ? 'border-[#6B8F5E] text-[#2C2C2C]'
-                          : 'border-transparent text-[#7A7A72] hover:text-[#2C2C2C]'
+                        activeTab === 'benefits' ? 'border-[#6B8F5E] text-[#2C2C2C]' : 'border-transparent text-[#7A7A72] hover:text-[#2C2C2C]'
                       }`}
                     >
-                      ફાયદા
+                      {t.detailBenefits}
                     </button>
                   )}
                   {product.ingredients && (
                     <button
                       onClick={() => setActiveTab('ingredients')}
                       className={`text-[10px] tracking-[0.15em] uppercase pb-3 transition-colors duration-200 cursor-pointer font-['Montserrat'] border-b-2 -mb-px ${
-                        activeTab === 'ingredients'
-                          ? 'border-[#6B8F5E] text-[#2C2C2C]'
-                          : 'border-transparent text-[#7A7A72] hover:text-[#2C2C2C]'
+                        activeTab === 'ingredients' ? 'border-[#6B8F5E] text-[#2C2C2C]' : 'border-transparent text-[#7A7A72] hover:text-[#2C2C2C]'
                       }`}
                     >
-                      સામગ્રી
+                      {t.detailIngredients}
                     </button>
                   )}
                 </div>
-
-                {/* Tab content */}
                 <p className="text-sm text-[#4A4A44] font-light leading-relaxed">
                   {activeTab === 'benefits' ? product.benefits : product.ingredients}
                 </p>
               </div>
             )}
-
           </div>
         </div>
 
@@ -224,7 +197,7 @@ export default function ProductDetail() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            Back to Products
+            {t.detailBack}
           </button>
         </div>
       </div>

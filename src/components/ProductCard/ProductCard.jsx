@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import { useLang } from '../../context/LanguageContext';
 import { getDisplayPrice, getDefaultVariant } from '../../utils/productHelpers';
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
+  const { t } = useLang();
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -21,10 +23,6 @@ export default function ProductCard({ product }) {
 
   const hasDetails = product.benefits || product.ingredients;
 
-  function handleVariantSelect(variant) {
-    setSelectedVariant(variant);
-  }
-
   function handleAddToCart() {
     addItem(product, selectedVariant);
     setAdded(true);
@@ -34,16 +32,12 @@ export default function ProductCard({ product }) {
   return (
     <article className="flex flex-col bg-white group border border-transparent hover:border-[#E4E4DC] transition-colors duration-300">
 
-      {/* Image Container */}
+      {/* Image */}
       <div className="relative w-full aspect-square bg-[#F5F5F0] overflow-hidden">
         {activeImage ? (
           <img
             src={activeImage}
-            alt={
-              selectedVariant
-                ? `${product.name} — ${selectedVariant.label}`
-                : product.name
-            }
+            alt={selectedVariant ? `${product.name} — ${selectedVariant.label}` : product.name}
             className={`w-full h-full ${imgFit} transition-all duration-[400ms] ease-out group-hover:scale-[1.04]`}
             loading="lazy"
           />
@@ -51,13 +45,13 @@ export default function ProductCard({ product }) {
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
             <PlaceholderIcon />
             <span className="text-[10px] tracking-[0.1em] uppercase text-[#AEAEA6]">
-              Image Soon
+              {t.cardImageSoon}
             </span>
           </div>
         )}
       </div>
 
-      {/* Text Stack */}
+      {/* Text */}
       <div className="flex flex-col items-center text-center px-3 pt-4 pb-2 gap-1 flex-1">
         <h3 className="font-['Montserrat'] text-xs sm:text-sm tracking-[0.1em] uppercase text-[#2C2C2C] font-normal leading-snug">
           {product.name}
@@ -73,7 +67,7 @@ export default function ProductCard({ product }) {
             {product.variants.map((variant) => (
               <button
                 key={variant.id}
-                onClick={() => handleVariantSelect(variant)}
+                onClick={() => setSelectedVariant(variant)}
                 className={`text-[10px] sm:text-xs px-2.5 py-1 border tracking-[0.05em] transition-all duration-200 cursor-pointer ${
                   selectedVariant?.id === variant.id
                     ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
@@ -88,7 +82,6 @@ export default function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Price */}
         <p className="text-sm sm:text-base font-['Montserrat'] font-normal text-[#2C2C2C] mt-2">
           {displayPrice}
         </p>
@@ -102,53 +95,31 @@ export default function ProductCard({ product }) {
             aria-expanded={detailsOpen}
             className="w-full flex items-center justify-between text-[10px] tracking-[0.1em] uppercase text-[#7A7A72] hover:text-[#6B8F5E] transition-colors duration-200 cursor-pointer py-2 border-t border-[#F0F0EA]"
           >
-            <span>Details</span>
+            <span>{t.cardDetails}</span>
             <ChevronIcon open={detailsOpen} />
           </button>
 
-          {/* Expandable Panel */}
-          <div
-            className={`overflow-hidden transition-all duration-300 ease-out ${
-              detailsOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
-            }`}
-          >
+          <div className={`overflow-hidden transition-all duration-300 ease-out ${detailsOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="pb-3 flex flex-col gap-3 text-left">
-
-              {/* Benefits */}
               {product.benefits && (
                 <div>
-                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">
-                    ફાયદા
-                  </p>
-                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">
-                    {product.benefits}
-                  </p>
+                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">{t.cardBenefits}</p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{product.benefits}</p>
                 </div>
               )}
-
-              {/* Divider between sections */}
-              {product.benefits && product.ingredients && (
-                <div className="w-full h-px bg-[#F0F0EA]" />
-              )}
-
-              {/* Ingredients */}
+              {product.benefits && product.ingredients && <div className="w-full h-px bg-[#F0F0EA]" />}
               {product.ingredients && (
                 <div>
-                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">
-                    સામગ્રી
-                  </p>
-                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">
-                    {product.ingredients}
-                  </p>
+                  <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">{t.cardIngredients}</p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{product.ingredients}</p>
                 </div>
               )}
-
             </div>
           </div>
         </div>
       )}
 
-      {/* Add to Cart Button */}
+      {/* Add to Cart */}
       <div className="px-3 pb-4 mt-auto">
         <button
           onClick={handleAddToCart}
@@ -158,30 +129,19 @@ export default function ProductCard({ product }) {
               ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
               : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
           }`}
-          aria-label={`Add ${product.name} to cart`}
+          aria-label={`${t.cardAddToCart} ${product.name}`}
         >
-          {added ? 'Added ✓' : 'Add to Cart'}
+          {added ? t.cardAdded : t.cardAddToCart}
         </button>
       </div>
     </article>
   );
 }
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
-
 function ChevronIcon({ open }) {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={`transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
-    >
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+      className={`transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}>
       <polyline points="6 9 12 15 18 9" />
     </svg>
   );

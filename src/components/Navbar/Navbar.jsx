@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useLang } from '../../context/LanguageContext';
 import { getWhatsAppLink } from '../../utils/whatsappMessage';
 
 export default function Navbar({ onCartOpen }) {
   const { totalItems } = useCart();
+  const { t, lang, chooseLang } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -40,28 +42,39 @@ export default function Navbar({ onCartOpen }) {
             to="/"
             className="font-['Montserrat'] text-xl font-light tracking-[0.25em] uppercase text-[#2C2C2C] hover:text-[#6B8F5E] transition-colors duration-300"
           >
-            STAR Herbal
+            {t.brandName}
           </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-10">
-            <NavLink to="/" end className={navLinkClass}>Home</NavLink>
-            <NavLink to="/products" className={navLinkClass}>Products</NavLink>
+            <NavLink to="/" end className={navLinkClass}>{t.navHome}</NavLink>
+            <NavLink to="/products" className={navLinkClass}>{t.navProducts}</NavLink>
             <a
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs tracking-[0.12em] uppercase text-[#4A4A44] hover:text-[#1A1A1A] transition-colors duration-300"
             >
-              WhatsApp Order
+              {t.navWhatsapp}
             </a>
           </nav>
 
-          {/* Right: Cart + Hamburger */}
-          <div className="flex items-center gap-3">
+          {/* Right: Lang Toggle + Cart + Hamburger */}
+          <div className="flex items-center gap-2">
+
+            {/* Language Toggle */}
+            <button
+              onClick={() => chooseLang(lang === 'en' ? 'gu' : 'en')}
+              className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer hidden sm:block"
+              aria-label={`Switch to ${lang === 'en' ? 'Gujarati' : 'English'}`}
+            >
+              {lang === 'en' ? 'ગુ' : 'EN'}
+            </button>
+
+            {/* Cart */}
             <button
               onClick={onCartOpen}
-              aria-label={`Open cart, ${totalItems} items`}
+              aria-label={`${t.navOpenCart}, ${totalItems} ${totalItems === 1 ? t.navItem : t.navItems}`}
               className="relative p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
             >
               <CartIcon />
@@ -74,7 +87,7 @@ export default function Navbar({ onCartOpen }) {
 
             <button
               onClick={(e) => { e.stopPropagation(); setMenuOpen((v) => !v); }}
-              aria-label="Toggle menu"
+              aria-label={t.navToggleMenu}
               aria-expanded={menuOpen}
               className="md:hidden p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
             >
@@ -87,13 +100,13 @@ export default function Navbar({ onCartOpen }) {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-          menuOpen ? 'max-h-64 border-t border-[#E4E4DC]' : 'max-h-0'
+          menuOpen ? 'max-h-72 border-t border-[#E4E4DC]' : 'max-h-0'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         <nav className="flex flex-col bg-white px-6 py-5 gap-5">
-          <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>Home</NavLink>
-          <NavLink to="/products" className={navLinkClass} onClick={() => setMenuOpen(false)}>Products</NavLink>
+          <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>{t.navHome}</NavLink>
+          <NavLink to="/products" className={navLinkClass} onClick={() => setMenuOpen(false)}>{t.navProducts}</NavLink>
           <a
             href={getWhatsAppLink()}
             target="_blank"
@@ -101,8 +114,15 @@ export default function Navbar({ onCartOpen }) {
             className="text-xs tracking-[0.12em] uppercase text-[#4A4A44] hover:text-[#1A1A1A] transition-colors duration-300"
             onClick={() => setMenuOpen(false)}
           >
-            WhatsApp Order
+            {t.navWhatsapp}
           </a>
+          {/* Language toggle in mobile menu */}
+          <button
+            onClick={() => { chooseLang(lang === 'en' ? 'gu' : 'en'); setMenuOpen(false); }}
+            className="text-xs tracking-[0.12em] uppercase text-[#6B8F5E] text-left cursor-pointer font-['Montserrat']"
+          >
+            {lang === 'en' ? 'ગુજરાતીમાં જુઓ' : 'View in English'}
+          </button>
         </nav>
       </div>
     </header>
