@@ -62,10 +62,10 @@ export default function Navbar({ onCartOpen }) {
           {/* Right: Lang Toggle + Cart + Hamburger */}
           <div className="flex items-center gap-2">
 
-            {/* Language Toggle */}
+            {/* Language Toggle — always visible on all screen sizes */}
             <button
               onClick={() => chooseLang(lang === 'en' ? 'gu' : 'en')}
-              className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer hidden sm:block"
+              className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer"
               aria-label={`Switch to ${lang === 'en' ? 'Gujarati' : 'English'}`}
             >
               {lang === 'en' ? 'ગુ' : 'EN'}
@@ -116,13 +116,6 @@ export default function Navbar({ onCartOpen }) {
           >
             {t.navWhatsapp}
           </a>
-          {/* Language toggle in mobile menu */}
-          <button
-            onClick={() => { chooseLang(lang === 'en' ? 'gu' : 'en'); setMenuOpen(false); }}
-            className="text-xs tracking-[0.12em] uppercase text-[#6B8F5E] text-left cursor-pointer font-['Montserrat']"
-          >
-            {lang === 'en' ? 'ગુજરાતીમાં જુઓ' : 'View in English'}
-          </button>
         </nav>
       </div>
     </header>

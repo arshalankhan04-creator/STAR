@@ -1,15 +1,5 @@
 /**
  * STAR Herbal Product Catalog
- *
- * Data structure is intentionally designed to support future additions:
- * - description, ingredients, usage, benefits fields are included but optional
- * - variants array supports any combination of size/weight/price
- * - featured flag controls home page display
- * - category slug matches URL query param values
- *
- * Image paths use Vite's asset import convention.
- * For variant-specific images, each variant carries its own `image` field.
- * The ProductCard reads variant.image (if present) and falls back to product.image.
  */
 
 // ─── Asset imports ────────────────────────────────────────────────────────────
@@ -33,8 +23,6 @@ import imgHerbalShampoo200ml  from '../assets/images/products/200mlshampoo.jpeg'
 import imgHerbalShampoo500ml  from '../assets/images/products/500mlshampoo.jpeg';
 import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
 
-// All product images are now available.
-
 // ─── Categories ───────────────────────────────────────────────────────────────
 
 export const CATEGORIES = [
@@ -53,8 +41,10 @@ export const products = [
   {
     id: 'soap-skin-care',
     name: 'Skin Care Soap',
+    nameGu: 'સ્કિન કેર સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -67,8 +57,10 @@ export const products = [
   {
     id: 'soap-aloevera-cool',
     name: 'Aloevera Cool Soap',
+    nameGu: 'એલોવેરા કૂલ સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -81,8 +73,10 @@ export const products = [
   {
     id: 'soap-charcoal-multani',
     name: 'Charcoal & Multani Mitti Soap',
+    nameGu: 'ચારકોલ & મુલ્તાની મિટ્ટી સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -95,8 +89,10 @@ export const products = [
   {
     id: 'soap-baby',
     name: 'Baby Soap',
+    nameGu: 'બેબી સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 40,
     unit: '50g',
     hasVariants: false,
@@ -109,8 +105,10 @@ export const products = [
   {
     id: 'soap-besan-pithi',
     name: 'Besan & Pithi Soap',
+    nameGu: 'બેસન & પિઠી સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -123,8 +121,10 @@ export const products = [
   {
     id: 'soap-honey',
     name: 'Honey Soap',
+    nameGu: 'મધ સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -137,8 +137,10 @@ export const products = [
   {
     id: 'soap-nim-aloevera',
     name: 'Nim Aloevera Soap',
+    nameGu: 'નીમ એલોવેરા સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 30,
     unit: '50g',
     hasVariants: false,
@@ -151,8 +153,10 @@ export const products = [
   {
     id: 'soap-milky',
     name: 'Milky Soap',
+    nameGu: 'મિલ્કી સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: 70,
     unit: '50g',
     hasVariants: false,
@@ -165,8 +169,10 @@ export const products = [
   {
     id: 'soap-star-facial',
     name: 'Star Facial Soap',
+    nameGu: 'સ્ટાર ફેશિયલ સાબુ',
     category: 'soap',
     categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: null,
     unit: null,
     hasVariants: true,
@@ -186,8 +192,10 @@ export const products = [
   {
     id: 'herbal-oil',
     name: 'Herbal Oil',
+    nameGu: 'હર્બલ ઓઈલ',
     category: 'hair-oil',
     categoryLabel: 'Hair Oil',
+    categoryLabelGu: 'હેર ઓઈલ',
     price: null,
     unit: null,
     hasVariants: true,
@@ -207,8 +215,10 @@ export const products = [
   {
     id: 'herbal-shampoo',
     name: 'Herbal Shampoo',
+    nameGu: 'હર્બલ શૅમ્પૂ',
     category: 'shampoo',
     categoryLabel: 'Shampoo',
+    categoryLabelGu: 'શૅમ્પૂ',
     price: null,
     unit: null,
     hasVariants: true,
@@ -228,8 +238,10 @@ export const products = [
   {
     id: 'herbal-face-gel',
     name: 'Herbal Face Gel',
+    nameGu: 'હર્બલ ફેસ જેલ',
     category: 'face-gel',
     categoryLabel: 'Face Gel',
+    categoryLabelGu: 'ફેસ જેલ',
     price: null,
     unit: null,
     hasVariants: true,

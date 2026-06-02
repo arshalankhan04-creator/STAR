@@ -5,10 +5,13 @@ import { getDisplayPrice, getDefaultVariant } from '../../utils/productHelpers';
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+
+  const displayName = lang === 'gu' && product.nameGu ? product.nameGu : product.name;
+  const displayCategoryLabel = lang === 'gu' && product.categoryLabelGu ? product.categoryLabelGu : product.categoryLabel;
 
   const activeImage =
     (selectedVariant?.image ?? null) !== null
@@ -54,10 +57,10 @@ export default function ProductCard({ product }) {
       {/* Text */}
       <div className="flex flex-col items-center text-center px-3 pt-4 pb-2 gap-1 flex-1">
         <h3 className="font-['Montserrat'] text-xs sm:text-sm tracking-[0.1em] uppercase text-[#2C2C2C] font-normal leading-snug">
-          {product.name}
+          {displayName}
         </h3>
         <p className="text-[11px] text-[#7A7A72] italic">
-          {product.categoryLabel}
+          {displayCategoryLabel}
           {!product.hasVariants && product.unit ? ` · ${product.unit}` : ''}
         </p>
 

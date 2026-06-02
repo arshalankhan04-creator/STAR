@@ -9,7 +9,7 @@ export default function ProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { addItem } = useCart();
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const product = products.find((p) => p.id === productId);
 
@@ -23,6 +23,9 @@ export default function ProductDetail() {
     navigate('/404', { replace: true });
     return null;
   }
+
+  const displayName = lang === 'gu' && product.nameGu ? product.nameGu : product.name;
+  const displayCategoryLabel = lang === 'gu' && product.categoryLabelGu ? product.categoryLabelGu : product.categoryLabel;
 
   const activeImage =
     (selectedVariant?.image ?? null) !== null
@@ -53,7 +56,7 @@ export default function ProductDetail() {
           <span>/</span>
           <button onClick={() => navigate('/products')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">{t.detailProducts}</button>
           <span>/</span>
-          <span className="text-[#2C2C2C]">{product.name}</span>
+          <span className="text-[#2C2C2C]">{displayName}</span>
         </nav>
       </div>
 
@@ -103,11 +106,11 @@ export default function ProductDetail() {
           <div className="flex flex-col gap-5">
 
             <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B8F5E] font-['Montserrat']">
-              {product.categoryLabel}
+              {displayCategoryLabel}
             </p>
 
             <h1 className="font-['Montserrat'] text-2xl sm:text-3xl tracking-[0.08em] uppercase text-[#2C2C2C] font-light leading-snug">
-              {product.name}
+              {displayName}
             </h1>
 
             <div className="w-8 h-px bg-[#6B8F5E]" />
