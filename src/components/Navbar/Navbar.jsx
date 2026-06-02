@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
@@ -7,7 +7,6 @@ import { getWhatsAppLink } from '../../utils/whatsappMessage';
 export default function Navbar({ onCartOpen }) {
   const { totalItems } = useCart();
   const { t, lang, chooseLang } = useLang();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,13 +14,6 @@ export default function Navbar({ onCartOpen }) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const close = () => setMenuOpen(false);
-    document.addEventListener('click', close);
-    return () => document.removeEventListener('click', close);
-  }, [menuOpen]);
 
   const navLinkClass = ({ isActive }) =>
     `text-xs tracking-[0.12em] uppercase transition-colors duration-300 ${
@@ -45,7 +37,7 @@ export default function Navbar({ onCartOpen }) {
             {t.brandName}
           </Link>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links — hidden on mobile */}
           <nav className="hidden md:flex items-center gap-10">
             <NavLink to="/" end className={navLinkClass}>{t.navHome}</NavLink>
             <NavLink to="/products" className={navLinkClass}>{t.navProducts}</NavLink>
@@ -59,10 +51,10 @@ export default function Navbar({ onCartOpen }) {
             </a>
           </nav>
 
-          {/* Right: Lang Toggle + Cart + Hamburger */}
+          {/* Right: Lang Toggle + Cart */}
           <div className="flex items-center gap-2">
 
-            {/* Language Toggle — always visible on all screen sizes */}
+            {/* Language Toggle */}
             <button
               onClick={() => chooseLang(lang === 'en' ? 'gu' : 'en')}
               className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer"
@@ -84,39 +76,8 @@ export default function Navbar({ onCartOpen }) {
                 </span>
               )}
             </button>
-
-            <button
-              onClick={(e) => { e.stopPropagation(); setMenuOpen((v) => !v); }}
-              aria-label={t.navToggleMenu}
-              aria-expanded={menuOpen}
-              className="md:hidden p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
-            >
-              {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
-            </button>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-          menuOpen ? 'max-h-72 border-t border-[#E4E4DC]' : 'max-h-0'
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <nav className="flex flex-col bg-white px-6 py-5 gap-5">
-          <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>{t.navHome}</NavLink>
-          <NavLink to="/products" className={navLinkClass} onClick={() => setMenuOpen(false)}>{t.navProducts}</NavLink>
-          <a
-            href={getWhatsAppLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs tracking-[0.12em] uppercase text-[#4A4A44] hover:text-[#1A1A1A] transition-colors duration-300"
-            onClick={() => setMenuOpen(false)}
-          >
-            {t.navWhatsapp}
-          </a>
-        </nav>
       </div>
     </header>
   );
@@ -128,25 +89,6 @@ function CartIcon() {
       <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
       <line x1="3" y1="6" x2="21" y2="6" />
       <path d="M16 10a4 4 0 01-8 0" />
-    </svg>
-  );
-}
-
-function HamburgerIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-      <line x1="3" y1="6" x2="21" y2="6" />
-      <line x1="3" y1="12" x2="21" y2="12" />
-      <line x1="3" y1="18" x2="21" y2="18" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   );
 }

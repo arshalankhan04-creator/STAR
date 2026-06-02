@@ -3,7 +3,7 @@ import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { getDisplayPrice, getDefaultVariant } from '../../utils/productHelpers';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, showDetails = true }) {
   const { addItem } = useCart();
   const { t, lang } = useLang();
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
@@ -12,6 +12,12 @@ export default function ProductCard({ product }) {
 
   const displayName = lang === 'gu' && product.nameGu ? product.nameGu : product.name;
   const displayCategoryLabel = lang === 'gu' && product.categoryLabelGu ? product.categoryLabelGu : product.categoryLabel;
+  const displayBenefits = lang === 'gu'
+    ? (product.benefitsGu ?? product.benefitsEn ?? '')
+    : (product.benefitsEn ?? product.benefitsGu ?? '');
+  const displayIngredients = lang === 'gu'
+    ? (product.ingredientsGu ?? product.ingredientsEn ?? '')
+    : (product.ingredientsEn ?? product.ingredientsGu ?? '');
 
   const activeImage =
     (selectedVariant?.image ?? null) !== null
@@ -24,7 +30,7 @@ export default function ProductCard({ product }) {
     ? selectedVariant ? `₹${selectedVariant.price}` : getDisplayPrice(product)
     : `₹${product.price}`;
 
-  const hasDetails = product.benefits || product.ingredients;
+  const hasDetails = showDetails && (displayBenefits || displayIngredients);
 
   function handleAddToCart() {
     addItem(product, selectedVariant);
@@ -104,17 +110,17 @@ export default function ProductCard({ product }) {
 
           <div className={`overflow-hidden transition-all duration-300 ease-out ${detailsOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="pb-3 flex flex-col gap-3 text-left">
-              {product.benefits && (
+              {displayBenefits && (
                 <div>
                   <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">{t.cardBenefits}</p>
-                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{product.benefits}</p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{displayBenefits}</p>
                 </div>
               )}
-              {product.benefits && product.ingredients && <div className="w-full h-px bg-[#F0F0EA]" />}
-              {product.ingredients && (
+              {displayBenefits && displayIngredients && <div className="w-full h-px bg-[#F0F0EA]" />}
+              {displayIngredients && (
                 <div>
                   <p className="text-[9px] tracking-[0.15em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-1">{t.cardIngredients}</p>
-                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{product.ingredients}</p>
+                  <p className="text-[11px] text-[#4A4A44] font-light leading-relaxed">{displayIngredients}</p>
                 </div>
               )}
             </div>

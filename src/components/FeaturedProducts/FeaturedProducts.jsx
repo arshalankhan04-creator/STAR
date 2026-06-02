@@ -38,7 +38,7 @@ export default function FeaturedProducts() {
                   onClick={() => navigate(`/products/${product.id}`)}
                   className="cursor-pointer"
                 >
-                  <ProductCard product={product} />
+                  <ProductCard product={product} showDetails={false} />
                 </div>
               ))
           }

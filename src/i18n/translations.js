@@ -72,8 +72,8 @@ export const translations = {
     // ── Product Card ───────────────────────────────────────────────────────
     cardImageSoon: 'Image Soon',
     cardDetails: 'Details',
-    cardBenefits: 'ફાયદા',
-    cardIngredients: 'સામગ્રી',
+    cardBenefits: 'Benefits',
+    cardIngredients: 'Ingredients',
     cardAddToCart: 'Add to Cart',
     cardAdded: 'Added ✓',
 
@@ -99,8 +99,8 @@ export const translations = {
     detailAddToCart: 'Add to Cart',
     detailAdded: 'Added to Cart ✓',
     detailBack: 'Back to Products',
-    detailBenefits: 'ફાયદા',
-    detailIngredients: 'સામગ્રી',
+    detailBenefits: 'Benefits',
+    detailIngredients: 'Ingredients',
 
     // ── Cart Drawer — Step 1 ───────────────────────────────────────────────
     cartTitle: 'Your Cart',

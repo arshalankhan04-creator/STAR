@@ -7,6 +7,8 @@ import CartDrawer from './components/CartDrawer/CartDrawer';
 import Footer from './components/Footer/Footer';
 import AppRoutes from './routes/AppRoutes';
 import LanguagePopup from './components/LanguagePopup/LanguagePopup';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import MobileBottomNav from './components/MobileBottomNav/MobileBottomNav';
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -15,14 +17,17 @@ export default function App() {
     <BrowserRouter>
       <LanguageProvider>
         <CartProvider>
+          <ScrollToTop />
           <LanguagePopup />
           <div className="flex flex-col min-h-screen">
             <Navbar onCartOpen={() => setCartOpen(true)} />
-            <div className="flex-1">
+            {/* pb-16 on mobile so content isn't hidden behind the bottom nav */}
+            <div className="flex-1 pb-16 md:pb-0">
               <AppRoutes />
             </div>
             <Footer />
           </div>
+          <MobileBottomNav />
           <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
         </CartProvider>
       </LanguageProvider>

@@ -43,7 +43,6 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}) {
     ...(note ? [`📝 Note: ${note}`] : []),
     '',
     '─────────────────────────',
-    '🙏 _Thank you for choosing STAR Herbal!_',
     '_We will confirm your order shortly._',
   ].join('\n');
 

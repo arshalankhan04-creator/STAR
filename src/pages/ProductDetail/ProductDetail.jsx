@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../../data/products';
 import { useCart } from '../../context/CartContext';
@@ -19,6 +19,11 @@ export default function ProductDetail() {
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState('benefits');
 
+  // Reset tab when language changes so content re-evaluates cleanly
+  useEffect(() => {
+    setActiveTab('benefits');
+  }, [lang]);
+
   if (!product) {
     navigate('/404', { replace: true });
     return null;
@@ -26,6 +31,12 @@ export default function ProductDetail() {
 
   const displayName = lang === 'gu' && product.nameGu ? product.nameGu : product.name;
   const displayCategoryLabel = lang === 'gu' && product.categoryLabelGu ? product.categoryLabelGu : product.categoryLabel;
+  const displayBenefits = lang === 'gu'
+    ? (product.benefitsGu ?? product.benefitsEn ?? '')
+    : (product.benefitsEn ?? product.benefitsGu ?? '');
+  const displayIngredients = lang === 'gu'
+    ? (product.ingredientsGu ?? product.ingredientsEn ?? '')
+    : (product.ingredientsEn ?? product.ingredientsGu ?? '');
 
   const activeImage =
     (selectedVariant?.image ?? null) !== null
@@ -44,7 +55,7 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 1800);
   }
 
-  const hasDetails = product.benefits || product.ingredients;
+  const hasDetails = displayBenefits || displayIngredients;
 
   return (
     <main className="min-h-screen bg-white pt-16 md:pt-20">
@@ -162,7 +173,7 @@ export default function ProductDetail() {
             {hasDetails && (
               <div className="border-t border-[#E4E4DC] pt-5 mt-2">
                 <div className="flex gap-6 mb-4 border-b border-[#E4E4DC]">
-                  {product.benefits && (
+                  {displayBenefits && (
                     <button
                       onClick={() => setActiveTab('benefits')}
                       className={`text-[10px] tracking-[0.15em] uppercase pb-3 transition-colors duration-200 cursor-pointer font-['Montserrat'] border-b-2 -mb-px ${
@@ -172,7 +183,7 @@ export default function ProductDetail() {
                       {t.detailBenefits}
                     </button>
                   )}
-                  {product.ingredients && (
+                  {displayIngredients && (
                     <button
                       onClick={() => setActiveTab('ingredients')}
                       className={`text-[10px] tracking-[0.15em] uppercase pb-3 transition-colors duration-200 cursor-pointer font-['Montserrat'] border-b-2 -mb-px ${
@@ -184,7 +195,7 @@ export default function ProductDetail() {
                   )}
                 </div>
                 <p className="text-sm text-[#4A4A44] font-light leading-relaxed">
-                  {activeTab === 'benefits' ? product.benefits : product.ingredients}
+                  {activeTab === 'benefits' ? displayBenefits : displayIngredients}
                 </p>
               </div>
             )}

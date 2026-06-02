@@ -87,7 +87,7 @@ export default function Products() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {filtered.map((product) => (
               <div key={product.id} onClick={() => navigate(`/products/${product.id}`)} className="cursor-pointer">
-                <ProductCard product={product} />
+                <ProductCard product={product} showDetails={false} />
               </div>
             ))}
           </div>
