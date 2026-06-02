@@ -2,11 +2,12 @@ const WHATSAPP_NUMBER = '919328798087'; // +91 India
 
 /**
  * Generates a beautifully formatted WhatsApp order message
- * and opens the WhatsApp click-to-chat URL.
+ * including customer delivery details, and opens WhatsApp.
  *
- * @param {Array} cartItems - Array of cart item objects
+ * @param {Array}  cartItems    - Array of cart item objects
+ * @param {Object} customerInfo - { name, phone, address, city, pincode, note }
  */
-export function openWhatsAppOrder(cartItems) {
+export function openWhatsAppOrder(cartItems, customerInfo = {}) {
   if (!cartItems || cartItems.length === 0) return;
 
   const itemLines = cartItems.map((item) => {
@@ -17,6 +18,8 @@ export function openWhatsAppOrder(cartItems) {
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const { name, phone, address, city, pincode, note } = customerInfo;
 
   const message = [
     '╔══════════════════════╗',
@@ -33,9 +36,11 @@ export function openWhatsAppOrder(cartItems) {
     '─────────────────────────',
     '',
     '📍 *Delivery Details*',
-    'Name: ',
-    'Address: ',
-    'City / Pincode: ',
+    `👤 Name: ${name || '—'}`,
+    `📞 Phone: ${phone || '—'}`,
+    `🏠 Address: ${address || '—'}`,
+    `🏙️ City: ${city || '—'}  |  Pincode: ${pincode || '—'}`,
+    ...(note ? [`📝 Note: ${note}`] : []),
     '',
     '─────────────────────────',
     '🙏 _Thank you for choosing STAR Herbal!_',
