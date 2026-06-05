@@ -1,4 +1,28 @@
 import { useLang } from '../../context/LanguageContext';
+import { useInView } from '../../hooks/useInView';
+
+function AnimatedItem({ item, index }) {
+  const [ref, inView] = useInView();
+  const delays = ['delay-1', 'delay-2', 'delay-3', 'delay-4'];
+
+  return (
+    <div
+      ref={ref}
+      className={`flex flex-col items-center text-center gap-3 will-animate ${inView ? `in-view ${delays[index] || ''}` : ''}`}
+    >
+      <div className="w-13 h-13 rounded-full border border-white/30 bg-white/10 flex items-center justify-center text-white mb-1 p-3 transition-transform duration-300 active:scale-90">
+        {item.icon}
+      </div>
+      <div className="w-5 h-px bg-white/40" />
+      <h3 className="font-['Montserrat'] text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-white font-medium">
+        {item.title}
+      </h3>
+      <p className="text-[11px] sm:text-xs text-white/75 font-light leading-relaxed max-w-[150px]">
+        {item.description}
+      </p>
+    </div>
+  );
+}
 
 export default function ValueProposition() {
   const { t } = useLang();
@@ -48,19 +72,8 @@ export default function ValueProposition() {
     <section className="w-full bg-[#4A7A3D] py-12 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
-          {props.map((item) => (
-            <div key={item.title} className="flex flex-col items-center text-center gap-3">
-              <div className="w-13 h-13 rounded-full border border-white/30 bg-white/10 flex items-center justify-center text-white mb-1 p-3">
-                {item.icon}
-              </div>
-              <div className="w-5 h-px bg-white/40" />
-              <h3 className="font-['Montserrat'] text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-white font-medium">
-                {item.title}
-              </h3>
-              <p className="text-[11px] sm:text-xs text-white/75 font-light leading-relaxed max-w-[150px]">
-                {item.description}
-              </p>
-            </div>
+          {props.map((item, index) => (
+            <AnimatedItem key={item.title} item={item} index={index} />
           ))}
         </div>
       </div>

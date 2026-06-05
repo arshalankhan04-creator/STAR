@@ -4,6 +4,7 @@ import { products } from '../../data/products';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { getDefaultVariant } from '../../utils/productHelpers';
+import { useRef } from 'react';
 
 export default function ProductDetail() {
   const { productId } = useParams();
@@ -18,6 +19,8 @@ export default function ProductDetail() {
   );
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState('benefits');
+  const [ripples, setRipples] = useState([]);
+  const btnRef = useRef(null);
 
   // Reset tab when language changes so content re-evaluates cleanly
   useEffect(() => {
@@ -49,7 +52,19 @@ export default function ProductDetail() {
     ? selectedVariant ? `₹${selectedVariant.price}` : '—'
     : `₹${product.price}`;
 
-  function handleAddToCart() {
+  function createRipple(e) {
+    const btn = btnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    const id = Date.now();
+    setRipples((prev) => [...prev, { id, x, y }]);
+    setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 600);
+  }
+
+  function handleAddToCart(e) {
+    createRipple(e);
     addItem(product, selectedVariant);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
@@ -61,7 +76,7 @@ export default function ProductDetail() {
     <main className="min-h-screen bg-white pt-16 md:pt-20">
 
       {/* Breadcrumb */}
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4 animate-fade-in">
         <nav className="flex items-center gap-2 text-[11px] text-[#7A7A72] tracking-[0.05em]">
           <button onClick={() => navigate('/')} className="hover:text-[#2C2C2C] transition-colors cursor-pointer">{t.detailHome}</button>
           <span>/</span>
@@ -74,14 +89,14 @@ export default function ProductDetail() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20">
 
-          {/* Image Panel */}
-          <div className="w-full">
+          {/* Image Panel — slides in from left */}
+          <div className="w-full animate-slide-in-left">
             <div className="aspect-square bg-[#F5F5F0] overflow-hidden">
               {activeImage ? (
                 <img
                   src={activeImage}
                   alt={selectedVariant ? `${product.name} — ${selectedVariant.label}` : product.name}
-                  className={`w-full h-full ${imgFit}`}
+                  className={`w-full h-full ${imgFit} transition-transform duration-500 hover:scale-[1.03]`}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
@@ -97,7 +112,7 @@ export default function ProductDetail() {
                   <button
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}
-                    className={`w-16 h-16 border-2 overflow-hidden bg-[#F5F5F0] transition-all duration-200 cursor-pointer ${
+                    className={`w-16 h-16 border-2 overflow-hidden bg-[#F5F5F0] transition-all duration-200 active:scale-95 cursor-pointer ${
                       selectedVariant?.id === variant.id ? 'border-[#6B8F5E]' : 'border-transparent hover:border-[#C8C8C0]'
                     }`}
                     aria-label={`View ${variant.label}`}
@@ -113,8 +128,8 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* Info Panel */}
-          <div className="flex flex-col gap-5">
+          {/* Info Panel — slides in from right */}
+          <div className="flex flex-col gap-5 animate-slide-in-right">
 
             <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B8F5E] font-['Montserrat']">
               {displayCategoryLabel}
@@ -124,7 +139,7 @@ export default function ProductDetail() {
               {displayName}
             </h1>
 
-            <div className="w-8 h-px bg-[#6B8F5E]" />
+            <div className="w-8 h-px bg-[#6B8F5E] animate-grow-width" />
 
             <p className="font-['Montserrat'] text-2xl text-[#2C2C2C] font-normal">
               {displayPrice}
@@ -142,7 +157,7 @@ export default function ProductDetail() {
                     <button
                       key={variant.id}
                       onClick={() => setSelectedVariant(variant)}
-                      className={`text-xs px-5 py-2.5 border tracking-[0.05em] transition-all duration-200 cursor-pointer font-['Montserrat'] ${
+                      className={`text-xs px-5 py-2.5 border tracking-[0.05em] transition-all duration-200 active:scale-95 cursor-pointer font-['Montserrat'] ${
                         selectedVariant?.id === variant.id
                           ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
                           : 'border-[#C8C8C0] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E]'
@@ -156,16 +171,21 @@ export default function ProductDetail() {
               </div>
             )}
 
+            {/* Add to Cart — with ripple */}
             <button
+              ref={btnRef}
               onClick={handleAddToCart}
               disabled={product.hasVariants && !selectedVariant}
-              className={`w-full border text-xs tracking-[0.18em] uppercase py-4 transition-all duration-[400ms] cursor-pointer font-['Montserrat'] mt-2 ${
+              className={`ripple-container w-full border text-xs tracking-[0.18em] uppercase py-4 transition-all duration-[400ms] cursor-pointer font-['Montserrat'] mt-2 ${
                 added
-                  ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
-                  : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
+                  ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white scale-[0.98]'
+                  : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white active:scale-[0.97] disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
               }`}
               aria-label={`${t.detailAddToCart} ${product.name}`}
             >
+              {ripples.map((r) => (
+                <span key={r.id} className="ripple-wave" style={{ left: r.x, top: r.y }} />
+              ))}
               {added ? t.detailAdded : t.detailAddToCart}
             </button>
 
@@ -194,7 +214,7 @@ export default function ProductDetail() {
                     </button>
                   )}
                 </div>
-                <p className="text-sm text-[#4A4A44] font-light leading-relaxed">
+                <p className="text-sm text-[#4A4A44] font-light leading-relaxed animate-fade-in" key={activeTab}>
                   {activeTab === 'benefits' ? displayBenefits : displayIngredients}
                 </p>
               </div>
@@ -206,7 +226,7 @@ export default function ProductDetail() {
         <div className="mt-12 md:mt-16">
           <button
             onClick={() => navigate('/products')}
-            className="flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#7A7A72] hover:text-[#2C2C2C] transition-colors duration-200 cursor-pointer font-['Montserrat']"
+            className="flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#7A7A72] hover:text-[#2C2C2C] transition-colors duration-200 active:scale-95 cursor-pointer font-['Montserrat']"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />

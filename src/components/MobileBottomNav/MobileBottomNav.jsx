@@ -6,13 +6,13 @@ export default function MobileBottomNav() {
   const { t } = useLang();
 
   const linkClass = ({ isActive }) =>
-    `flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-colors duration-200 ${
+    `flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-all duration-200 active:scale-90 ${
       isActive ? 'text-[#6B8F5E]' : 'text-[#7A7A72]'
     }`;
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E4E4DC] flex items-center safe-area-pb"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E4E4DC] flex items-center safe-area-pb animate-slide-up"
       aria-label="Mobile navigation"
     >
       {/* Home */}
@@ -36,7 +36,7 @@ export default function MobileBottomNav() {
         href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col items-center justify-center gap-1 flex-1 py-2 text-[#7A7A72] transition-colors duration-200 active:text-[#6B8F5E]"
+        className="flex flex-col items-center justify-center gap-1 flex-1 py-2 text-[#7A7A72] transition-all duration-200 active:scale-90 active:text-[#6B8F5E]"
       >
         <WhatsAppIcon />
         <span className="text-[9px] tracking-[0.08em] uppercase font-['Montserrat']">

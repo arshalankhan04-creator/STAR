@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
@@ -8,12 +8,24 @@ export default function Navbar({ onCartOpen }) {
   const { totalItems } = useCart();
   const { t, lang, chooseLang } = useLang();
   const [scrolled, setScrolled] = useState(false);
+  const prevTotalRef = useRef(totalItems);
+  const [badgePulse, setBadgePulse] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Pulse the badge whenever an item is added
+  useEffect(() => {
+    if (totalItems > prevTotalRef.current) {
+      setBadgePulse(true);
+      const t = setTimeout(() => setBadgePulse(false), 450);
+      return () => clearTimeout(t);
+    }
+    prevTotalRef.current = totalItems;
+  }, [totalItems]);
 
   const navLinkClass = ({ isActive }) =>
     `text-xs tracking-[0.12em] uppercase transition-colors duration-300 ${
@@ -22,9 +34,10 @@ export default function Navbar({ onCartOpen }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 animate-fade-in-up ${
         scrolled ? 'border-b border-[#E4E4DC] shadow-[0_1px_8px_rgba(0,0,0,0.04)]' : ''
       }`}
+      style={{ animationDuration: '0.5s' }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -57,7 +70,7 @@ export default function Navbar({ onCartOpen }) {
             {/* Language Toggle */}
             <button
               onClick={() => chooseLang(lang === 'en' ? 'gu' : 'en')}
-              className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer"
+              className="text-[10px] tracking-[0.1em] uppercase border border-[#E4E4DC] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E] transition-all duration-200 active:scale-95 px-2.5 py-1.5 font-['Montserrat'] cursor-pointer"
               aria-label={`Switch to ${lang === 'en' ? 'Gujarati' : 'English'}`}
             >
               {lang === 'en' ? 'ગુ' : 'EN'}
@@ -67,11 +80,13 @@ export default function Navbar({ onCartOpen }) {
             <button
               onClick={onCartOpen}
               aria-label={`${t.navOpenCart}, ${totalItems} ${totalItems === 1 ? t.navItem : t.navItems}`}
-              className="relative p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-colors duration-300"
+              className="relative p-2 text-[#4A4A44] hover:text-[#2C2C2C] transition-all duration-300 active:scale-90"
             >
               <CartIcon />
               {totalItems > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#6B8F5E] text-white text-[9px] font-medium rounded-full flex items-center justify-center leading-none">
+                <span
+                  className={`absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#6B8F5E] text-white text-[9px] font-medium rounded-full flex items-center justify-center leading-none ${badgePulse ? 'animate-pulse-dot' : ''}`}
+                >
                   {totalItems > 9 ? '9+' : totalItems}
                 </span>
               )}

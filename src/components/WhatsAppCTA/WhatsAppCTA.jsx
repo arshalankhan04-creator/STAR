@@ -1,15 +1,20 @@
 import { getWhatsAppLink } from '../../utils/whatsappMessage';
 import { useLang } from '../../context/LanguageContext';
+import { useInView } from '../../hooks/useInView';
 
 export default function WhatsAppCTA() {
   const { t } = useLang();
+  const [ref, inView] = useInView();
 
   return (
     <section className="w-full bg-[#FAFAF8] py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl mx-auto text-center">
+        <div
+          ref={ref}
+          className={`max-w-xl mx-auto text-center will-animate ${inView ? 'in-view' : ''}`}
+        >
 
-          <div className="w-14 h-14 rounded-full border border-[#6B8F5E]/30 bg-[#6B8F5E]/8 flex items-center justify-center mx-auto mb-6">
+          <div className="w-14 h-14 rounded-full border border-[#6B8F5E]/30 bg-[#6B8F5E]/8 flex items-center justify-center mx-auto mb-6 animate-float">
             <WhatsAppIcon size={24} />
           </div>
 
@@ -19,7 +24,7 @@ export default function WhatsAppCTA() {
           <h2 className="font-['Montserrat'] text-lg sm:text-xl md:text-2xl tracking-[0.12em] uppercase text-[#2C2C2C] font-normal mb-4">
             {t.ctaHeading}
           </h2>
-          <div className="w-8 h-px bg-[#6B8F5E] mx-auto mb-6" />
+          <div className="w-8 h-px bg-[#6B8F5E] mx-auto mb-6 animate-grow-width" />
           <p className="text-sm text-[#7A7A72] font-light leading-relaxed mb-8 max-w-sm mx-auto">
             {t.ctaDesc}
           </p>
@@ -28,7 +33,7 @@ export default function WhatsAppCTA() {
             href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 border border-[#1A1A1A] bg-transparent text-[#2C2C2C] text-xs tracking-[0.18em] uppercase px-12 py-4 transition-all duration-[400ms] ease-out hover:bg-[#1A1A1A] hover:text-white font-['Montserrat']"
+            className="inline-flex items-center gap-3 border border-[#1A1A1A] bg-transparent text-[#2C2C2C] text-xs tracking-[0.18em] uppercase px-12 py-4 transition-all duration-[400ms] ease-out hover:bg-[#1A1A1A] hover:text-white active:scale-[0.97] font-['Montserrat']"
             aria-label={t.ctaBtn}
           >
             <WhatsAppIcon size={15} />

@@ -50,35 +50,135 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Custom Animations ─────────────────────────────────────────────────── */
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-in-up {
   animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
-/* ─── Page transition ───────────────────────────────────────────────────── */
+/* Scroll-triggered fade-in-up — applied by JS when element enters viewport */
+@keyframes scrollFadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.in-view {
+  animation: scrollFadeInUp 0.65s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+/* Stagger delays — add delay-1 … delay-6 on siblings */
+.in-view.delay-1 { animation-delay: 0.08s; }
+.in-view.delay-2 { animation-delay: 0.16s; }
+.in-view.delay-3 { animation-delay: 0.24s; }
+.in-view.delay-4 { animation-delay: 0.32s; }
+.in-view.delay-5 { animation-delay: 0.40s; }
+.in-view.delay-6 { animation-delay: 0.48s; }
 
-@keyframes pageFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Before in-view fires — keep element invisible so it doesn't flash */
+.will-animate {
+  opacity: 0;
 }
 
+/* ─── Fade in (no upward movement) ─────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.6s ease both;
+}
+
+/* ─── Scale pop (for modals, language popup) ────────────────────────────── */
+@keyframes scalePop {
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-scale-pop {
+  animation: scalePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Slide up (bottom nav entrance) ───────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation-delay: 0.3s;
+}
+
+/* ─── Slide in from left ────────────────────────────────────────────────── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ─── Slide in from right ───────────────────────────────────────────────── */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ─── Ripple on click (Add to Cart button) ──────────────────────────────── */
+@keyframes ripple {
+  to { transform: scale(3.5); opacity: 0; }
+}
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  width: 48px;
+  height: 48px;
+  margin-top: -24px;
+  margin-left: -24px;
+  pointer-events: none;
+  animation: ripple 0.55s ease-out forwards;
+}
+
+/* ─── Pulse dot (cart badge) ────────────────────────────────────────────── */
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+.animate-pulse-dot {
+  animation: pulseDot 0.4s ease-in-out;
+}
+
+/* ─── Grow width (divider line reveal) ─────────────────────────────────── */
+@keyframes growWidth {
+  from { width: 0; opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-grow-width {
+  animation: growWidth 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation-delay: 0.3s;
+}
+
+/* ─── Page transition ───────────────────────────────────────────────────── */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .page-transition {
   animation: pageFadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ─── Floating WhatsApp button ──────────────────────────────────────────── */
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: floatBob 3s ease-in-out infinite;
 }
 
 .scrollbar-hide {
@@ -87,4 +187,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ─── Respect reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  .in-view,
+  .animate-fade-in-up,
+  .animate-scale-pop,
+  .animate-slide-up,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-float,
+  .animate-grow-width,
+  .page-transition {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .will-animate { opacity: 1; }
 }

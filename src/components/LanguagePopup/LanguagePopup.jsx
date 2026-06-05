@@ -8,7 +8,7 @@ export default function LanguagePopup() {
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+      <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm animate-fade-in" aria-hidden="true" />
 
       {/* Modal */}
       <div
@@ -17,7 +17,7 @@ export default function LanguagePopup() {
         aria-labelledby="lang-popup-heading"
         className="fixed inset-0 z-[101] flex items-center justify-center px-5"
       >
-        <div className="w-full max-w-xs bg-white flex flex-col items-center text-center p-8 gap-6 animate-fade-in-up shadow-xl">
+        <div className="w-full max-w-xs bg-white flex flex-col items-center text-center p-8 gap-6 animate-scale-pop shadow-xl">
 
           {/* Icon */}
           <div className="w-12 h-12 rounded-full bg-[#6B8F5E]/10 border border-[#6B8F5E]/25 flex items-center justify-center">
@@ -48,13 +48,13 @@ export default function LanguagePopup() {
           <div className="flex flex-col gap-3 w-full">
             <button
               onClick={() => chooseLang('en')}
-              className="w-full border border-[#1A1A1A] bg-transparent text-[#2C2C2C] text-xs tracking-[0.18em] uppercase py-3.5 font-['Montserrat'] transition-all duration-300 hover:bg-[#1A1A1A] hover:text-white cursor-pointer"
+              className="w-full border border-[#1A1A1A] bg-transparent text-[#2C2C2C] text-xs tracking-[0.18em] uppercase py-3.5 font-['Montserrat'] transition-all duration-300 hover:bg-[#1A1A1A] hover:text-white active:scale-[0.97] cursor-pointer"
             >
               English
             </button>
             <button
               onClick={() => chooseLang('gu')}
-              className="w-full border border-[#6B8F5E] bg-[#6B8F5E] text-white text-sm py-3.5 font-['Montserrat'] transition-all duration-300 hover:bg-[#5a7d4f] cursor-pointer tracking-wide"
+              className="w-full border border-[#6B8F5E] bg-[#6B8F5E] text-white text-sm py-3.5 font-['Montserrat'] transition-all duration-300 hover:bg-[#5a7d4f] active:scale-[0.97] cursor-pointer tracking-wide"
             >
               ગુજરાતી
             </button>

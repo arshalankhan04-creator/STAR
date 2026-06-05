@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { getDisplayPrice, getDefaultVariant } from '../../utils/productHelpers';
@@ -9,6 +9,8 @@ export default function ProductCard({ product, showDetails = true }) {
   const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [ripples, setRipples] = useState([]);
+  const btnRef = useRef(null);
 
   const displayName = lang === 'gu' && product.nameGu ? product.nameGu : product.name;
   const displayCategoryLabel = lang === 'gu' && product.categoryLabelGu ? product.categoryLabelGu : product.categoryLabel;
@@ -32,7 +34,19 @@ export default function ProductCard({ product, showDetails = true }) {
 
   const hasDetails = showDetails && (displayBenefits || displayIngredients);
 
-  function handleAddToCart() {
+  function createRipple(e) {
+    const btn = btnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    const id = Date.now();
+    setRipples((prev) => [...prev, { id, x, y }]);
+    setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 600);
+  }
+
+  function handleAddToCart(e) {
+    createRipple(e);
     addItem(product, selectedVariant);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -47,7 +61,7 @@ export default function ProductCard({ product, showDetails = true }) {
           <img
             src={activeImage}
             alt={selectedVariant ? `${product.name} — ${selectedVariant.label}` : product.name}
-            className={`w-full h-full ${imgFit} transition-all duration-[400ms] ease-out group-hover:scale-[1.04]`}
+            className={`w-full h-full ${imgFit} transition-all duration-[400ms] ease-out group-hover:scale-[1.04] group-active:scale-[1.02]`}
             loading="lazy"
           />
         ) : (
@@ -77,7 +91,7 @@ export default function ProductCard({ product, showDetails = true }) {
               <button
                 key={variant.id}
                 onClick={() => setSelectedVariant(variant)}
-                className={`text-[10px] sm:text-xs px-2.5 py-1 border tracking-[0.05em] transition-all duration-200 cursor-pointer ${
+                className={`text-[10px] sm:text-xs px-2.5 py-1 border tracking-[0.05em] transition-all duration-200 active:scale-95 cursor-pointer ${
                   selectedVariant?.id === variant.id
                     ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
                     : 'border-[#C8C8C0] text-[#7A7A72] hover:border-[#6B8F5E] hover:text-[#6B8F5E]'
@@ -128,18 +142,27 @@ export default function ProductCard({ product, showDetails = true }) {
         </div>
       )}
 
-      {/* Add to Cart */}
+      {/* Add to Cart — with ripple */}
       <div className="px-3 pb-4 mt-auto">
         <button
+          ref={btnRef}
           onClick={handleAddToCart}
           disabled={product.hasVariants && !selectedVariant}
-          className={`w-full border text-[10px] sm:text-xs tracking-[0.12em] uppercase py-3 transition-all duration-[400ms] cursor-pointer font-['Montserrat'] ${
+          className={`ripple-container w-full border text-[10px] sm:text-xs tracking-[0.12em] uppercase py-3 transition-all duration-[400ms] cursor-pointer font-['Montserrat'] ${
             added
-              ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'
-              : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
+              ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white scale-[0.98]'
+              : 'border-[#1A1A1A] bg-transparent text-[#2C2C2C] hover:bg-[#1A1A1A] hover:text-white active:scale-[0.97] disabled:border-[#C8C8C0] disabled:text-[#AEAEA6] disabled:cursor-not-allowed'
           }`}
           aria-label={`${t.cardAddToCart} ${product.name}`}
         >
+          {/* Ripple waves */}
+          {ripples.map((r) => (
+            <span
+              key={r.id}
+              className="ripple-wave"
+              style={{ left: r.x, top: r.y }}
+            />
+          ))}
           {added ? t.cardAdded : t.cardAddToCart}
         </button>
       </div>
