@@ -5,6 +5,7 @@
 // ─── Asset imports ────────────────────────────────────────────────────────────
 
 import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg';
+import imgSoapSkinCare80g     from '../assets/images/products/skincare80gram.jpeg';
 import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
 import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
 import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
@@ -45,12 +46,16 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
-    unit: '50g',
-    hasVariants: false,
+    price: null,
+    unit: null,
+    hasVariants: true,
     featured: true,
     image: imgSoapSkinCare,
     imageStyle: 'cover',
+    variants: [
+      { id: 'soap-skin-care-50g', label: '50g', price: 30, image: imgSoapSkinCare },
+      { id: 'soap-skin-care-80g', label: '80g', price: 50, image: imgSoapSkinCare80g },
+    ],
     benefitsEn: 'Removes blackheads, pimples and dark spots on the face, neck and elbows — provides whitening glow to the skin.',
     benefitsGu: 'ચહેરા ઉપર ના કાળા કુંડળ, ફોડલી આને ગરદન–કોહની ની કાળાશ મિટાવી whitening glow કરે.',
     ingredientsEn: 'Coffee Powder, Chavala Powder, Potato Powder, Mulethi Powder — plus 14 more natural ingredients.',
