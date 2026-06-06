@@ -51,7 +51,7 @@ export const products = [
     hasVariants: true,
     featured: true,
     image: imgSoapSkinCare,
-    imageStyle: 'cover',
+    imageStyle: 'contain',
     variants: [
       { id: 'soap-skin-care-50g', label: '50g', price: 30, image: imgSoapSkinCare },
       { id: 'soap-skin-care-80g', label: '80g', price: 50, image: imgSoapSkinCare80g },
