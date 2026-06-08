@@ -7,6 +7,7 @@
 import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg';
 import imgSoapSkinCare80g     from '../assets/images/products/skincare80gram.jpeg';
 import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
+import imgSoapAlovera80g      from '../assets/images/products/Aloeveracool80gram50rupees.jpeg';
 import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
 import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
 import imgSoapBesan           from '../assets/images/products/soap-besan-pithi.jpg';
@@ -68,12 +69,16 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
-    unit: '50g',
-    hasVariants: false,
+    price: null,
+    unit: null,
+    hasVariants: true,
     featured: false,
     image: imgSoapAlovera,
-    imageStyle: 'cover',
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-aloevera-cool-50g', label: '50g', price: 30, image: imgSoapAlovera },
+      { id: 'soap-aloevera-cool-80g', label: '80g', price: 50, image: imgSoapAlovera80g },
+    ],
     benefitsEn: 'Relieves heat, body odour and itching — provides a cool and refreshing sensation on the scalp and body.',
     benefitsGu: 'માથા આને શરીર ની આળ, ગરમી આને ખંજવાળ થી મુક્ત કરી ઠંડક આપે.',
     ingredientsEn: 'Aloevera, Coconut Oil, Glycerin — plus 6 more natural ingredients.',
