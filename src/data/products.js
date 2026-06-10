@@ -8,10 +8,14 @@ import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg
 import imgSoapSkinCare80g     from '../assets/images/products/skincare80gram.jpeg';
 import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
 import imgSoapAlovera80g      from '../assets/images/products/Aloeveracool80gram50rupees.jpeg';
+import imgSoapAlovera100g     from '../assets/images/products/eloveracool60rupees100gm.jpeg';
 import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
 import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
 import imgSoapBesan           from '../assets/images/products/soap-besan-pithi.jpg';
 import imgSoapNim             from '../assets/images/products/soap-nim-aloevera.jpg';
+import imgSoapNim80g          from '../assets/images/products/nimalovera80gm50rupees.jpeg';
+import imgSoapNim100g         from '../assets/images/products/nimalovera100gm60rupees.jpeg';
+import imgSoapWhitening       from '../assets/images/products/whiteningsoap.jpeg';
 import imgSoapMilky           from '../assets/images/products/soap-milky.jpg';
 import imgStarFacial8g        from '../assets/images/products/soap-star-facial-8g.jpg';
 import imgStarFacial22g       from '../assets/images/products/soap-star-facial-22g.jpg';
@@ -76,8 +80,9 @@ export const products = [
     image: imgSoapAlovera,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-aloevera-cool-50g', label: '50g', price: 30, image: imgSoapAlovera },
-      { id: 'soap-aloevera-cool-80g', label: '80g', price: 50, image: imgSoapAlovera80g },
+      { id: 'soap-aloevera-cool-50g',  label: '50g',  price: 30, image: imgSoapAlovera },
+      { id: 'soap-aloevera-cool-80g',  label: '80g',  price: 50, image: imgSoapAlovera80g },
+      { id: 'soap-aloevera-cool-100g', label: '100g', price: 60, image: imgSoapAlovera100g },
     ],
     benefitsEn: 'Relieves heat, body odour and itching — provides a cool and refreshing sensation on the scalp and body.',
     benefitsGu: 'માથા આને શરીર ની આળ, ગરમી આને ખંજવાળ થી મુક્ત કરી ઠંડક આપે.',
@@ -163,12 +168,17 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
-    unit: '50g',
-    hasVariants: false,
+    price: null,
+    unit: null,
+    hasVariants: true,
     featured: false,
     image: imgSoapNim,
-    imageStyle: 'cover',
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-nim-aloevera-50g',  label: '50g',  price: 30, image: imgSoapNim },
+      { id: 'soap-nim-aloevera-80g',  label: '80g',  price: 50, image: imgSoapNim80g },
+      { id: 'soap-nim-aloevera-100g', label: '100g', price: 60, image: imgSoapNim100g },
+    ],
     benefitsEn: 'Removes skin impurities, pimples and protects against skin infections. Relieves body rashes and itching — keeps the body germ-free and provides a cooling effect.',
     benefitsGu: 'ત્વચા ની અશુદ્ધિઓ દૂર કરી ખીલ, ફોડલી આને ચામડી ના ચેપ સામે રક્ષણ આપે — શરીર માં થતી ધાધર, ખંજવાળ ને દૂર કરી શરીર ને કીટાણું મુક્ત કરી ઠંડક આપે.',
     ingredientsEn: 'Neem, Aloevera, Coconut Oil, Rose Water — made from natural ingredients.',
@@ -191,6 +201,24 @@ export const products = [
     benefitsGu: '૦ થી કોઈ પણ age ના વ્યક્તિ ની કરચલી વાળી & સૂકી skin ને પોષણ આપી મુલાયમ કરે — પાતળી પતળાય વાળી ચામડી ને પોષણ આપી સ્મૂથ કરે.',
     ingredientsEn: 'Sheep Ghee, Goat Milk, Cream (Malai), Glycerin, Rose Water — plus 7 more natural ingredients.',
     ingredientsGu: 'ઘેટા નું ઘી, બકરી નું દૂધ, મલાઈ, ગ્લિસરિન, ગુલાબ જળ — ઉપરાંત ૭ વસ્તુ થી બનેલો Milky.',
+  },
+  {
+    id: 'soap-whitening',
+    name: 'Body Whitening Soap',
+    nameGu: 'બૉડી વ્હાઇટનિંગ સાબુ',
+    category: 'soap',
+    categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
+    price: 70,
+    unit: '100g',
+    hasVariants: false,
+    featured: false,
+    image: imgSoapWhitening,
+    imageStyle: 'contain',
+    benefitsEn: 'Removes dark spots and blemishes from the body — gives the skin a radiant whitening glow.',
+    benefitsGu: 'Body ના દાઘ ધબ્બા મિટાડી ને body ને glow આપે.',
+    ingredientsEn: 'Goat Milk, Kojic Acid — plus 7 more natural ingredients.',
+    ingredientsGu: 'બકરી નું દૂધ, Kojic Acid — ઉપરાંત ૭ વસ્તુ થી બનેલો Soap.',
   },
   {
     id: 'soap-star-facial',
