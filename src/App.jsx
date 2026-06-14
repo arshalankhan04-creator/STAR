@@ -9,6 +9,7 @@ import AppRoutes from './routes/AppRoutes';
 import LanguagePopup from './components/LanguagePopup/LanguagePopup';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import MobileBottomNav from './components/MobileBottomNav/MobileBottomNav';
+import IntroAnimation from './components/IntroAnimation/IntroAnimation';
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function App() {
     <BrowserRouter>
       <LanguageProvider>
         <CartProvider>
+          <IntroAnimation />
           <ScrollToTop />
           <LanguagePopup />
           <div className="flex flex-col min-h-screen">
