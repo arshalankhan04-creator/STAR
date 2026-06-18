@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import heroImage from '../../assets/images/brand/hero.png';
+import openingVideo from '../../assets/videos/openinganimation.mp4';
 import { useLang } from '../../context/LanguageContext';
 
 export default function Hero() {
@@ -9,13 +9,16 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-[#F0F4EE] pt-16 md:pt-20">
 
-      {/* Hero background image */}
+      {/* Opening video background */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt=""
+        <video
+          src={openingVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
           aria-hidden="true"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-white/72" />
       </div>

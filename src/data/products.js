@@ -6,11 +6,14 @@
 
 import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg';
 import imgSoapSkinCare80g     from '../assets/images/products/skincare80gram.jpeg';
+import imgSoapSkinCare100g    from '../assets/images/products/skincare100gram60rupees.jpeg';
 import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
 import imgSoapAlovera80g      from '../assets/images/products/Aloeveracool80gram50rupees.jpeg';
 import imgSoapAlovera100g     from '../assets/images/products/eloveracool60rupees100gm.jpeg';
 import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
 import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
+import imgSoapBaby80g         from '../assets/images/products/babysoap80gram50rupees.jpeg';
+import imgSoapBaby100g        from '../assets/images/products/babysoap100gram60rupees.jpeg';
 import imgSoapBesan           from '../assets/images/products/soap-besan-pithi.jpg';
 import imgSoapNim             from '../assets/images/products/soap-nim-aloevera.jpg';
 import imgSoapNim80g          from '../assets/images/products/nimalovera80gm50rupees.jpeg';
@@ -58,8 +61,9 @@ export const products = [
     image: imgSoapSkinCare,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-skin-care-50g', label: '50g', price: 30, image: imgSoapSkinCare },
-      { id: 'soap-skin-care-80g', label: '80g', price: 50, image: imgSoapSkinCare80g },
+      { id: 'soap-skin-care-50g',  label: '50g',  price: 30, image: imgSoapSkinCare },
+      { id: 'soap-skin-care-80g',  label: '80g',  price: 50, image: imgSoapSkinCare80g },
+      { id: 'soap-skin-care-100g', label: '100g', price: 60, image: imgSoapSkinCare100g },
     ],
     benefitsEn: 'Removes blackheads, pimples and dark spots on the face, neck and elbows — provides whitening glow to the skin.',
     benefitsGu: 'ચહેરા ઉપર ના કાળા કુંડળ, ફોડલી આને ગરદન–કોહની ની કાળાશ મિટાવી whitening glow કરે.',
@@ -114,12 +118,17 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 40,
-    unit: '50g',
-    hasVariants: false,
+    price: null,
+    unit: null,
+    hasVariants: true,
     featured: false,
     image: imgSoapBaby,
-    imageStyle: 'cover',
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-baby-50g',  label: '50g',  price: 30, image: imgSoapBaby },
+      { id: 'soap-baby-80g',  label: '80g',  price: 50, image: imgSoapBaby80g },
+      { id: 'soap-baby-100g', label: '100g', price: 60, image: imgSoapBaby100g },
+    ],
     benefitsEn: 'Suitable for babies of all ages — nourishes and moisturises delicate skin with gentle massage ingredients.',
     benefitsGu: '૦ થી કોઈ પણ age ના baby ની skin ને massage ingredients થી moisture કરી પોષણ આપે.',
     ingredientsEn: 'Honey, Gram Flour (Besan), Pithi, Goat Milk, Massage Ingredients.',
