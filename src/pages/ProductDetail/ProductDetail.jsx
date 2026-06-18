@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../../data/products';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { getDefaultVariant } from '../../utils/productHelpers';
-import { useRef } from 'react';
 
 export default function ProductDetail() {
   const { productId } = useParams();

@@ -32,16 +32,6 @@ import imgHerbalShampoo200ml  from '../assets/images/products/200mlshampoo.jpeg'
 import imgHerbalShampoo500ml  from '../assets/images/products/500mlshampoo.jpeg';
 import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
 
-// ─── Categories ───────────────────────────────────────────────────────────────
-
-export const CATEGORIES = [
-  { id: 'all',      label: 'All' },
-  { id: 'soap',     label: 'Soap' },
-  { id: 'hair-oil', label: 'Hair Oil' },
-  { id: 'shampoo',  label: 'Shampoo' },
-  { id: 'face-gel', label: 'Face Gel' },
-];
-
 // ─── Products ─────────────────────────────────────────────────────────────────
 
 export const products = [

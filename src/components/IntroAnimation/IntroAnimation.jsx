@@ -2,49 +2,49 @@ import { useEffect, useRef, useState } from 'react';
 import introVideo from '../../assets/videos/openinganimation.mp4';
 
 /**
- * Fullscreen intro that plays once per session.
- * On end: the entire overlay scales down (zooms out) to reveal
- * the hero section behind it — seamless zoom-out transition.
+ * Fullscreen intro animation that plays once per session.
+ * Uses sessionStorage so it won't replay on page refresh,
+ * but will play again if the user opens a fresh tab/window.
  */
 export default function IntroAnimation() {
   const SESSION_KEY = 'star_intro_played';
   const videoRef = useRef(null);
 
+  // If already played this session, don't mount at all
   const alreadyPlayed = sessionStorage.getItem(SESSION_KEY) === 'true';
-  const [visible, setVisible]       = useState(!alreadyPlayed);
-  const [zoomingOut, setZoomingOut] = useState(false);
+  const [visible, setVisible] = useState(!alreadyPlayed);
+  const [fadingOut, setFadingOut] = useState(false);
 
   useEffect(() => {
     if (!visible) return;
+
+    // Mark as played immediately so a fast refresh won't replay it
     sessionStorage.setItem(SESSION_KEY, 'true');
-    videoRef.current?.play().catch(() => dismiss());
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Attempt autoplay (muted is required by browsers)
+    video.play().catch(() => {
+      // Autoplay blocked — dismiss immediately
+      dismiss();
+    });
   }, [visible]);
 
   function dismiss() {
-    setZoomingOut(true);
-    // Unmount after the CSS transition completes (1s)
-    setTimeout(() => setVisible(false), 1000);
+    setFadingOut(true);
+    // Wait for fade-out transition then unmount
+    setTimeout(() => setVisible(false), 700);
   }
 
   if (!visible) return null;
 
   return (
     <div
+      className={`fixed inset-0 z-[200] bg-black flex items-center justify-center transition-opacity duration-700 ${
+        fadingOut ? 'opacity-0' : 'opacity-100'
+      }`}
       aria-hidden="true"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 200,
-        // Scale the whole overlay down — the hero behind is revealed
-        transform: zoomingOut ? 'scale(0)' : 'scale(1)',
-        transformOrigin: 'center center',
-        transition: zoomingOut
-          ? 'transform 1s cubic-bezier(0.7, 0, 0.3, 1)'
-          : 'none',
-        // Clip the black edges as they shrink
-        borderRadius: zoomingOut ? '50%' : '0%',
-        overflow: 'hidden',
-      }}
     >
       <video
         ref={videoRef}
@@ -52,7 +52,7 @@ export default function IntroAnimation() {
         muted
         playsInline
         onEnded={dismiss}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        className="w-full h-full object-cover"
       />
     </div>
   );

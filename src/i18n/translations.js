@@ -15,7 +15,6 @@ export const translations = {
     navProducts: 'Products',
     navWhatsapp: 'WhatsApp Order',
     navOpenCart: 'Open cart',
-    navToggleMenu: 'Toggle menu',
     navItems: 'items',
     navItem: 'item',
 
@@ -165,7 +164,6 @@ export const translations = {
     navProducts: 'પ્રોડક્ટ્સ',
     navWhatsapp: 'WhatsApp ઓર્ડર',
     navOpenCart: 'કાર્ટ ખોલો',
-    navToggleMenu: 'મેનૂ ખોલો',
     navItems: 'વસ્તુઓ',
     navItem: 'વસ્તુ',
 
