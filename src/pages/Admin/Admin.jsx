@@ -162,7 +162,7 @@ export default function Admin() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="font-['Montserrat'] text-xl sm:text-2xl tracking-[0.15em] uppercase text-white font-semibold">
+              <h1 className="font-['Montserrat'] text-xl sm:text-2xl tracking-[0.15em] uppercase text-white font-semibold" style={{ color: '#ffffff' }}>
                 Product Admin
               </h1>
               <span className="text-[10px] tracking-[0.1em] uppercase bg-[#6B8F5E] text-white px-2 py-0.5 rounded font-['Montserrat']">
