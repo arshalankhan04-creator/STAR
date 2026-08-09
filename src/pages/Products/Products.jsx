@@ -18,11 +18,12 @@ export default function Products() {
   const [headerRef, headerInView] = useInView();
 
   const CATEGORIES = [
-    { id: 'all',      label: t.catAll },
-    { id: 'soap',     label: t.catSoap },
-    { id: 'hair-oil', label: t.catHairOil },
-    { id: 'shampoo',  label: t.catShampoo },
-    { id: 'face-gel', label: t.catFaceGel },
+    { id: 'all',       label: t.catAll },
+    { id: 'soap',      label: t.catSoap },
+    { id: 'hair-oil',  label: t.catHairOil },
+    { id: 'shampoo',   label: t.catShampoo },
+    { id: 'face-gel',  label: t.catFaceGel },
+    { id: 'face-wash', label: t.catFaceWash },
   ];
 
   useEffect(() => {

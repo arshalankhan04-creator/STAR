@@ -11,6 +11,7 @@ import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool
 import imgSoapAlovera80g      from '../assets/images/products/Aloeveracool80gram50rupees.jpeg';
 import imgSoapAlovera100g     from '../assets/images/products/eloveracool60rupees100gm.jpeg';
 import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
+import imgSoapCharcoal100g     from '../assets/images/products/charcoal_multani_mitti_100gm.jpeg';
 import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
 import imgSoapBaby80g         from '../assets/images/products/babysoap80gram50rupees.jpeg';
 import imgSoapBaby100g        from '../assets/images/products/babysoap100gram60rupees.jpeg';
@@ -24,13 +25,17 @@ import imgStarFacial8g        from '../assets/images/products/soap-star-facial-8
 import imgStarFacial22g       from '../assets/images/products/soap-star-facial-22g.jpg';
 import imgStarFacial50g       from '../assets/images/products/soap-star-facial-50g.jpg';
 import imgHerbalFaceGel       from '../assets/images/products/herbal-face-gel.jpg';
-import imgHerbalOil           from '../assets/images/products/herbal-oil.jpg';
-import imgHerbalOil200ml      from '../assets/images/products/200mloil.jpeg';
-import imgHerbalOil500ml      from '../assets/images/products/500mloil.jpeg';
-import imgHerbalShampoo       from '../assets/images/products/herbal-shampoo.jpg';
-import imgHerbalShampoo200ml  from '../assets/images/products/200mlshampoo.jpeg';
-import imgHerbalShampoo500ml  from '../assets/images/products/500mlshampoo.jpeg';
+import imgHerbalFaceWash      from '../assets/images/products/120ml_fashwash_100rupees.jpeg';
+import imgHerbalOil           from '../assets/images/products/100ml_oil.jpeg';
+import imgHerbalOil200ml      from '../assets/images/products/200ml_oil.jpeg';
+import imgHerbalOil500ml      from '../assets/images/products/500ml_oil.jpeg';
+import imgHerbalShampoo       from '../assets/images/products/100ml_shampoo.jpeg';
+import imgHerbalShampoo200ml  from '../assets/images/products/200ml_shampoo.jpeg';
+import imgHerbalShampoo500ml  from '../assets/images/products/500ml_shampoo.jpeg';
 import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
+import imgSoapKesarChandan8g   from '../assets/images/products/kesar_chandan_8gm_15rupees.jpeg';
+import imgSoapKesarChandan20g  from '../assets/images/products/kesar_chandan_20gm_30rupees.jpeg';
+import imgSoapKesarChandan100g from '../assets/images/products/kesar_chandan_100gm_100rupees.jpeg';
 
 // ─── Products ─────────────────────────────────────────────────────────────────
 
@@ -90,12 +95,16 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
-    unit: '50g',
-    hasVariants: false,
+    price: null,
+    unit: null,
+    hasVariants: true,
     featured: false,
-    image: imgSoapCharcoal,
-    imageStyle: 'cover',
+    image: imgSoapCharcoal100g,
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-charcoal-multani-50g',  label: '50g',  price: 30, image: imgSoapCharcoal },
+      { id: 'soap-charcoal-multani-100g', label: '100g', price: 60, image: imgSoapCharcoal100g },
+    ],
     benefitsEn: 'Controls oily skin, removes blemishes, pimples and acne — keeps the skin free from excess sweat and impurities.',
     benefitsGu: 'ચહેરા ને oily ત્વચા થી મુક્ત કરી દાઘ, ફોડલી, ખીલ આને વારંવાર આવતા પરસેવા ના ટીપા મુક્ત કરે.',
     ingredientsEn: 'Charcoal, Multani Mitti, Glycerin, Rose Water — plus 5 more natural ingredients.',
@@ -242,6 +251,29 @@ export const products = [
     ingredientsEn: 'Facial Whitening Capsule, Mulethi Powder, Goat Milk, Rice Powder, Cream (Malai) — plus 7 more natural ingredients.',
     ingredientsGu: 'ફેશિયલ વ્હાઇટિંગ કૅપ્સ્યૂલ, મુલઠી પાઉડર, બકરી નું દૂધ, ચોખા નો પાઉડર, મલાઈ — ઉપરાંત ૭ વસ્તુ.',
   },
+  {
+    id: 'soap-kesar-chandan',
+    name: 'Kesar Chandan Soap',
+    nameGu: 'કેસર ચંદન સાબુ',
+    category: 'soap',
+    categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
+    price: null,
+    unit: null,
+    hasVariants: true,
+    featured: true,
+    image: imgSoapKesarChandan100g,
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: 15,  image: imgSoapKesarChandan8g },
+      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: 30,  image: imgSoapKesarChandan20g },
+      { id: 'soap-kesar-chandan-100g', label: '100g', price: 100, image: imgSoapKesarChandan100g },
+    ],
+    benefitsEn: '',
+    benefitsGu: '',
+    ingredientsEn: '',
+    ingredientsGu: '',
+  },
 
   // ── HAIR OIL ───────────────────────────────────────────────────────────────
   {
@@ -316,6 +348,26 @@ export const products = [
     benefitsGu: 'ચહેરા & body ને moisture કરી દાઘ, ફોડલી થી મુક્ત કરી છિદ્રો ને ભરી skin glow આપે.',
     ingredientsEn: 'Flax Seeds Gel, Pithi, Glycerin, Rose Water — plus 5 or more natural ingredients.',
     ingredientsGu: 'ફ્લેક્સ સીડ્સ જેલ, પિઠી, ગ્લિસરિન, ગુલાબ જળ — ઉપરાંત ૫ થી વધુ વસ્તુ થી બનેલ Gel.',
+  },
+
+  // ── FACE WASH ─────────────────────────────────────────────────────────────
+  {
+    id: 'herbal-face-wash',
+    name: 'Herbal Face Wash',
+    nameGu: 'હર્બલ ફેસ વોશ',
+    category: 'face-wash',
+    categoryLabel: 'Face Wash',
+    categoryLabelGu: 'ફેસ વોશ',
+    price: 100,
+    unit: '120ml',
+    hasVariants: false,
+    featured: true,
+    image: imgHerbalFaceWash,
+    imageStyle: 'contain',
+    benefitsEn: '',
+    benefitsGu: '',
+    ingredientsEn: '',
+    ingredientsGu: '',
   },
 ];
 

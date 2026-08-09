@@ -89,6 +89,7 @@ export const translations = {
     catHairOil: 'Hair Oil',
     catShampoo: 'Shampoo',
     catFaceGel: 'Face Gel',
+    catFaceWash: 'Face Wash',
 
     // ── Product Detail ─────────────────────────────────────────────────────
     detailHome: 'Home',
@@ -238,6 +239,7 @@ export const translations = {
     catHairOil: 'હેર ઓઈલ',
     catShampoo: 'શૅમ્પૂ',
     catFaceGel: 'ફેસ જેલ',
+    catFaceWash: 'ફેસ વોશ',
 
     // ── Product Detail ─────────────────────────────────────────────────────
     detailHome: 'હોમ',
