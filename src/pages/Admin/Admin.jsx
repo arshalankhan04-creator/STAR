@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import ProductFormModal from '../../components/Admin/ProductFormModal';
 
-// SHA-256 cryptographic hash of PIN (prevents hardcoded PIN exposure & works seamlessly on Vercel)
-const ADMIN_PIN_HASH = '75d0436e9f47508020863fb5108eb31955a95d754083075d014f3564dfb432b5';
+// Salted SHA-256 cryptographic hash of PIN (prevents lookup tables & rainbow attacks)
+const ADMIN_PIN_HASH = '3616533c8ecd3a59c88de5473dcbad761f83a1bb829c9a4f67567987d1d5a682';
+const PIN_SALT = 'STAR_HERBAL_SALT_987654_';
 
 async function hashPin(pin) {
-  const msgUint8 = new TextEncoder().encode(pin);
+  const msgUint8 = new TextEncoder().encode(PIN_SALT + pin);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
