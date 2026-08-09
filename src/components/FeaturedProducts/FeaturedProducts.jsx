@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { featuredProducts } from '../../data/products';
+import { useProducts } from '../../context/ProductContext';
 import ProductCard from '../ProductCard/ProductCard';
 import ProductCardSkeleton from '../ProductCardSkeleton/ProductCardSkeleton';
 import { useLang } from '../../context/LanguageContext';
@@ -9,6 +9,7 @@ import { useInView } from '../../hooks/useInView';
 export default function FeaturedProducts() {
   const navigate = useNavigate();
   const { t } = useLang();
+  const { featuredProducts } = useProducts();
   const [loading, setLoading] = useState(true);
   const [headerRef, headerInView] = useInView();
   const [gridRef, gridInView] = useInView({ threshold: 0.06 });

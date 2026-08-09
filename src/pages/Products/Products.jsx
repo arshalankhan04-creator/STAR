@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { products } from '../../data/products';
+import { useProducts } from '../../context/ProductContext';
 import { filterByCategory } from '../../utils/productHelpers';
 import { useLang } from '../../context/LanguageContext';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -11,6 +11,7 @@ export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { t } = useLang();
+  const { products } = useProducts();
   const activeCategory = searchParams.get('category') || 'all';
   const filtered = filterByCategory(products, activeCategory);
   const [loading, setLoading] = useState(true);

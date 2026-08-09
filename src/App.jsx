@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { ProductProvider } from './context/ProductContext';
 import Navbar from './components/Navbar/Navbar';
 import CartDrawer from './components/CartDrawer/CartDrawer';
 import Footer from './components/Footer/Footer';
@@ -17,21 +18,23 @@ export default function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <CartProvider>
-          <IntroAnimation />
-          <ScrollToTop />
-          <LanguagePopup />
-          <div className="flex flex-col min-h-screen">
-            <Navbar onCartOpen={() => setCartOpen(true)} />
-            {/* pb-16 on mobile so content isn't hidden behind the bottom nav */}
-            <div className="flex-1 pb-16 md:pb-0">
-              <AppRoutes />
+        <ProductProvider>
+          <CartProvider>
+            <IntroAnimation />
+            <ScrollToTop />
+            <LanguagePopup />
+            <div className="flex flex-col min-h-screen">
+              <Navbar onCartOpen={() => setCartOpen(true)} />
+              {/* pb-16 on mobile so content isn't hidden behind the bottom nav */}
+              <div className="flex-1 pb-16 md:pb-0">
+                <AppRoutes />
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-          <MobileBottomNav />
-          <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-        </CartProvider>
+            <MobileBottomNav />
+            <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+          </CartProvider>
+        </ProductProvider>
       </LanguageProvider>
     </BrowserRouter>
   );

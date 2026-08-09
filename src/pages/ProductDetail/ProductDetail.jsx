@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../../data/products';
+import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { getDefaultVariant } from '../../utils/productHelpers';
@@ -10,6 +10,7 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   const { addItem } = useCart();
   const { t, lang } = useLang();
+  const { products } = useProducts();
 
   const product = products.find((p) => p.id === productId);
 

@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Products from '../pages/Products/Products';
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
+import Admin from '../pages/Admin/Admin';
 import NotFound from '../pages/NotFound/NotFound';
 
 export default function AppRoutes() {
@@ -13,6 +14,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
