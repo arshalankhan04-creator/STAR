@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import ProductFormModal from '../../components/Admin/ProductFormModal';
 
-const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN;
+// SHA-256 cryptographic hash of PIN (prevents hardcoded PIN exposure & works seamlessly on Vercel)
+const ADMIN_PIN_HASH = '75d0436e9f47508020863fb5108eb31955a95d754083075d014f3564dfb432b5';
+
+async function hashPin(pin) {
+  const msgUint8 = new TextEncoder().encode(pin);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct, resetProducts } = useProducts();
@@ -20,9 +28,10 @@ export default function Admin() {
   const [editingProduct, setEditingProduct] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    if (pinInput.trim() === ADMIN_PIN) {
+    const inputHash = await hashPin(pinInput.trim());
+    if (inputHash === ADMIN_PIN_HASH) {
       sessionStorage.setItem('star_admin_authed', 'true');
       setIsAuthenticated(true);
       setPinError(false);
