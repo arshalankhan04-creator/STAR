@@ -22,9 +22,7 @@ export default function ProductCard({ product, showDetails = true }) {
     : (product.ingredientsEn ?? product.ingredientsGu ?? '');
 
   const activeImage =
-    (selectedVariant?.image ?? null) !== null
-      ? selectedVariant.image
-      : product.image ?? null;
+    (selectedVariant && selectedVariant.image) || product.image || null;
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 

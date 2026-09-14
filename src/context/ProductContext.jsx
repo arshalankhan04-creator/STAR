@@ -3,14 +3,35 @@ import { products as initialProducts } from '../data/products';
 
 const ProductContext = createContext();
 
-const STORAGE_KEY = 'star_herbal_products_v1';
+const STORAGE_KEY = 'star_herbal_products_v2';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {
     try {
+      localStorage.removeItem('star_herbal_products_v1');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Re-attach valid bundled image imports from initialProducts
+          return parsed.map((p) => {
+            const initial = initialProducts.find((ip) => ip.id === p.id);
+            if (!initial) return p;
+            return {
+              ...p,
+              image: initial.image || p.image,
+              variants: p.variants
+                ? p.variants.map((v) => {
+                    const initialV = initial.variants?.find((iv) => iv.id === v.id);
+                    return {
+                      ...v,
+                      image: initialV?.image || initial.image || v.image,
+                    };
+                  })
+                : initial.variants,
+            };
+          });
+        }
       }
     } catch (e) {
       console.error('Failed to load products from localStorage:', e);
