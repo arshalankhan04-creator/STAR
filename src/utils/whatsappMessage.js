@@ -12,11 +12,9 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}) {
 
   const itemLines = cartItems.map((item) => {
     const variant = item.selectedVariant ? ` (${item.selectedVariant.label})` : '';
-    const subtotal = item.price * item.quantity;
-    return `  • ${item.name}${variant}\n    Qty: ${item.quantity}  ×  ₹${item.price}  =  *₹${subtotal}*`;
+    return `  • ${item.name}${variant}\n    Qty: ${item.quantity}`;
   });
 
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const { name, phone, address, city, pincode, note } = customerInfo;
@@ -31,8 +29,7 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}) {
     '─────────────────────────',
     ...itemLines,
     '─────────────────────────',
-    `📦 Items: ${itemCount}`,
-    `💰 *Total: ₹${total}*`,
+    `📦 Total Items: ${itemCount}`,
     '─────────────────────────',
     '',
     '📍 *Delivery Details*',
@@ -43,7 +40,7 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}) {
     ...(note ? [`📝 Note: ${note}`] : []),
     '',
     '─────────────────────────',
-    '_We will confirm your order shortly._',
+    '_We will confirm your order and pricing shortly._',
   ].join('\n');
 
   const encodedMessage = encodeURIComponent(message);

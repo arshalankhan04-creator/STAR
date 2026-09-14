@@ -8,9 +8,10 @@
  */
 export function getDisplayPrice(product) {
   if (!product.hasVariants) {
-    return `₹${product.price}`;
+    return product.price != null ? `₹${product.price}` : '';
   }
-  const prices = product.variants.map((v) => v.price);
+  const prices = product.variants ? product.variants.map((v) => v.price).filter((p) => typeof p === 'number') : [];
+  if (prices.length === 0) return '';
   const min = Math.min(...prices);
   const max = Math.max(...prices);
   if (min === max) return `₹${min}`;

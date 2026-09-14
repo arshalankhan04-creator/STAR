@@ -4,7 +4,7 @@ import { useLang } from '../../context/LanguageContext';
 import { openWhatsAppOrder } from '../../utils/whatsappMessage';
 
 export default function CartDrawer({ isOpen, onClose }) {
-  const { items, totalItems, totalPrice, removeItem, updateQuantity, clearCart } = useCart();
+  const { items, totalItems, removeItem, updateQuantity, clearCart } = useCart();
   const { t } = useLang();
   const drawerRef = useRef(null);
   const [step, setStep] = useState('cart'); // 'cart' | 'form'
@@ -65,7 +65,6 @@ export default function CartDrawer({ isOpen, onClose }) {
           <CartStep
             items={items}
             totalItems={totalItems}
-            totalPrice={totalPrice}
             onClose={onClose}
             onRemove={removeItem}
             onQuantityChange={updateQuantity}
@@ -74,7 +73,7 @@ export default function CartDrawer({ isOpen, onClose }) {
           />
         ) : (
           <CheckoutFormStep
-            totalPrice={totalPrice}
+            totalItems={totalItems}
             onBack={() => setStep('cart')}
             onSubmit={handleFormSubmit}
             t={t}
@@ -87,7 +86,7 @@ export default function CartDrawer({ isOpen, onClose }) {
 
 // ─── Step 1: Cart ─────────────────────────────────────────────────────────────
 
-function CartStep({ items, totalItems, totalPrice, onClose, onRemove, onQuantityChange, onProceed, t }) {
+function CartStep({ items, totalItems, onClose, onRemove, onQuantityChange, onProceed, t }) {
   return (
     <>
       <div className="flex items-center justify-between px-6 py-5 border-b border-[#E4E4DC]">
@@ -128,7 +127,9 @@ function CartStep({ items, totalItems, totalPrice, onClose, onRemove, onQuantity
         <div className="border-t border-[#E4E4DC] px-6 py-5 flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="text-xs tracking-[0.1em] uppercase text-[#7A7A72] font-['Montserrat']">{t.cartTotal}</span>
-            <span className="font-['Montserrat'] text-base font-normal text-[#2C2C2C]">₹{totalPrice}</span>
+            <span className="font-['Montserrat'] text-xs tracking-[0.05em] uppercase text-[#2C2C2C]">
+              {totalItems} {totalItems === 1 ? t.cartItemSingular : t.cartItemPlural}
+            </span>
           </div>
           <button
             onClick={onProceed}
@@ -147,7 +148,7 @@ function CartStep({ items, totalItems, totalPrice, onClose, onRemove, onQuantity
 
 // ─── Step 2: Checkout Form ────────────────────────────────────────────────────
 
-function CheckoutFormStep({ totalPrice, onBack, onSubmit, t }) {
+function CheckoutFormStep({ totalItems, onBack, onSubmit, t }) {
   const [form, setForm] = useState({ name: '', phone: '', address: '', city: '', pincode: '', note: '' });
   const [errors, setErrors] = useState({});
 
@@ -188,7 +189,7 @@ function CheckoutFormStep({ totalPrice, onBack, onSubmit, t }) {
             <p className="text-[11px] text-[#7A7A72] mt-0.5">{t.formStep}</p>
           </div>
         </div>
-        <div className="font-['Montserrat'] text-sm font-normal text-[#2C2C2C]">₹{totalPrice}</div>
+        <div className="font-['Montserrat'] text-xs text-[#7A7A72]">{totalItems} {totalItems === 1 ? t.cartItemSingular : t.cartItemPlural}</div>
       </div>
 
       <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-4" noValidate>
@@ -272,9 +273,8 @@ function CartItem({ item, onRemove, onQuantityChange, t }) {
             <RemoveIcon />
           </button>
         </div>
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center mt-2">
           <QuantityControl quantity={item.quantity} onDecrease={() => onQuantityChange(item.quantity - 1)} onIncrease={() => onQuantityChange(item.quantity + 1)} />
-          <span className="text-xs font-['Montserrat'] text-[#2C2C2C]">₹{item.price * item.quantity}</span>
         </div>
       </div>
     </li>

@@ -269,11 +269,12 @@ export default function Admin() {
               </thead>
               <tbody className="divide-y divide-[#E4E4DC] text-xs">
                 {filteredProducts.map((p) => {
+                  const validPrices = p.hasVariants && p.variants ? p.variants.map((v) => v.price).filter((pr) => typeof pr === 'number') : [];
                   const displayPriceStr = p.hasVariants
-                    ? p.variants && p.variants.length > 0
-                      ? `₹${Math.min(...p.variants.map((v) => v.price))} – ₹${Math.max(...p.variants.map((v) => v.price))}`
-                      : 'Variants'
-                    : `₹${p.price} ${p.unit ? `/ ${p.unit}` : ''}`;
+                    ? validPrices.length > 0
+                      ? `₹${Math.min(...validPrices)} – ₹${Math.max(...validPrices)}`
+                      : '—'
+                    : typeof p.price === 'number' ? `₹${p.price} ${p.unit ? `/ ${p.unit}` : ''}` : (p.unit || '—');
 
                   return (
                     <tr key={p.id} className="hover:bg-[#FAFBF9] transition-colors">

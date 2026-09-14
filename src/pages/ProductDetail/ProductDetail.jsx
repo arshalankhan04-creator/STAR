@@ -48,9 +48,6 @@ export default function ProductDetail() {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
-  const displayPrice = product.hasVariants
-    ? selectedVariant ? `₹${selectedVariant.price}` : '—'
-    : `₹${product.price}`;
 
   function createRipple(e) {
     const btn = btnRef.current;
@@ -141,12 +138,11 @@ export default function ProductDetail() {
 
             <div className="w-8 h-px bg-[#6B8F5E] animate-grow-width" />
 
-            <p className="font-['Montserrat'] text-2xl text-[#2C2C2C] font-normal">
-              {displayPrice}
-              {!product.hasVariants && product.unit && (
-                <span className="text-sm text-[#7A7A72] font-light ml-2">/ {product.unit}</span>
-              )}
-            </p>
+            {!product.hasVariants && product.unit && (
+              <p className="font-['Montserrat'] text-sm text-[#7A7A72] font-normal">
+                {product.unit}
+              </p>
+            )}
 
             {/* Variant Pills */}
             {product.hasVariants && product.variants && (

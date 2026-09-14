@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
-import { getDisplayPrice, getDefaultVariant } from '../../utils/productHelpers';
+import { getDefaultVariant } from '../../utils/productHelpers';
 
 export default function ProductCard({ product, showDetails = true }) {
   const { addItem } = useCart();
@@ -28,9 +28,6 @@ export default function ProductCard({ product, showDetails = true }) {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
-  const displayPrice = product.hasVariants
-    ? selectedVariant ? `₹${selectedVariant.price}` : getDisplayPrice(product)
-    : `₹${product.price}`;
 
   const hasDetails = showDetails && (displayBenefits || displayIngredients);
 
@@ -105,9 +102,6 @@ export default function ProductCard({ product, showDetails = true }) {
           </div>
         )}
 
-        <p className="text-sm sm:text-base font-['Montserrat'] font-normal text-[#2C2C2C] mt-2">
-          {displayPrice}
-        </p>
       </div>
 
       {/* Details Toggle */}

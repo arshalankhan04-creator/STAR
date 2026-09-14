@@ -4,38 +4,38 @@
 
 // ─── Asset imports ────────────────────────────────────────────────────────────
 
-import imgSoapSkinCare        from '../assets/images/products/soap-skin-care.jpg';
-import imgSoapSkinCare80g     from '../assets/images/products/skincare80gram.jpeg';
-import imgSoapSkinCare100g    from '../assets/images/products/skincare100gram60rupees.jpeg';
-import imgSoapAlovera         from '../assets/images/products/soap-aloevera-cool.jpg';
-import imgSoapAlovera80g      from '../assets/images/products/Aloeveracool80gram50rupees.jpeg';
-import imgSoapAlovera100g     from '../assets/images/products/eloveracool60rupees100gm.jpeg';
-import imgSoapCharcoal        from '../assets/images/products/soap-charcoal-multani.jpg';
-import imgSoapCharcoal100g     from '../assets/images/products/charcoal_multani_mitti_100gm.jpeg';
-import imgSoapBaby            from '../assets/images/products/soap-baby.jpg';
-import imgSoapBaby80g         from '../assets/images/products/babysoap80gram50rupees.jpeg';
-import imgSoapBaby100g        from '../assets/images/products/babysoap100gram60rupees.jpeg';
-import imgSoapBesan           from '../assets/images/products/soap-besan-pithi.jpg';
-import imgSoapNim             from '../assets/images/products/soap-nim-aloevera.jpg';
-import imgSoapNim80g          from '../assets/images/products/nimalovera80gm50rupees.jpeg';
-import imgSoapNim100g         from '../assets/images/products/nimalovera100gm60rupees.jpeg';
-import imgSoapWhitening       from '../assets/images/products/whiteningsoap.jpeg';
-import imgSoapMilky           from '../assets/images/products/soap-milky.jpg';
-import imgStarFacial8g        from '../assets/images/products/soap-star-facial-8g.jpg';
-import imgStarFacial22g       from '../assets/images/products/soap-star-facial-22g.jpg';
-import imgStarFacial50g       from '../assets/images/products/soap-star-facial-50g.jpg';
-import imgHerbalFaceGel       from '../assets/images/products/herbal-face-gel.jpg';
-import imgHerbalFaceWash      from '../assets/images/products/120ml_fashwash_100rupees.jpeg';
-import imgHerbalOil           from '../assets/images/products/100ml_oil.jpeg';
-import imgHerbalOil200ml      from '../assets/images/products/200ml_oil.jpeg';
-import imgHerbalOil500ml      from '../assets/images/products/500ml_oil.jpeg';
-import imgHerbalShampoo       from '../assets/images/products/100ml_shampoo.jpeg';
-import imgHerbalShampoo200ml  from '../assets/images/products/200ml_shampoo.jpeg';
-import imgHerbalShampoo500ml  from '../assets/images/products/500ml_shampoo.jpeg';
-import imgSoapHoney           from '../assets/images/products/soap-honey.jpg';
-import imgSoapKesarChandan8g   from '../assets/images/products/kesar_chandan_8gm_15rupees.jpeg';
-import imgSoapKesarChandan20g  from '../assets/images/products/kesar_chandan_20gm_30rupees.jpeg';
-import imgSoapKesarChandan100g from '../assets/images/products/kesar_chandan_100gm_100rupees.jpeg';
+import imgSoapSkinCare        from '../assets/images/products/skin-care-soap-50g-30rs.jpg';
+import imgSoapSkinCare80g     from '../assets/images/products/skin-care-soap-80g-50rs.jpeg';
+import imgSoapSkinCare100g    from '../assets/images/products/skin-care-soap-100g-60rs.jpeg';
+import imgSoapAlovera         from '../assets/images/products/aloevera-cool-soap-50g-30rs.jpg';
+import imgSoapAlovera80g      from '../assets/images/products/aloevera-cool-soap-80g-50rs.jpeg';
+import imgSoapAlovera100g     from '../assets/images/products/aloevera-cool-soap-100g-60rs.jpeg';
+import imgSoapCharcoal        from '../assets/images/products/charcoal-multani-mitti-soap-50g-30rs.jpg';
+import imgSoapCharcoal100g     from '../assets/images/products/charcoal-multani-mitti-soap-100g-60rs.jpeg';
+import imgSoapBaby            from '../assets/images/products/baby-soap-50g-30rs.jpg';
+import imgSoapBaby80g         from '../assets/images/products/baby-soap-80g-50rs.jpeg';
+import imgSoapBaby100g        from '../assets/images/products/baby-soap-100g-60rs.jpeg';
+import imgSoapBesan           from '../assets/images/products/besan-pithi-soap-50g-30rs.jpg';
+import imgSoapNim             from '../assets/images/products/nim-aloevera-soap-50g-30rs.jpg';
+import imgSoapNim80g          from '../assets/images/products/nim-aloevera-soap-80g-50rs.jpeg';
+import imgSoapNim100g         from '../assets/images/products/nim-aloevera-soap-100g-60rs.jpeg';
+import imgSoapWhitening       from '../assets/images/products/body-whitening-soap-100g-70rs.jpeg';
+import imgSoapMilky           from '../assets/images/products/milky-soap-50g-70rs.jpg';
+import imgStarFacial8g        from '../assets/images/products/star-facial-soap-8g-10rs.jpg';
+import imgStarFacial22g       from '../assets/images/products/star-facial-soap-22g-25rs.jpg';
+import imgStarFacial50g       from '../assets/images/products/star-facial-soap-50g-60rs.jpg';
+import imgHerbalFaceGel       from '../assets/images/products/herbal-face-gel-100ml-50rs.jpg';
+import imgHerbalFaceWash      from '../assets/images/products/herbal-face-wash-120ml-100rs.jpeg';
+import imgHerbalOil           from '../assets/images/products/herbal-oil-100ml-140rs.jpeg';
+import imgHerbalOil200ml      from '../assets/images/products/herbal-oil-200ml-280rs.jpeg';
+import imgHerbalOil500ml      from '../assets/images/products/herbal-oil-500ml-700rs.jpeg';
+import imgHerbalShampoo       from '../assets/images/products/herbal-shampoo-100ml-70rs.jpeg';
+import imgHerbalShampoo200ml  from '../assets/images/products/herbal-shampoo-200ml-140rs.jpeg';
+import imgHerbalShampoo500ml  from '../assets/images/products/herbal-shampoo-500ml-350rs.jpeg';
+import imgSoapHoney           from '../assets/images/products/honey-soap-50g-30rs.jpg';
+import imgSoapKesarChandan8g   from '../assets/images/products/kesar-chandan-soap-8g-15rs.jpeg';
+import imgSoapKesarChandan20g  from '../assets/images/products/kesar-chandan-soap-20g-30rs.jpeg';
+import imgSoapKesarChandan100g from '../assets/images/products/kesar-chandan-soap-100g-100rs.jpeg';
 
 // ─── Products ─────────────────────────────────────────────────────────────────
 
@@ -56,9 +56,9 @@ export const products = [
     image: imgSoapSkinCare,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-skin-care-50g',  label: '50g',  price: 30, image: imgSoapSkinCare },
-      { id: 'soap-skin-care-80g',  label: '80g',  price: 50, image: imgSoapSkinCare80g },
-      { id: 'soap-skin-care-100g', label: '100g', price: 60, image: imgSoapSkinCare100g },
+      { id: 'soap-skin-care-50g',  label: '50g',  price: null, image: imgSoapSkinCare },
+      { id: 'soap-skin-care-80g',  label: '80g',  price: null, image: imgSoapSkinCare80g },
+      { id: 'soap-skin-care-100g', label: '100g', price: null, image: imgSoapSkinCare100g },
     ],
     benefitsEn: 'Removes blackheads, pimples and dark spots on the face, neck and elbows — provides whitening glow to the skin.',
     benefitsGu: 'ચહેરા ઉપર ના કાળા કુંડળ, ફોડલી આને ગરદન–કોહની ની કાળાશ મિટાવી whitening glow કરે.',
@@ -79,9 +79,9 @@ export const products = [
     image: imgSoapAlovera,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-aloevera-cool-50g',  label: '50g',  price: 30, image: imgSoapAlovera },
-      { id: 'soap-aloevera-cool-80g',  label: '80g',  price: 50, image: imgSoapAlovera80g },
-      { id: 'soap-aloevera-cool-100g', label: '100g', price: 60, image: imgSoapAlovera100g },
+      { id: 'soap-aloevera-cool-50g',  label: '50g',  price: null, image: imgSoapAlovera },
+      { id: 'soap-aloevera-cool-80g',  label: '80g',  price: null, image: imgSoapAlovera80g },
+      { id: 'soap-aloevera-cool-100g', label: '100g', price: null, image: imgSoapAlovera100g },
     ],
     benefitsEn: 'Relieves heat, body odour and itching — provides a cool and refreshing sensation on the scalp and body.',
     benefitsGu: 'માથા આને શરીર ની આળ, ગરમી આને ખંજવાળ થી મુક્ત કરી ઠંડક આપે.',
@@ -102,8 +102,8 @@ export const products = [
     image: imgSoapCharcoal100g,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-charcoal-multani-50g',  label: '50g',  price: 30, image: imgSoapCharcoal },
-      { id: 'soap-charcoal-multani-100g', label: '100g', price: 60, image: imgSoapCharcoal100g },
+      { id: 'soap-charcoal-multani-50g',  label: '50g',  price: null, image: imgSoapCharcoal },
+      { id: 'soap-charcoal-multani-100g', label: '100g', price: null, image: imgSoapCharcoal100g },
     ],
     benefitsEn: 'Controls oily skin, removes blemishes, pimples and acne — keeps the skin free from excess sweat and impurities.',
     benefitsGu: 'ચહેરા ને oily ત્વચા થી મુક્ત કરી દાઘ, ફોડલી, ખીલ આને વારંવાર આવતા પરસેવા ના ટીપા મુક્ત કરે.',
@@ -124,9 +124,9 @@ export const products = [
     image: imgSoapBaby,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-baby-50g',  label: '50g',  price: 30, image: imgSoapBaby },
-      { id: 'soap-baby-80g',  label: '80g',  price: 50, image: imgSoapBaby80g },
-      { id: 'soap-baby-100g', label: '100g', price: 60, image: imgSoapBaby100g },
+      { id: 'soap-baby-50g',  label: '50g',  price: null, image: imgSoapBaby },
+      { id: 'soap-baby-80g',  label: '80g',  price: null, image: imgSoapBaby80g },
+      { id: 'soap-baby-100g', label: '100g', price: null, image: imgSoapBaby100g },
     ],
     benefitsEn: 'Suitable for babies of all ages — nourishes and moisturises delicate skin with gentle massage ingredients.',
     benefitsGu: '૦ થી કોઈ પણ age ના baby ની skin ને massage ingredients થી moisture કરી પોષણ આપે.',
@@ -140,7 +140,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
+    price: null,
     unit: '50g',
     hasVariants: false,
     featured: false,
@@ -158,7 +158,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 30,
+    price: null,
     unit: '50g',
     hasVariants: false,
     featured: false,
@@ -183,9 +183,9 @@ export const products = [
     image: imgSoapNim,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-nim-aloevera-50g',  label: '50g',  price: 30, image: imgSoapNim },
-      { id: 'soap-nim-aloevera-80g',  label: '80g',  price: 50, image: imgSoapNim80g },
-      { id: 'soap-nim-aloevera-100g', label: '100g', price: 60, image: imgSoapNim100g },
+      { id: 'soap-nim-aloevera-50g',  label: '50g',  price: null, image: imgSoapNim },
+      { id: 'soap-nim-aloevera-80g',  label: '80g',  price: null, image: imgSoapNim80g },
+      { id: 'soap-nim-aloevera-100g', label: '100g', price: null, image: imgSoapNim100g },
     ],
     benefitsEn: 'Removes skin impurities, pimples and protects against skin infections. Relieves body rashes and itching — keeps the body germ-free and provides a cooling effect.',
     benefitsGu: 'ત્વચા ની અશુદ્ધિઓ દૂર કરી ખીલ, ફોડલી આને ચામડી ના ચેપ સામે રક્ષણ આપે — શરીર માં થતી ધાધર, ખંજવાળ ને દૂર કરી શરીર ને કીટાણું મુક્ત કરી ઠંડક આપે.',
@@ -199,7 +199,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 70,
+    price: null,
     unit: '50g',
     hasVariants: false,
     featured: true,
@@ -217,7 +217,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: 70,
+    price: null,
     unit: '100g',
     hasVariants: false,
     featured: false,
@@ -240,9 +240,9 @@ export const products = [
     hasVariants: true,
     imageStyle: 'cover',
     variants: [
-      { id: 'star-facial-8g',  label: '8g',  price: 10,  image: imgStarFacial8g  },
-      { id: 'star-facial-22g', label: '22g', price: 25,  image: imgStarFacial22g },
-      { id: 'star-facial-50g', label: '50g', price: 60,  image: imgStarFacial50g },
+      { id: 'star-facial-8g',  label: '8g',  price: null,  image: imgStarFacial8g  },
+      { id: 'star-facial-22g', label: '22g', price: null,  image: imgStarFacial22g },
+      { id: 'star-facial-50g', label: '50g', price: null,  image: imgStarFacial50g },
     ],
     image: imgStarFacial50g,
     featured: true,
@@ -265,9 +265,9 @@ export const products = [
     image: imgSoapKesarChandan100g,
     imageStyle: 'contain',
     variants: [
-      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: 15,  image: imgSoapKesarChandan8g },
-      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: 30,  image: imgSoapKesarChandan20g },
-      { id: 'soap-kesar-chandan-100g', label: '100g', price: 100, image: imgSoapKesarChandan100g },
+      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: null,  image: imgSoapKesarChandan8g },
+      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: null,  image: imgSoapKesarChandan20g },
+      { id: 'soap-kesar-chandan-100g', label: '100g', price: null, image: imgSoapKesarChandan100g },
     ],
     benefitsEn: '',
     benefitsGu: '',
@@ -287,9 +287,9 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-oil-100ml', label: '100ml', price: 140, image: imgHerbalOil },
-      { id: 'herbal-oil-200ml', label: '200ml', price: 280, image: imgHerbalOil200ml },
-      { id: 'herbal-oil-500ml', label: '500ml', price: 700, image: imgHerbalOil500ml },
+      { id: 'herbal-oil-100ml', label: '100ml', price: null, image: imgHerbalOil },
+      { id: 'herbal-oil-200ml', label: '200ml', price: null, image: imgHerbalOil200ml },
+      { id: 'herbal-oil-500ml', label: '500ml', price: null, image: imgHerbalOil500ml },
     ],
     image: imgHerbalOil,
     featured: true,
@@ -312,9 +312,9 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-shampoo-100ml', label: '100ml', price: 70,  image: imgHerbalShampoo },
-      { id: 'herbal-shampoo-200ml', label: '200ml', price: 140, image: imgHerbalShampoo200ml },
-      { id: 'herbal-shampoo-500ml', label: '500ml', price: 350, image: imgHerbalShampoo500ml },
+      { id: 'herbal-shampoo-100ml', label: '100ml', price: null,  image: imgHerbalShampoo },
+      { id: 'herbal-shampoo-200ml', label: '200ml', price: null, image: imgHerbalShampoo200ml },
+      { id: 'herbal-shampoo-500ml', label: '500ml', price: null, image: imgHerbalShampoo500ml },
     ],
     image: imgHerbalShampoo,
     featured: true,
@@ -337,9 +337,9 @@ export const products = [
     unit: null,
     hasVariants: true,
     variants: [
-      { id: 'herbal-face-gel-100ml', label: '100ml', price: 50,  image: imgHerbalFaceGel },
-      { id: 'herbal-face-gel-200ml', label: '200ml', price: 100, image: imgHerbalFaceGel },
-      { id: 'herbal-face-gel-500ml', label: '500ml', price: 250, image: imgHerbalFaceGel },
+      { id: 'herbal-face-gel-100ml', label: '100ml', price: null,  image: imgHerbalFaceGel },
+      { id: 'herbal-face-gel-200ml', label: '200ml', price: null, image: imgHerbalFaceGel },
+      { id: 'herbal-face-gel-500ml', label: '500ml', price: null, image: imgHerbalFaceGel },
     ],
     image: imgHerbalFaceGel,
     featured: true,
@@ -358,7 +358,7 @@ export const products = [
     category: 'face-wash',
     categoryLabel: 'Face Wash',
     categoryLabelGu: 'ફેસ વોશ',
-    price: 100,
+    price: null,
     unit: '120ml',
     hasVariants: false,
     featured: true,
