@@ -474,7 +474,7 @@ export default function Wholesale() {
           columns={[t.wsShampooTableCol1, t.wsShampooTableCol2, t.wsShampooTableCol3, t.wsShampooTableCol4]}
           rows={[
             { cells: ['100ml', '₹70',  '5%', t.wsShampoo100Note], highlight: false },
-            { cells: ['200ml', '₹175', '5%', t.wsShampoo200Note], highlight: false },
+            { cells: ['250ml', '₹175', '5%', t.wsShampoo200Note], highlight: false },
             { cells: ['500ml', '₹340', '5%', t.wsShampoo500Note], highlight: false },
           ]}
         />

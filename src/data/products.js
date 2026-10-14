@@ -60,15 +60,9 @@ import imgSoapMilkyPack      from '../assets/images/products/milky-soap-pack.web
 // Honey Soap (50g only — no wholesale)
 import imgSoapHoney50g       from '../assets/images/products/honey-soap-50g.webp';
 
-// Kesar Chandan Soap
-import imgSoapKesar8g        from '../assets/images/products/kesar-chandan-soap-8g.webp';
-import imgSoapKesar20g       from '../assets/images/products/kesar-chandan-soap-20g.webp';
-import imgSoapKesar100g      from '../assets/images/products/kesar-chandan-soap-100g.webp';
-import imgSoapKesarPack      from '../assets/images/products/kesar-chandan-soap-pack.webp';
-
 // Herbal Shampoo — branded images (new, for retail + wholesale)
 import imgShampoo100ml       from '../assets/images/products/herbal-shampoo-100ml-branded.webp';
-import imgShampoo200ml       from '../assets/images/products/herbal-shampoo-200ml-branded.webp';
+import imgShampoo250ml       from '../assets/images/products/herbal-shampoo-200ml-branded.webp';
 import imgShampoo500ml       from '../assets/images/products/herbal-shampoo-500ml-branded.webp';
 
 // Herbal Oil — branded images (new); 200ml product is now 250ml
@@ -327,35 +321,6 @@ export const products = [
     ingredientsGu: 'બકરી નું દૂધ, Kojic Acid — ઉપરાંત ૭ વસ્તુ થી બનેલો Soap.',
   },
 
-  {
-    id: 'soap-kesar-chandan',
-    name: 'Kesar Chandan Soap',
-    nameGu: 'કેસર ચંદન સાબુ',
-    category: 'soap',
-    categoryLabel: 'Handmade Soap',
-    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
-    unit: null,
-    hasVariants: true,
-    featured: true,
-    image: imgSoapKesar100g,
-    imageStyle: 'contain',
-    variants: [
-      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: null, image: imgSoapKesar8g },
-      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: null, image: imgSoapKesar20g },
-      {
-        id: 'soap-kesar-chandan-100g', label: '100g', price: null,
-        image: imgSoapKesar100g,
-        packImage: imgSoapKesarPack,
-        wholesaleEligible: true,
-      },
-    ],
-    benefitsEn: '',
-    benefitsGu: '',
-    ingredientsEn: '',
-    ingredientsGu: '',
-  },
-
   // ── HAIR OIL ───────────────────────────────────────────────────────────────
 
   {
@@ -428,8 +393,8 @@ export const products = [
         gstRate: 0.05,
       },
       {
-        id: 'herbal-shampoo-200ml', label: '200ml', price: null,
-        image: imgShampoo200ml,
+        id: 'herbal-shampoo-250ml', label: '250ml', price: null,
+        image: imgShampoo250ml,
         wholesaleEligible: true,
         wholesalePrice: 175,
         wholesaleMinQty: 25,
