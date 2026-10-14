@@ -15,7 +15,7 @@ export default function Products() {
   const activeCategory = searchParams.get('category') || 'all';
   const filtered = filterByCategory(products, activeCategory);
   const [loading, setLoading] = useState(true);
-  const [gridKey, setGridKey] = useState(0); // force re-mount grid on category change so animations replay
+  const [gridKey, setGridKey] = useState(0);
   const [headerRef, headerInView] = useInView();
 
   const CATEGORIES = [
@@ -66,7 +66,7 @@ export default function Products() {
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
 
-        {/* Category filter pills — staggered */}
+        {/* Category filter pills */}
         <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 mb-8 md:mb-12 scrollbar-hide">
           {CATEGORIES.map((cat, i) => (
             <button

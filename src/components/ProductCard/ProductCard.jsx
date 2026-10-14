@@ -26,7 +26,6 @@ export default function ProductCard({ product, showDetails = true }) {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
-
   const hasDetails = showDetails && (displayBenefits || displayIngredients);
 
   function createRipple(e) {
@@ -99,7 +98,6 @@ export default function ProductCard({ product, showDetails = true }) {
             ))}
           </div>
         )}
-
       </div>
 
       {/* Details Toggle */}
@@ -134,7 +132,7 @@ export default function ProductCard({ product, showDetails = true }) {
         </div>
       )}
 
-      {/* Add to Cart — with ripple */}
+      {/* Add to Cart */}
       <div className="px-3 pb-4 mt-auto">
         <button
           ref={btnRef}
@@ -147,13 +145,8 @@ export default function ProductCard({ product, showDetails = true }) {
           }`}
           aria-label={`${t.cardAddToCart} ${product.name}`}
         >
-          {/* Ripple waves */}
           {ripples.map((r) => (
-            <span
-              key={r.id}
-              className="ripple-wave"
-              style={{ left: r.x, top: r.y }}
-            />
+            <span key={r.id} className="ripple-wave" style={{ left: r.x, top: r.y }} />
           ))}
           {added ? t.cardAdded : t.cardAddToCart}
         </button>

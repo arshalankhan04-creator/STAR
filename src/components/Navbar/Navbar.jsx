@@ -50,10 +50,11 @@ export default function Navbar({ onCartOpen }) {
             {t.brandName}
           </Link>
 
-          {/* Desktop Nav Links — hidden on mobile */}
+          {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-10">
             <NavLink to="/" end className={navLinkClass}>{t.navHome}</NavLink>
             <NavLink to="/products" className={navLinkClass}>{t.navProducts}</NavLink>
+            <NavLink to="/wholesale" className={navLinkClass}>{t.navWholesale}</NavLink>
             <a
               href={getWhatsAppLink()}
               target="_blank"

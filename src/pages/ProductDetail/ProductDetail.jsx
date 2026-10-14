@@ -46,7 +46,6 @@ export default function ProductDetail() {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
-
   function createRipple(e) {
     const btn = btnRef.current;
     if (!btn) return;
@@ -84,7 +83,7 @@ export default function ProductDetail() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20">
 
-          {/* Image Panel — slides in from left */}
+          {/* Image Panel */}
           <div className="w-full animate-slide-in-left">
             <div className="aspect-square bg-[#F5F5F0] overflow-hidden">
               {activeImage ? (
@@ -123,7 +122,7 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* Info Panel — slides in from right */}
+          {/* Info Panel */}
           <div className="flex flex-col gap-5 animate-slide-in-right">
 
             <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B8F5E] font-['Montserrat']">
@@ -165,7 +164,7 @@ export default function ProductDetail() {
               </div>
             )}
 
-            {/* Add to Cart — with ripple */}
+            {/* Add to Cart */}
             <button
               ref={btnRef}
               onClick={handleAddToCart}

@@ -3,8 +3,24 @@ import { useCart } from '../../context/CartContext';
 import { useLang } from '../../context/LanguageContext';
 import { openWhatsAppOrder } from '../../utils/whatsappMessage';
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function fmt(n) {
+  return `₹${Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+// ─── Main Drawer ──────────────────────────────────────────────────────────────
+
 export default function CartDrawer({ isOpen, onClose }) {
-  const { items, totalItems, removeItem, updateQuantity, clearCart } = useCart();
+  const {
+    items, totalItems,
+    removeItem, updateQuantity, clearCart,
+    retailSubtotal,
+    wholesaleSubtotalPreGst, wholesaleGstAmount, wholesaleSubtotalWithGst,
+    grandTotal,
+    hasRetailItems, hasWholesaleItems,
+    soapMinCheck, wholesaleMinimumViolations,
+  } = useCart();
   const { t } = useLang();
   const drawerRef = useRef(null);
   const [step, setStep] = useState('cart'); // 'cart' | 'form'
@@ -29,13 +45,33 @@ export default function CartDrawer({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
+  // Build violation messages for the alert
+  const violations = [];
+  if (hasWholesaleItems && !soapMinCheck.met) {
+    violations.push(
+      `Wholesale orders require a minimum of ${50} soap units. Add ${soapMinCheck.shortfall} more to qualify.`
+    );
+  }
+  wholesaleMinimumViolations.forEach(({ item, shortfall }) => {
+    violations.push(
+      `${item.name}${item.selectedVariant ? ` (${item.selectedVariant.label})` : ''}: minimum ${item.wholesaleMinQty} units. Add ${shortfall} more.`
+    );
+  });
+
   function handleProceed() {
     if (items.length === 0) return;
+    if (violations.length > 0) return; // blocked — alert shown inline
     setStep('form');
   }
 
   function handleFormSubmit(customerInfo) {
-    openWhatsAppOrder(items, customerInfo);
+    openWhatsAppOrder(items, customerInfo, {
+      retailSubtotal,
+      wholesaleSubtotalPreGst,
+      wholesaleGstAmount,
+      wholesaleSubtotalWithGst,
+      grandTotal,
+    });
     clearCart();
     onClose();
   }
@@ -69,11 +105,20 @@ export default function CartDrawer({ isOpen, onClose }) {
             onRemove={removeItem}
             onQuantityChange={updateQuantity}
             onProceed={handleProceed}
+            violations={violations}
+            hasRetailItems={hasRetailItems}
+            hasWholesaleItems={hasWholesaleItems}
+            retailSubtotal={retailSubtotal}
+            wholesaleSubtotalPreGst={wholesaleSubtotalPreGst}
+            wholesaleGstAmount={wholesaleGstAmount}
+            wholesaleSubtotalWithGst={wholesaleSubtotalWithGst}
+            grandTotal={grandTotal}
             t={t}
           />
         ) : (
           <CheckoutFormStep
             totalItems={totalItems}
+            hasWholesaleItems={hasWholesaleItems}
             onBack={() => setStep('cart')}
             onSubmit={handleFormSubmit}
             t={t}
@@ -86,9 +131,20 @@ export default function CartDrawer({ isOpen, onClose }) {
 
 // ─── Step 1: Cart ─────────────────────────────────────────────────────────────
 
-function CartStep({ items, totalItems, onClose, onRemove, onQuantityChange, onProceed, t }) {
+function CartStep({
+  items, totalItems, onClose, onRemove, onQuantityChange, onProceed,
+  violations, hasRetailItems, hasWholesaleItems,
+  retailSubtotal, wholesaleSubtotalPreGst, wholesaleGstAmount,
+  wholesaleSubtotalWithGst, grandTotal,
+  t,
+}) {
+  const retailItems    = items.filter((i) => i.pricingMode !== 'wholesale');
+  const wholesaleItems = items.filter((i) => i.pricingMode === 'wholesale');
+  const isMixed        = hasRetailItems && hasWholesaleItems;
+
   return (
     <>
+      {/* Header */}
       <div className="flex items-center justify-between px-6 py-5 border-b border-[#E4E4DC]">
         <div>
           <h2 className="font-['Montserrat'] text-xs tracking-[0.15em] uppercase text-[#2C2C2C]">
@@ -105,41 +161,127 @@ function CartStep({ items, totalItems, onClose, onRemove, onQuantityChange, onPr
         </button>
       </div>
 
+      {/* Items */}
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {items.length === 0 ? (
           <EmptyCart t={t} />
         ) : (
-          <ul className="flex flex-col gap-5">
-            {items.map((item) => (
-              <CartItem
-                key={item.key}
-                item={item}
-                onRemove={() => onRemove(item.key)}
-                onQuantityChange={(qty) => onQuantityChange(item.key, qty)}
-                t={t}
-              />
-            ))}
-          </ul>
+          <div className="flex flex-col gap-6">
+            {/* Retail items */}
+            {hasRetailItems && (
+              <div>
+                {isMixed && (
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#7A7A72] font-['Montserrat'] mb-3 flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C8C8C0]" />
+                    Retail
+                  </p>
+                )}
+                <ul className="flex flex-col gap-5">
+                  {retailItems.map((item) => (
+                    <CartItem
+                      key={item.key}
+                      item={item}
+                      onRemove={() => onRemove(item.key)}
+                      onQuantityChange={(qty) => onQuantityChange(item.key, qty)}
+                      t={t}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Wholesale items */}
+            {hasWholesaleItems && (
+              <div>
+                {isMixed && (
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#6B8F5E] font-['Montserrat'] mb-3 flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#6B8F5E]" />
+                    Wholesale
+                  </p>
+                )}
+                <ul className="flex flex-col gap-5">
+                  {wholesaleItems.map((item) => (
+                    <CartItem
+                      key={item.key}
+                      item={item}
+                      onRemove={() => onRemove(item.key)}
+                      onQuantityChange={(qty) => onQuantityChange(item.key, qty)}
+                      t={t}
+                      isWholesale
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
+      {/* Footer */}
       {items.length > 0 && (
-        <div className="border-t border-[#E4E4DC] px-6 py-5 flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs tracking-[0.1em] uppercase text-[#7A7A72] font-['Montserrat']">{t.cartTotal}</span>
-            <span className="font-['Montserrat'] text-xs tracking-[0.05em] uppercase text-[#2C2C2C]">
-              {totalItems} {totalItems === 1 ? t.cartItemSingular : t.cartItemPlural}
-            </span>
+        <div className="border-t border-[#E4E4DC] px-6 py-5 flex flex-col gap-3">
+
+          {/* Price breakdown */}
+          <div className="flex flex-col gap-1.5 text-[11px]">
+            {hasRetailItems && (
+              <div className="flex items-center justify-between text-[#7A7A72]">
+                <span className="font-['Montserrat'] tracking-[0.05em]">Retail subtotal</span>
+                <span>{retailSubtotal > 0 ? fmt(retailSubtotal) : '—'}</span>
+              </div>
+            )}
+            {hasWholesaleItems && (
+              <>
+                <div className="flex items-center justify-between text-[#7A7A72]">
+                  <span className="font-['Montserrat'] tracking-[0.05em]">Wholesale subtotal</span>
+                  <span>{fmt(wholesaleSubtotalPreGst)}</span>
+                </div>
+                <div className="flex items-center justify-between text-[#7A7A72]">
+                  <span className="font-['Montserrat'] tracking-[0.05em]">GST (5%)</span>
+                  <span>{fmt(wholesaleGstAmount)}</span>
+                </div>
+              </>
+            )}
+            {(hasRetailItems || hasWholesaleItems) && (
+              <div className="flex items-center justify-between border-t border-[#E4E4DC] pt-2 mt-1">
+                <span className="text-[10px] tracking-[0.1em] uppercase text-[#2C2C2C] font-['Montserrat']">
+                  {grandTotal > 0 ? 'Total' : 'Items'}
+                </span>
+                <span className="font-['Montserrat'] text-xs text-[#2C2C2C]">
+                  {grandTotal > 0
+                    ? fmt(grandTotal)
+                    : `${totalItems} ${totalItems === 1 ? t.cartItemSingular : t.cartItemPlural}`}
+                </span>
+              </div>
+            )}
           </div>
+
+          {/* Wholesale minimum violation alerts */}
+          {violations.length > 0 && (
+            <div className="bg-amber-50 border border-amber-200 px-3 py-2.5 flex flex-col gap-1.5">
+              {violations.map((msg, i) => (
+                <p key={i} className="text-[10px] text-amber-700 leading-relaxed">⚠ {msg}</p>
+              ))}
+            </div>
+          )}
+
+          {/* Proceed button */}
           <button
             onClick={onProceed}
-            className="w-full flex items-center justify-center gap-2 bg-[#6B8F5E] text-white text-xs tracking-[0.15em] uppercase py-4 transition-all duration-[400ms] hover:bg-[#5a7d4f] cursor-pointer font-['Montserrat']"
+            disabled={violations.length > 0}
+            className="w-full flex items-center justify-center gap-2 bg-[#6B8F5E] text-white text-xs tracking-[0.15em] uppercase py-4 transition-all duration-[400ms] hover:bg-[#5a7d4f] cursor-pointer font-['Montserrat'] disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label={t.cartProceed}
           >
             <WhatsAppIcon />
             {t.cartProceed}
           </button>
-          <p className="text-[10px] text-[#7A7A72] text-center leading-relaxed">{t.cartProceedNote}</p>
+          {violations.length > 0 && (
+            <p className="text-[10px] text-amber-600 text-center leading-relaxed">
+              Resolve the quantity issues above to proceed.
+            </p>
+          )}
+          {violations.length === 0 && (
+            <p className="text-[10px] text-[#7A7A72] text-center leading-relaxed">{t.cartProceedNote}</p>
+          )}
         </div>
       )}
     </>
@@ -148,7 +290,7 @@ function CartStep({ items, totalItems, onClose, onRemove, onQuantityChange, onPr
 
 // ─── Step 2: Checkout Form ────────────────────────────────────────────────────
 
-function CheckoutFormStep({ totalItems, onBack, onSubmit, t }) {
+function CheckoutFormStep({ totalItems, hasWholesaleItems, onBack, onSubmit, t }) {
   const [form, setForm] = useState({ name: '', phone: '', address: '', city: '', pincode: '', note: '' });
   const [errors, setErrors] = useState({});
 
@@ -195,10 +337,18 @@ function CheckoutFormStep({ totalItems, onBack, onSubmit, t }) {
       <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-4" noValidate>
         <p className="text-[11px] text-[#7A7A72] leading-relaxed">{t.formIntro}</p>
 
+        {hasWholesaleItems && (
+          <div className="bg-[#F0F4EE] border border-[#6B8F5E]/20 px-3 py-2.5">
+            <p className="text-[10px] text-[#6B8F5E] leading-relaxed">
+              Your order includes wholesale items. The WhatsApp message will include a full pricing and GST breakdown.
+            </p>
+          </div>
+        )}
+
         <FormField label={t.formName} name="name" type="text" placeholder={t.formNamePlaceholder} value={form.name} error={errors.name} onChange={handleChange} required />
         <FormField label={t.formPhone} name="phone" type="tel" placeholder={t.formPhonePlaceholder} value={form.phone} error={errors.phone} onChange={handleChange} required />
 
-        {/* Address textarea */}
+        {/* Address */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[10px] tracking-[0.15em] uppercase text-[#7A7A72] font-['Montserrat']">
             {t.formAddress} <span className="text-[#6B8F5E]">*</span>
@@ -257,7 +407,13 @@ function FormField({ label, name, type, placeholder, value, error, onChange, req
 
 // ─── Cart Item ────────────────────────────────────────────────────────────────
 
-function CartItem({ item, onRemove, onQuantityChange, t }) {
+function CartItem({ item, onRemove, onQuantityChange, t, isWholesale = false }) {
+  const pricePerUnit = item.pricePerUnit;
+  const gstRate      = item.gstRate ?? 0;
+  const lineSubtotal = pricePerUnit != null ? pricePerUnit * item.quantity : null;
+  const lineGst      = lineSubtotal != null && gstRate > 0 ? lineSubtotal * gstRate : 0;
+  const lineTotal    = lineSubtotal != null ? lineSubtotal + lineGst : null;
+
   return (
     <li className="flex gap-3">
       <div className="w-16 h-16 flex-shrink-0 bg-[#F5F5F0] flex items-center justify-center">
@@ -268,13 +424,25 @@ function CartItem({ item, onRemove, onQuantityChange, t }) {
           <div className="min-w-0">
             <p className="text-xs font-['Montserrat'] tracking-[0.08em] uppercase text-[#2C2C2C] truncate">{item.name}</p>
             {item.selectedVariant && <p className="text-[11px] text-[#7A7A72] mt-0.5">{item.selectedVariant.label}</p>}
+            {isWholesale && pricePerUnit != null && (
+              <p className="text-[10px] text-[#6B8F5E] mt-0.5">
+                {fmt(pricePerUnit)}/unit{gstRate > 0 ? ` + ${(gstRate * 100).toFixed(0)}% GST` : ''}
+              </p>
+            )}
           </div>
           <button onClick={onRemove} aria-label={`Remove ${item.name}`} className="flex-shrink-0 text-[#C8C8C0] hover:text-[#7A7A72] transition-colors duration-200 cursor-pointer mt-0.5">
             <RemoveIcon />
           </button>
         </div>
-        <div className="flex items-center mt-2">
-          <QuantityControl quantity={item.quantity} onDecrease={() => onQuantityChange(item.quantity - 1)} onIncrease={() => onQuantityChange(item.quantity + 1)} />
+        <div className="flex items-center justify-between mt-2">
+          <QuantityControl
+            quantity={item.quantity}
+            onDecrease={() => onQuantityChange(item.quantity - 1)}
+            onIncrease={() => onQuantityChange(item.quantity + 1)}
+          />
+          {isWholesale && lineTotal != null && (
+            <span className="text-[11px] text-[#2C2C2C] font-['Montserrat']">{fmt(lineTotal)}</span>
+          )}
         </div>
       </div>
     </li>
