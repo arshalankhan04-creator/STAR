@@ -276,7 +276,7 @@ function SoapTierBanner({ combinedQty, t }) {
 function PricingTable({ eyebrow, heading, note, rows, columns }) {
   const [ref, inView] = useInView();
   return (
-    <section className="w-full bg-white py-10 md:py-14 border-t border-[#E4E4DC]">
+    <section className="w-full bg-white py-8 md:py-10">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
           <p className="text-[10px] tracking-[0.3em] uppercase text-[#6B8F5E] mb-2 font-['Montserrat']">{eyebrow}</p>
@@ -432,40 +432,54 @@ export default function Wholesale() {
         </div>
       </div>
 
-      {/* How It Works */}
-      <HowItWorks t={t} />
+      {/* How It Works — moved to bottom */}
 
       {/* ── Soaps ── */}
       <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <SectionHeader eyebrow={t.wsSoapsEyebrow} heading={t.wsSoapsHeading} />
-        <SoapTierBanner combinedQty={combinedSoapQty} t={t} />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {wholesaleSoapProducts.map((item) => {
-            const key = item.variantId ?? item.id;
-            return (
-              <SoapCard key={key} item={item} qty={qtys[key] ?? 1} onQtyChange={(v) => setQty(key, v)}
-                combinedSoapQty={combinedSoapQty} onAdd={() => handleAddSoap(item)} added={addedKeys.has(key)} t={t} lang={lang} />
-            );
-          })}
+
+        {/* Soap pricing table above cards */}
+        <PricingTable
+          eyebrow={t.wsSoapTableEyebrow} heading={t.wsSoapTableHeading} note={t.wsSoapTableNote}
+          columns={[t.wsSoapTableCol1, t.wsSoapTableCol2, t.wsSoapTableCol3, t.wsSoapTableCol4]}
+          rows={[
+            { cells: [t.wsSoapRow1Qty, '₹80', '—',  t.wsSoapRow1Note], highlight: false },
+            { cells: [t.wsSoapRow2Qty, '₹65', '5%', t.wsSoapRow2Note], highlight: true  },
+            { cells: [t.wsSoapRow3Qty, '₹60', '5%', t.wsSoapRow3Note], highlight: false },
+            { cells: [t.wsSoapRow4Qty, '₹55', '5%', t.wsSoapRow4Note], highlight: false },
+          ]}
+        />
+
+        <div className="mt-10">
+          <SoapTierBanner combinedQty={combinedSoapQty} t={t} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {wholesaleSoapProducts.map((item) => {
+              const key = item.variantId ?? item.id;
+              return (
+                <SoapCard key={key} item={item} qty={qtys[key] ?? 1} onQtyChange={(v) => setQty(key, v)}
+                  combinedSoapQty={combinedSoapQty} onAdd={() => handleAddSoap(item)} added={addedKeys.has(key)} t={t} lang={lang} />
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Soap pricing table */}
-      <PricingTable
-        eyebrow={t.wsSoapTableEyebrow} heading={t.wsSoapTableHeading} note={t.wsSoapTableNote}
-        columns={[t.wsSoapTableCol1, t.wsSoapTableCol2, t.wsSoapTableCol3, t.wsSoapTableCol4]}
-        rows={[
-          { cells: [t.wsSoapRow1Qty, '₹80', '—',  t.wsSoapRow1Note], highlight: false },
-          { cells: [t.wsSoapRow2Qty, '₹65', '5%', t.wsSoapRow2Note], highlight: true  },
-          { cells: [t.wsSoapRow3Qty, '₹60', '5%', t.wsSoapRow3Note], highlight: false },
-          { cells: [t.wsSoapRow4Qty, '₹55', '5%', t.wsSoapRow4Note], highlight: false },
-        ]}
-      />
-
       {/* ── Shampoo ── */}
-      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 border-t border-[#E4E4DC]">
         <SectionHeader eyebrow={t.wsShampooEyebrow} heading={t.wsShampooHeading} />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+
+        {/* Shampoo pricing table above cards */}
+        <PricingTable
+          eyebrow={t.wsShampooEyebrow} heading={t.wsShampooTableHeading} note={t.wsShampooTableNote}
+          columns={[t.wsShampooTableCol1, t.wsShampooTableCol2, t.wsShampooTableCol3, t.wsShampooTableCol4]}
+          rows={[
+            { cells: ['100ml', '₹70',  '5%', t.wsShampoo100Note], highlight: false },
+            { cells: ['200ml', '₹175', '5%', t.wsShampoo200Note], highlight: false },
+            { cells: ['500ml', '₹340', '5%', t.wsShampoo500Note], highlight: false },
+          ]}
+        />
+
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {wholesaleShampooProducts.map((item) => (
             <BulkCard key={item.variantId} item={item} qty={qtys[item.variantId] ?? item.wholesaleMinQty}
               onQtyChange={(v) => setQty(item.variantId, v)} onAdd={() => handleAddBulk(item)}
@@ -474,21 +488,22 @@ export default function Wholesale() {
         </div>
       </section>
 
-      {/* Shampoo pricing table */}
-      <PricingTable
-        eyebrow={t.wsShampooEyebrow} heading={t.wsShampooTableHeading} note={t.wsShampooTableNote}
-        columns={[t.wsShampooTableCol1, t.wsShampooTableCol2, t.wsShampooTableCol3, t.wsShampooTableCol4]}
-        rows={[
-          { cells: ['100ml', '₹70',  '5%', t.wsShampoo100Note], highlight: false },
-          { cells: ['200ml', '₹175', '5%', t.wsShampoo200Note], highlight: false },
-          { cells: ['500ml', '₹340', '5%', t.wsShampoo500Note], highlight: false },
-        ]}
-      />
-
       {/* ── Hair Oil ── */}
-      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 border-t border-[#E4E4DC]">
         <SectionHeader eyebrow={t.wsOilEyebrow} heading={t.wsOilHeading} />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+
+        {/* Oil pricing table above cards */}
+        <PricingTable
+          eyebrow={t.wsOilEyebrow} heading={t.wsOilTableHeading} note={t.wsOilTableNote}
+          columns={[t.wsOilTableCol1, t.wsOilTableCol2, t.wsOilTableCol3, t.wsOilTableCol4]}
+          rows={[
+            { cells: ['100ml', '₹140', '5%', t.wsOil100Note], highlight: false },
+            { cells: ['250ml', '₹340', '5%', t.wsOil250Note], highlight: false },
+            { cells: ['500ml', '₹660', '5%', t.wsOil500Note], highlight: false },
+          ]}
+        />
+
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {wholesaleOilProducts.map((item) => (
             <BulkCard key={item.variantId} item={item} qty={qtys[item.variantId] ?? item.wholesaleMinQty}
               onQtyChange={(v) => setQty(item.variantId, v)} onAdd={() => handleAddBulk(item)}
@@ -497,16 +512,8 @@ export default function Wholesale() {
         </div>
       </section>
 
-      {/* Oil pricing table */}
-      <PricingTable
-        eyebrow={t.wsOilEyebrow} heading={t.wsOilTableHeading} note={t.wsOilTableNote}
-        columns={[t.wsOilTableCol1, t.wsOilTableCol2, t.wsOilTableCol3, t.wsOilTableCol4]}
-        rows={[
-          { cells: ['100ml', '₹140', '5%', t.wsOil100Note], highlight: false },
-          { cells: ['250ml', '₹340', '5%', t.wsOil250Note], highlight: false },
-          { cells: ['500ml', '₹660', '5%', t.wsOil500Note], highlight: false },
-        ]}
-      />
+      {/* How It Works — at the bottom */}
+      <HowItWorks t={t} />
 
       {/* Back */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
