@@ -26,6 +26,10 @@ export function getDisplayPrice(product) {
  */
 export function getDefaultVariant(product) {
   if (!product.hasVariants || !product.variants?.length) return null;
+  if (product.category === 'soap') {
+    const v100 = product.variants.find((v) => v.label === '100g' || v.id?.endsWith('-100g'));
+    if (v100) return v100;
+  }
   return product.variants[0];
 }
 

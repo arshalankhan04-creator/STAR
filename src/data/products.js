@@ -19,13 +19,11 @@
 
 // Skin Care Soap
 import imgSoapSkinCare50g    from '../assets/images/products/skin-care-soap-50g.webp';
-import imgSoapSkinCare80g    from '../assets/images/products/skin-care-soap-80g.webp';
 import imgSoapSkinCare100g   from '../assets/images/products/skin-care-soap-100g.webp';
 import imgSoapSkinCarePack   from '../assets/images/products/skin-care-soap-pack.webp';
 
 // Aloevera Cool Soap
 import imgSoapAlovera50g     from '../assets/images/products/aloevera-cool-soap-50g.webp';
-import imgSoapAlovera80g     from '../assets/images/products/aloevera-cool-soap-80g.webp';
 import imgSoapAlovera100g    from '../assets/images/products/aloevera-cool-soap-100g.webp';
 import imgSoapAloveraPack    from '../assets/images/products/aloevera-cool-soap-pack.webp';
 
@@ -36,33 +34,31 @@ import imgSoapCharcoalPack   from '../assets/images/products/charcoal-multani-mi
 
 // Baby Soap
 import imgSoapBaby50g        from '../assets/images/products/baby-soap-50g.webp';
-import imgSoapBaby80g        from '../assets/images/products/baby-soap-80g.webp';
 import imgSoapBaby100g       from '../assets/images/products/baby-soap-100g.webp';
 import imgSoapBabyPack       from '../assets/images/products/baby-soap-pack.webp';
 
-// Besan & Pithi Soap (50g only — no wholesale)
-import imgSoapBesan          from '../assets/images/products/besan-pithi-soap-50g.webp';
-
 // Neem Aloevera Soap
 import imgSoapNeem50g        from '../assets/images/products/neem-aloevera-soap-50g.webp';
-import imgSoapNeem80g        from '../assets/images/products/neem-aloevera-soap-80g.webp';
 import imgSoapNeem100g       from '../assets/images/products/neem-aloevera-soap-100g.webp';
 import imgSoapNeemPack       from '../assets/images/products/neem-aloevera-soap-pack.webp';
+
+// Milky Soap
+import imgSoapMilky50g       from '../assets/images/products/milky-soap-50g.webp';
+import imgSoapMilkyPack      from '../assets/images/products/milky-soap-pack.webp';
 
 // Body Whitening Soap (100g only)
 import imgSoapWhitening100g  from '../assets/images/products/body-whitening-soap-100g.webp';
 import imgSoapWhiteningPack  from '../assets/images/products/body-whitening-soap-pack.webp';
 
-// Milky Soap (50g only — no wholesale)
-import imgSoapMilky50g       from '../assets/images/products/milky-soap-50g.webp';
-import imgSoapMilkyPack      from '../assets/images/products/milky-soap-pack.webp';
-
-// Honey Soap (50g only — no wholesale)
-import imgSoapHoney50g       from '../assets/images/products/honey-soap-50g.webp';
+// Kesar Chandan Soap
+import imgSoapKesar8g        from '../assets/images/products/kesar-chandan-soap-8g.webp';
+import imgSoapKesar20g       from '../assets/images/products/kesar-chandan-soap-20g.webp';
+import imgSoapKesar100g      from '../assets/images/products/kesar-chandan-soap-100g.webp';
+import imgSoapKesarPack      from '../assets/images/products/kesar-chandan-soap-pack.webp';
 
 // Herbal Shampoo — branded images (new, for retail + wholesale)
 import imgShampoo100ml       from '../assets/images/products/herbal-shampoo-100ml-branded.webp';
-import imgShampoo250ml       from '../assets/images/products/herbal-shampoo-200ml-branded.webp';
+import imgShampoo250ml       from '../assets/images/products/herbal-shampoo-250ml-branded.webp';
 import imgShampoo500ml       from '../assets/images/products/herbal-shampoo-500ml-branded.webp';
 
 // Herbal Oil — branded images (new); 200ml product is now 250ml
@@ -114,7 +110,6 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       { id: 'soap-skin-care-50g',  label: '50g',  price: null, image: imgSoapSkinCare50g },
-      { id: 'soap-skin-care-80g',  label: '80g',  price: null, image: imgSoapSkinCare80g },
       {
         id: 'soap-skin-care-100g', label: '100g', price: null,
         image: imgSoapSkinCare100g,          // retail image — unchanged
@@ -143,7 +138,6 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       { id: 'soap-aloevera-cool-50g',  label: '50g',  price: null, image: imgSoapAlovera50g },
-      { id: 'soap-aloevera-cool-80g',  label: '80g',  price: null, image: imgSoapAlovera80g },
       {
         id: 'soap-aloevera-cool-100g', label: '100g', price: null,
         image: imgSoapAlovera100g,
@@ -200,7 +194,6 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       { id: 'soap-baby-50g',  label: '50g',  price: null, image: imgSoapBaby50g },
-      { id: 'soap-baby-80g',  label: '80g',  price: null, image: imgSoapBaby80g },
       {
         id: 'soap-baby-100g', label: '100g', price: null,
         image: imgSoapBaby100g,
@@ -212,44 +205,6 @@ export const products = [
     benefitsGu: '૦ થી કોઈ પણ age ના baby ની skin ને massage ingredients થી moisture કરી પોષણ આપે.',
     ingredientsEn: 'Honey, Gram Flour (Besan), Pithi, Goat Milk, Massage Ingredients.',
     ingredientsGu: 'મધ, બેસન, પિઠી, બકરી નું દૂધ, Massage Ingredients.',
-  },
-
-  {
-    id: 'soap-besan-pithi',
-    name: 'Besan & Pithi Soap',
-    nameGu: 'બેસન & પિઠી સાબુ',
-    category: 'soap',
-    categoryLabel: 'Handmade Soap',
-    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
-    unit: '50g',
-    hasVariants: false,
-    featured: false,
-    image: imgSoapBesan,
-    imageStyle: 'cover',
-    benefitsEn: 'Makes the skin soft, smooth and well-moisturised.',
-    benefitsGu: 'ત્વચા ને મુલાયમ, moisture આને કોમળ બનાવે.',
-    ingredientsEn: 'Gram Flour (Besan), Pithi, Coconut Oil, Rose Water — plus 4 more natural ingredients.',
-    ingredientsGu: 'બેસન, પિઠી, નાળિયેર તેલ, ગુલાબ જળ — ઉપરાંત ૪ વસ્તુ થી બનેલો.',
-  },
-
-  {
-    id: 'soap-honey',
-    name: 'Honey Soap',
-    nameGu: 'મધ સાબુ',
-    category: 'soap',
-    categoryLabel: 'Handmade Soap',
-    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
-    unit: '50g',
-    hasVariants: false,
-    featured: false,
-    image: imgSoapHoney50g,
-    imageStyle: 'cover',
-    benefitsEn: 'Nourishes the skin and gives it a radiant glow.',
-    benefitsGu: 'ત્વચા ને પોષણ આપી ચમકદાર બનાવે.',
-    ingredientsEn: 'Honey, Coconut Oil, Vitamin E Capsule, Rose Water — plus 5 more natural ingredients.',
-    ingredientsGu: 'મધ, નાળિયેર તેલ, વિટામિન E કૅપ્સ્યૂલ, ગુલાબ જળ — ઉપરાંત ૫ વસ્તુ થી બનેલો Honey.',
   },
 
   {
@@ -267,7 +222,6 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       { id: 'soap-nim-aloevera-50g',  label: '50g',  price: null, image: imgSoapNeem50g },
-      { id: 'soap-nim-aloevera-80g',  label: '80g',  price: null, image: imgSoapNeem80g },
       {
         id: 'soap-nim-aloevera-100g', label: '100g', price: null,
         image: imgSoapNeem100g,
@@ -289,11 +243,20 @@ export const products = [
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
     price: null,
-    unit: '50g',
-    hasVariants: false,
+    unit: null,
+    hasVariants: true,
     featured: true,
     image: imgSoapMilky50g,
     imageStyle: 'cover',
+    variants: [
+      { id: 'soap-milky-50g',  label: '50g',  price: null, image: imgSoapMilky50g },
+      {
+        id: 'soap-milky-100g', label: '100g', price: null,
+        image: imgSoapMilky50g,
+        packImage: imgSoapMilkyPack,
+        wholesaleEligible: true,
+      },
+    ],
     benefitsEn: 'Nourishes and softens wrinkled and dry skin for people of all ages — also nourishes and smoothens thin, delicate skin.',
     benefitsGu: '૦ થી કોઈ પણ age ના વ્યક્તિ ની કરચલી વાળી & સૂકી skin ને પોષણ આપી મુલાયમ કરે — પાતળી પતળાય વાળી ચામડી ને પોષણ આપી સ્મૂથ કરે.',
     ingredientsEn: 'Sheep Ghee, Goat Milk, Cream (Malai), Glycerin, Rose Water — plus 7 more natural ingredients.',
@@ -319,6 +282,35 @@ export const products = [
     benefitsGu: 'Body ના દાઘ ધબ્બા મિટાડી ને body ને glow આપે.',
     ingredientsEn: 'Goat Milk, Kojic Acid — plus 7 more natural ingredients.',
     ingredientsGu: 'બકરી નું દૂધ, Kojic Acid — ઉપરાંત ૭ વસ્તુ થી બનેલો Soap.',
+  },
+
+  {
+    id: 'soap-kesar-chandan',
+    name: 'Kesar Chandan Soap',
+    nameGu: 'કેસર ચંદન સાબુ',
+    category: 'soap',
+    categoryLabel: 'Handmade Soap',
+    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
+    price: null,
+    unit: null,
+    hasVariants: true,
+    featured: true,
+    image: imgSoapKesar100g,
+    imageStyle: 'contain',
+    variants: [
+      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: null, image: imgSoapKesar8g },
+      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: null, image: imgSoapKesar20g },
+      {
+        id: 'soap-kesar-chandan-100g', label: '100g', price: null,
+        image: imgSoapKesar100g,
+        packImage: imgSoapKesarPack,
+        wholesaleEligible: true,
+      },
+    ],
+    benefitsEn: 'Gentle daily cleansing that keeps skin refreshed and soft — infused with saffron and sandalwood inspired care for a natural, healthy glow.',
+    benefitsGu: 'રોજિંદા ઉપયોગ માટે ત્વચા ને સ્વચ્છ, તાજી અને મુલાયમ રાખે — કેસર અને ચંદન ના કુદરતી ગુણો થી ત્વચા ને કુદરતી નિખાર આપે.',
+    ingredientsEn: 'Saffron (Kesar), Sandalwood (Chandan), Natural Botanical Extracts — made with pure natural ingredients.',
+    ingredientsGu: 'કેસર, ચંદન, કુદરતી વનસ્પતિ અર્ક — શુદ્ધ કુદરતી સામગ્રી થી બનેલ.',
   },
 
   // ── HAIR OIL ───────────────────────────────────────────────────────────────

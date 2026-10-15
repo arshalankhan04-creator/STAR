@@ -6,7 +6,10 @@ import { getDefaultVariant } from '../../utils/productHelpers';
 export default function ProductCard({ product, showDetails = true }) {
   const { addItem } = useCart();
   const { t, lang } = useLang();
-  const [selectedVariant, setSelectedVariant] = useState(getDefaultVariant(product));
+  const [selectedVariant, setSelectedVariant] = useState(() => getDefaultVariant(product));
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [ripples, setRipples] = useState([]);
@@ -21,12 +24,57 @@ export default function ProductCard({ product, showDetails = true }) {
     ? (product.ingredientsGu ?? product.ingredientsEn ?? '')
     : (product.ingredientsEn ?? product.ingredientsGu ?? '');
 
-  const activeImage =
-    (selectedVariant && selectedVariant.image) || product.image || null;
+  const is100gSoap =
+    product.category === 'soap' &&
+    (
+      (!product.hasVariants && (product.unit === '100g' || product.packImage)) ||
+      (selectedVariant && (selectedVariant.label === '100g' || selectedVariant.id?.endsWith('-100g')))
+    );
+
+  const packImg = (selectedVariant && selectedVariant.packImage) || product.packImage || null;
+  const barImg = (selectedVariant && selectedVariant.image) || product.image || null;
+
+  // For 100g soap: pack image first by default, bar image second
+  const images = (is100gSoap && packImg && barImg && packImg !== barImg)
+    ? [packImg, barImg]
+    : (barImg ? [barImg] : (packImg ? [packImg] : []));
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
   const hasDetails = showDetails && (displayBenefits || displayIngredients);
+
+  function handleSelectVariant(variant, e) {
+    if (e) e.stopPropagation();
+    setSelectedVariant(variant);
+    setActiveImageIndex(0);
+  }
+
+  function handleTouchStart(e) {
+    if (images.length > 1) {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+    }
+  }
+
+  function handleTouchEnd(e) {
+    if (images.length > 1 && touchStartX.current !== null && touchStartY.current !== null) {
+      const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+      const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+      if (Math.abs(deltaX) > 30 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        e.stopPropagation();
+        setActiveImageIndex((prev) => (prev === 0 ? 1 : 0));
+      }
+      touchStartX.current = null;
+      touchStartY.current = null;
+    }
+  }
+
+  function toggleImage(e) {
+    if (e) e.stopPropagation();
+    if (images.length > 1) {
+      setActiveImageIndex((prev) => (prev === 0 ? 1 : 0));
+    }
+  }
 
   function createRipple(e) {
     const btn = btnRef.current;
@@ -49,15 +97,81 @@ export default function ProductCard({ product, showDetails = true }) {
   return (
     <article className="flex flex-col bg-white group border border-transparent hover:border-[#E4E4DC] transition-colors duration-300">
 
-      {/* Image */}
-      <div className="relative w-full aspect-square bg-[#F5F5F0] overflow-hidden">
-        {activeImage ? (
-          <img
-            src={activeImage}
-            alt={selectedVariant ? `${product.name} — ${selectedVariant.label}` : product.name}
-            className={`w-full h-full ${imgFit} transition-all duration-[400ms] ease-out group-hover:scale-[1.04] group-active:scale-[1.02]`}
-            loading="lazy"
-          />
+      {/* Image Container with Swipe / Click navigation for 100g soaps */}
+      <div
+        className="relative w-full aspect-square bg-[#F5F5F0] overflow-hidden select-none"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onClick={images.length > 1 ? toggleImage : undefined}
+      >
+        {images.length > 0 ? (
+          <>
+            {images.map((imgSrc, idx) => (
+              <img
+                key={idx}
+                src={imgSrc}
+                alt={selectedVariant ? `${product.name} — ${selectedVariant.label}` : product.name}
+                className={`absolute inset-0 w-full h-full ${imgFit} transition-all duration-[350ms] ease-out ${
+                  idx === activeImageIndex
+                    ? 'opacity-100 z-10 scale-100 group-hover:scale-[1.03]'
+                    : 'opacity-0 z-0 scale-98 pointer-events-none'
+                }`}
+                loading="lazy"
+              />
+            ))}
+
+            {/* Desktop / Laptop Click Navigation & Indicators (100g soaps only) */}
+            {images.length > 1 && (
+              <>
+                {/* Prev Arrow */}
+                <button
+                  type="button"
+                  onClick={toggleImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 shadow-md cursor-pointer"
+                  aria-label="Previous view"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+
+                {/* Next Arrow */}
+                <button
+                  type="button"
+                  onClick={toggleImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 shadow-md cursor-pointer"
+                  aria-label="Next view"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+
+                {/* Dots Indicator */}
+                <div
+                  className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-black/35 backdrop-blur-xs px-2.5 py-1 rounded-full pointer-events-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveImageIndex(idx);
+                      }}
+                      className={`rounded-full transition-all duration-200 cursor-pointer ${
+                        idx === activeImageIndex
+                          ? 'w-4 h-1.5 bg-white'
+                          : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
+                      }`}
+                      aria-label={`View ${idx === 0 ? 'Pack' : 'Bar'}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
             <PlaceholderIcon />
@@ -84,7 +198,7 @@ export default function ProductCard({ product, showDetails = true }) {
             {product.variants.map((variant) => (
               <button
                 key={variant.id}
-                onClick={() => setSelectedVariant(variant)}
+                onClick={(e) => handleSelectVariant(variant, e)}
                 className={`text-[10px] sm:text-xs px-2.5 py-1 border tracking-[0.05em] transition-all duration-200 active:scale-95 cursor-pointer ${
                   selectedVariant?.id === variant.id
                     ? 'border-[#6B8F5E] bg-[#6B8F5E] text-white'

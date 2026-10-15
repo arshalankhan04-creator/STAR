@@ -3,12 +3,14 @@ import { products as initialProducts } from '../data/products';
 
 const ProductContext = createContext();
 
-const STORAGE_KEY = 'star_herbal_products_v2';
+const STORAGE_KEY = 'star_herbal_products_v4';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {
     try {
       localStorage.removeItem('star_herbal_products_v1');
+      localStorage.removeItem('star_herbal_products_v2');
+      localStorage.removeItem('star_herbal_products_v3');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);

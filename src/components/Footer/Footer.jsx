@@ -29,8 +29,7 @@ export default function Footer() {
             <nav className="flex flex-col gap-3">
               <Link to="/" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">{t.navHome}</Link>
               <Link to="/products" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">{t.navProducts}</Link>
-              <Link to="/products?category=soap" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">{t.footerSoaps}</Link>
-              <Link to="/products?category=hair-oil" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">{t.footerHairOil}</Link>
+              <Link to="/wholesale" className="text-xs text-white/50 hover:text-white transition-colors duration-200 tracking-[0.05em]">{t.navWholesale}</Link>
             </nav>
           </div>
 
