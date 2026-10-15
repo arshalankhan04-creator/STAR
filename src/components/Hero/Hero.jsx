@@ -12,6 +12,7 @@ import imgSoapWhiteningPack  from '../../assets/images/products/body-whitening-s
 import imgSoapCharcoalPack   from '../../assets/images/products/charcoal-multani-mitti-soap-pack.webp';
 import imgSoapMilkyPack      from '../../assets/images/products/milky-soap-pack.webp';
 import imgSoapNeemPack       from '../../assets/images/products/neem-aloevera-soap-pack.webp';
+import imgSoapKesarPack      from '../../assets/images/products/kesar-chandan-soap-pack.webp';
 import imgShampoo500ml       from '../../assets/images/products/herbal-shampoo-500ml-branded.webp';
 import imgOil500ml           from '../../assets/images/products/herbal-oil-500ml-branded.webp';
 
@@ -61,6 +62,14 @@ const SLIDES = [
     image: imgSoapNeemPack,
     labelEn: 'Neem Aloevera Soap',
     labelGu: 'નીમ એલોવેરા સાબુ',
+    tagEn: '100g · Wholesale Available',
+    tagGu: '100g · જથ્થાબંધ ઉપલબ્ધ',
+  },
+  {
+    id: 'kesar',
+    image: imgSoapKesarPack,
+    labelEn: 'Kesar Chandan Soap',
+    labelGu: 'કેસર ચંદન સાબુ',
     tagEn: '100g · Wholesale Available',
     tagGu: '100g · જથ્થાબંધ ઉપલબ્ધ',
   },
