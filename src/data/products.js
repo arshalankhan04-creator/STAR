@@ -50,12 +50,6 @@ import imgSoapMilkyPack      from '../assets/images/products/milky-soap-pack.web
 import imgSoapWhitening100g  from '../assets/images/products/body-whitening-soap-100g.webp';
 import imgSoapWhiteningPack  from '../assets/images/products/body-whitening-soap-pack.webp';
 
-// Kesar Chandan Soap
-import imgSoapKesar8g        from '../assets/images/products/kesar-chandan-soap-8g.webp';
-import imgSoapKesar20g       from '../assets/images/products/kesar-chandan-soap-20g.webp';
-import imgSoapKesar100g      from '../assets/images/products/kesar-chandan-soap-100g.webp';
-import imgSoapKesarPack      from '../assets/images/products/kesar-chandan-soap-pack.webp';
-
 // Herbal Shampoo — branded images (new, for retail + wholesale)
 import imgShampoo100ml       from '../assets/images/products/herbal-shampoo-100ml-branded.webp';
 import imgShampoo250ml       from '../assets/images/products/herbal-shampoo-250ml-branded.webp';
