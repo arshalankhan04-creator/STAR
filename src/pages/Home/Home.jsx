@@ -10,9 +10,9 @@ export default function Home() {
     <main>
       {/* Wholesale first — highest priority */}
       <Hero />
+      <ValueProposition />
       <WholesaleSection />
       {/* Retail section below */}
-      <ValueProposition />
       <FeaturedProducts />
       <WhyChooseStar />
       <WhatsAppCTA />
