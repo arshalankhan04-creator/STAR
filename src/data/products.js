@@ -278,34 +278,6 @@ export const products = [
     ingredientsGu: 'બકરી નું દૂધ, Kojic Acid — ઉપરાંત ૭ વસ્તુ થી બનેલો Soap.',
   },
 
-  {
-    id: 'soap-kesar-chandan',
-    name: 'Kesar Chandan Soap',
-    nameGu: 'કેસર ચંદન સાબુ',
-    category: 'soap',
-    categoryLabel: 'Handmade Soap',
-    categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
-    unit: null,
-    hasVariants: true,
-    featured: true,
-    image: imgSoapKesar100g,
-    imageStyle: 'contain',
-    variants: [
-      { id: 'soap-kesar-chandan-8g',   label: '8g',   price: null, image: imgSoapKesar8g },
-      { id: 'soap-kesar-chandan-20g',  label: '20g',  price: null, image: imgSoapKesar20g },
-      {
-        id: 'soap-kesar-chandan-100g', label: '100g', price: null,
-        image: imgSoapKesar100g,
-        packImage: imgSoapKesarPack,
-        wholesaleEligible: true,
-      },
-    ],
-    benefitsEn: 'Gentle daily cleansing that keeps skin refreshed and soft — infused with saffron and sandalwood inspired care for a natural, healthy glow.',
-    benefitsGu: 'રોજિંદા ઉપયોગ માટે ત્વચા ને સ્વચ્છ, તાજી અને મુલાયમ રાખે — કેસર અને ચંદન ના કુદરતી ગુણો થી ત્વચા ને કુદરતી નિખાર આપે.',
-    ingredientsEn: 'Saffron (Kesar), Sandalwood (Chandan), Natural Botanical Extracts — made with pure natural ingredients.',
-    ingredientsGu: 'કેસર, ચંદન, કુદરતી વનસ્પતિ અર્ક — શુદ્ધ કુદરતી સામગ્રી થી બનેલ.',
-  },
 
   // ── HAIR OIL ───────────────────────────────────────────────────────────────
 
