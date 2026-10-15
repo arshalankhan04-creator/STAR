@@ -293,7 +293,7 @@ export const products = [
     unit: '100g',
     hasVariants: false,
     featured: false,
-    image: imgSoapKesarPack,   // retail page shows pack image (wholesale-only product)
+    image: imgSoapKesarPack,
     packImage: imgSoapKesarPack,
     wholesaleEligible: true,
     imageStyle: 'contain',
