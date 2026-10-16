@@ -108,7 +108,7 @@ export const products = [
     variants: [
       { id: 'soap-skin-care-50g',  label: '50g',  price: null, image: imgSoapSkinCare50g },
       {
-        id: 'soap-skin-care-100g', label: '100g', price: null,
+        id: 'soap-skin-care-100g', label: '100g', price: 80,
         image: imgSoapSkinCare100g,          // retail image — unchanged
         packImage: imgSoapSkinCarePack,      // wholesale page only
         wholesaleEligible: true,
@@ -136,7 +136,7 @@ export const products = [
     variants: [
       { id: 'soap-aloevera-cool-50g',  label: '50g',  price: null, image: imgSoapAlovera50g },
       {
-        id: 'soap-aloevera-cool-100g', label: '100g', price: null,
+        id: 'soap-aloevera-cool-100g', label: '100g', price: 80,
         image: imgSoapAlovera100g,
         packImage: imgSoapAloveraPack,
         wholesaleEligible: true,
@@ -164,7 +164,7 @@ export const products = [
     variants: [
       { id: 'soap-charcoal-multani-50g',  label: '50g',  price: null, image: imgSoapCharcoal50g },
       {
-        id: 'soap-charcoal-multani-100g', label: '100g', price: null,
+        id: 'soap-charcoal-multani-100g', label: '100g', price: 80,
         image: imgSoapCharcoal100g,
         packImage: imgSoapCharcoalPack,
         wholesaleEligible: true,
@@ -192,7 +192,7 @@ export const products = [
     variants: [
       { id: 'soap-baby-50g',  label: '50g',  price: null, image: imgSoapBaby50g },
       {
-        id: 'soap-baby-100g', label: '100g', price: null,
+        id: 'soap-baby-100g', label: '100g', price: 80,
         image: imgSoapBaby100g,
         packImage: imgSoapBabyPack,
         wholesaleEligible: true,
@@ -220,7 +220,7 @@ export const products = [
     variants: [
       { id: 'soap-nim-aloevera-50g',  label: '50g',  price: null, image: imgSoapNeem50g },
       {
-        id: 'soap-nim-aloevera-100g', label: '100g', price: null,
+        id: 'soap-nim-aloevera-100g', label: '100g', price: 80,
         image: imgSoapNeem100g,
         packImage: imgSoapNeemPack,
         wholesaleEligible: true,
@@ -248,7 +248,7 @@ export const products = [
     variants: [
       { id: 'soap-milky-50g',  label: '50g',  price: null, image: imgSoapMilky50g },
       {
-        id: 'soap-milky-100g', label: '100g', price: null,
+        id: 'soap-milky-100g', label: '100g', price: 80,
         image: imgSoapMilky50g,
         packImage: imgSoapMilkyPack,
         wholesaleEligible: true,
@@ -267,7 +267,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
+    price: 80,
     unit: '100g',
     hasVariants: false,
     featured: false,
@@ -289,7 +289,7 @@ export const products = [
     category: 'soap',
     categoryLabel: 'Handmade Soap',
     categoryLabelGu: 'હાથથી બનાવેલ સાબુ',
-    price: null,
+    price: 80,
     unit: '100g',
     hasVariants: false,
     featured: false,
@@ -320,7 +320,7 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       {
-        id: 'herbal-oil-100ml', label: '100ml', price: null,
+        id: 'herbal-oil-100ml', label: '100ml', price: 180,
         image: imgOil100ml,
         wholesaleEligible: true,
         wholesalePrice: 140,
@@ -328,7 +328,7 @@ export const products = [
         gstRate: 0.05,
       },
       {
-        id: 'herbal-oil-250ml', label: '250ml', price: null,
+        id: 'herbal-oil-250ml', label: '250ml', price: 420,
         image: imgOil250ml,
         wholesaleEligible: true,
         wholesalePrice: 340,
@@ -336,7 +336,7 @@ export const products = [
         gstRate: 0.05,
       },
       {
-        id: 'herbal-oil-500ml', label: '500ml', price: null,
+        id: 'herbal-oil-500ml', label: '500ml', price: 800,
         image: imgOil500ml,
         wholesaleEligible: true,
         wholesalePrice: 660,
@@ -367,7 +367,7 @@ export const products = [
     imageStyle: 'contain',
     variants: [
       {
-        id: 'herbal-shampoo-100ml', label: '100ml', price: null,
+        id: 'herbal-shampoo-100ml', label: '100ml', price: 100,
         image: imgShampoo100ml,
         wholesaleEligible: true,
         wholesalePrice: 70,
@@ -375,7 +375,7 @@ export const products = [
         gstRate: 0.05,
       },
       {
-        id: 'herbal-shampoo-250ml', label: '250ml', price: null,
+        id: 'herbal-shampoo-250ml', label: '250ml', price: 220,
         image: imgShampoo250ml,
         wholesaleEligible: true,
         wholesalePrice: 175,
@@ -383,7 +383,7 @@ export const products = [
         gstRate: 0.05,
       },
       {
-        id: 'herbal-shampoo-500ml', label: '500ml', price: null,
+        id: 'herbal-shampoo-500ml', label: '500ml', price: 450,
         image: imgShampoo500ml,
         wholesaleEligible: true,
         wholesalePrice: 340,

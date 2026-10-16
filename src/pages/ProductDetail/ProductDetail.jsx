@@ -61,6 +61,8 @@ export default function ProductDetail() {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
+  const currentPrice = selectedVariant ? selectedVariant.price : product.price;
+
   function handleSelectVariant(variant) {
     setSelectedVariant(variant);
     setActiveImageIndex(0);
@@ -267,11 +269,19 @@ export default function ProductDetail() {
 
             <div className="w-8 h-px bg-[#6B8F5E] animate-grow-width" />
 
-            {!product.hasVariants && product.unit && (
-              <p className="font-['Montserrat'] text-sm text-[#7A7A72] font-normal">
-                {product.unit}
-              </p>
-            )}
+            {/* Price & Unit */}
+            <div className="flex items-baseline gap-3">
+              {currentPrice != null && (
+                <span className="font-['Montserrat'] text-2xl sm:text-3xl font-medium text-[#2C2C2C]">
+                  ₹{currentPrice}
+                </span>
+              )}
+              {!product.hasVariants && product.unit && (
+                <span className="font-['Montserrat'] text-sm text-[#7A7A72] font-normal">
+                  {product.unit}
+                </span>
+              )}
+            </div>
 
             {/* Variant Pills */}
             {product.hasVariants && product.variants && (

@@ -41,6 +41,8 @@ export default function ProductCard({ product, showDetails = true }) {
 
   const imgFit = product.imageStyle === 'contain' ? 'object-contain' : 'object-cover';
 
+  const currentPrice = selectedVariant ? selectedVariant.price : product.price;
+
   const hasDetails = showDetails && (displayBenefits || displayIngredients);
 
   function handleSelectVariant(variant, e) {
@@ -211,6 +213,13 @@ export default function ProductCard({ product, showDetails = true }) {
               </button>
             ))}
           </div>
+        )}
+
+        {/* Retail Price */}
+        {currentPrice != null && (
+          <p className="font-['Montserrat'] text-xs sm:text-sm font-semibold text-[#2C2C2C] mt-2 tracking-wider">
+            ₹{currentPrice}
+          </p>
         )}
       </div>
 

@@ -37,7 +37,13 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}, totals = {}) {
     retailItems.forEach((item) => {
       const variant = item.selectedVariant ? ` (${item.selectedVariant.label})` : '';
       lines.push(`  • ${item.name}${variant}`);
-      lines.push(`    Qty: ${item.quantity}`);
+      const pricePerUnit = item.pricePerUnit ?? item.price ?? null;
+      if (pricePerUnit != null) {
+        const lineTotal = pricePerUnit * item.quantity;
+        lines.push(`    Qty: ${item.quantity}  ×  ${fmt(pricePerUnit)} = ${fmt(lineTotal)}`);
+      } else {
+        lines.push(`    Qty: ${item.quantity}`);
+      }
     });
     if (totals.retailSubtotal > 0) {
       lines.push('─────────────────────────');
@@ -113,10 +119,18 @@ export function openWhatsAppOrder(cartItems, customerInfo = {}, totals = {}) {
   }
 
   // ── Grand total ──────────────────────────────────────────────────────────────
-  if (wholesaleItems.length > 0 && totals.grandTotal > 0) {
+  if (totals.grandTotal > 0) {
     lines.push('─────────────────────────');
     lines.push(`💰 *GRAND TOTAL: ${fmt(totals.grandTotal)}*`);
-    lines.push('  _(Wholesale total includes GST. Retail prices confirmed on delivery.)_');
+    if (wholesaleItems.length > 0 && retailItems.length > 0) {
+      lines.push('  _(Includes retail items and wholesale with 5% GST)_');
+    } else if (wholesaleItems.length > 0) {
+      lines.push('  _(Wholesale total includes 5% GST)_');
+    }
+    const hasUnpricedRetail = retailItems.some((i) => (i.pricePerUnit ?? i.price) == null);
+    if (hasUnpricedRetail) {
+      lines.push('  _(Items without listed price will be confirmed on delivery)_');
+    }
     lines.push('');
   }
 

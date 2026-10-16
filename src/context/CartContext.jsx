@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useEffect, useMemo } from 'react';
-import { WHOLESALE_SOAP_TIERS, WHOLESALE_SOAP_MIN_QTY } from '../data/products';
+import { WHOLESALE_SOAP_TIERS, WHOLESALE_SOAP_MIN_QTY, products as catalogProducts } from '../data/products';
 
 const CartContext = createContext(null);
 
@@ -200,10 +200,20 @@ export function CartProvider({ children }) {
           };
         }
         // Retail
+        let price = item.price;
+        if (price === null) {
+          const catProd = catalogProducts.find((p) => p.id === item.productId);
+          if (catProd) {
+            price = item.selectedVariant
+              ? (catProd.variants?.find((v) => v.id === item.selectedVariant.id)?.price ?? null)
+              : (catProd.price ?? null);
+          }
+        }
         return {
           ...item,
-          pricePerUnit: item.price,
-          effectiveUnitPrice: item.price,
+          price,
+          pricePerUnit: price,
+          effectiveUnitPrice: price,
         };
       }),
     [items, soapTier]

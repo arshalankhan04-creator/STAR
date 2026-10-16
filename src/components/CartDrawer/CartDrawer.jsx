@@ -429,6 +429,11 @@ function CartItem({ item, onRemove, onQuantityChange, t, isWholesale = false }) 
                 {fmt(pricePerUnit)}/unit{gstRate > 0 ? ` + ${(gstRate * 100).toFixed(0)}% GST` : ''}
               </p>
             )}
+            {!isWholesale && pricePerUnit != null && (
+              <p className="text-[10px] text-[#7A7A72] mt-0.5">
+                {fmt(pricePerUnit)}/unit
+              </p>
+            )}
           </div>
           <button onClick={onRemove} aria-label={`Remove ${item.name}`} className="flex-shrink-0 text-[#C8C8C0] hover:text-[#7A7A72] transition-colors duration-200 cursor-pointer mt-0.5">
             <RemoveIcon />
@@ -442,6 +447,9 @@ function CartItem({ item, onRemove, onQuantityChange, t, isWholesale = false }) 
           />
           {isWholesale && lineTotal != null && (
             <span className="text-[11px] text-[#2C2C2C] font-['Montserrat']">{fmt(lineTotal)}</span>
+          )}
+          {!isWholesale && lineSubtotal != null && (
+            <span className="text-[11px] text-[#2C2C2C] font-['Montserrat']">{fmt(lineSubtotal)}</span>
           )}
         </div>
       </div>
